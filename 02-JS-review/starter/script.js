@@ -280,3 +280,40 @@ const updatedBook = {
   pages: 1210,
 };
 updatedBook;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                            TEMPLATE LITERALS
+//-----------------------------------------------------------------------------------
+// - Permet plus de souplesse
+// - Permet d'intégrer des expressions JS (ce qui retourne une valeur)
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+let summary = `
+${title}, a ${pages}-page long book, was written by ${author} and published in ${
+  publicationDate.split("-")[0]
+}
+`;
+
+summary;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                                TERNARIES
+//-----------------------------------------------------------------------------------
+// - Permet de définir des valeurs selon des conditions
+// - Remplace if / else qui est un statement (et donc ne retourne pas de valeur)
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+summary = `The book has ${
+  hasMovieAdaptation ? "" : "not"
+} been adapted as a movie`;
+
+summary;
+
+const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+pagesRange;
+
+console.log(`The book has ${pagesRange} pages`);
