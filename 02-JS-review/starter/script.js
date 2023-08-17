@@ -151,7 +151,7 @@ book;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
-// Partie Destructuring
+//                              DESTRUCTURING
 //-----------------------------------------------------------------------------------
 // - La destructuring doit avoir EXACTEMENT le même nom que la propriété d'objet
 // - Autant pour les objets, que pour les tableaux
@@ -191,3 +191,92 @@ console.log(author, title, genres);
 //----- Classique -----
 // const [primaryGenre, secondaryGenre] = genres;
 // console.log(primaryGenre, secondaryGenre);
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                           REST
+//-----------------------------------------------------------------------------------
+// - Dans un Destructuring, Rest crée un tableau supplémentaire avec tout le "reste"
+// - Rest se place à la fin d'un DESTRUCTURING
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+//----------//----------//----------
+//----- Destructuring + REST Operator = création d'un tableau supplémentaire  -----
+//----------//----------//----------
+
+// exemple : 1 element de tableau, puis 1 autre, puis un tableau entier
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+console.log(primaryGenre, secondaryGenre, otherGenres);
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                           SPREAD - dans un tableau
+//-----------------------------------------------------------------------------------
+// - SPREAD crée un tableau qui prendra l'ensemble des éléments
+// - SPREAD peut se placer autant au début, qu'en fin de tableau
+// - SPREAD s'écrit comme REST, sauf qu'il ne fait pas appel au DESTRUCTURING
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+//----------//----------//----------
+//-----  Tableau + Élément = création d'un tableau supplémentaire  -----
+//----------//----------//----------
+
+// exemple : 1 tableau entier, puis un élément
+const newGenres = [genres, "epic fantasy"];
+newGenres;
+
+//----------//----------//----------
+//----- SPREAD Operator = un seul tableau qui reunit tout  -----
+//----------//----------//----------
+
+const newGenres2 = ["epic fantasy", ...genres];
+newGenres2;
+
+//----------//----------//----------
+// ----- Peut se placer en début où l'on souhaite
+//----------//----------//----------
+
+const newGenres3 = [...genres, "epic fantasy"];
+newGenres3;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                           SPREAD - dans un objet
+//-----------------------------------------------------------------------------------
+// - SPREAD crée un objet qui prendra l'ensemble des éléments
+// - SPREAD peut se placer autant au début, qu'en fin d'objet
+// - SPREAD s'écrit comme REST, sauf qu'il ne fait pas appel au DESTRUCTURING
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+//----------//----------//----------
+// ----- Objet sans SPREAD sur le book : Objet dans Objet (confusion)
+//----------//----------//----------
+
+const updatedBook_wrong = {
+  // Integre book
+  book,
+  // Ajoute une nouvelle propriété dans l'objet
+  moviePublicationDate: "2001-12-19",
+
+  // Écrase une propriété existante
+  pages: 1210,
+};
+updatedBook_wrong;
+
+//----------//----------//----------
+// ----- Objet AVEC SPREAD sur le book : un seul objet
+//----------//----------//----------
+
+const updatedBook = {
+  // Integre book AVEC SPREAD
+  ...book,
+  // Ajoute une nouvelle propriété dans l'objet
+  moviePublicationDate: "2001-12-19",
+
+  // Écrase une propriété existante (attention, si placée avant, se fera à son tour écrasée)
+  pages: 1210,
+};
+updatedBook;
