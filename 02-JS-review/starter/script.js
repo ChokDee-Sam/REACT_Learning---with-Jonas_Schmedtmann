@@ -317,3 +317,28 @@ const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
 pagesRange;
 
 console.log(`The book has ${pagesRange} pages`);
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                                ARROW FUNCTIONS
+//-----------------------------------------------------------------------------------
+// - Permet d'écrire rapidement une "one line function" (en retirant le return)
+// - En cas de multiples lignes de code, on ajoute des accolades + return
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+function getYear_1(str) {
+  return str.split("-")[0];
+}
+
+const getYear_2 = (str) => str.split("-")[0];
+
+console.log(getYear_1(publicationDate));
+console.log(getYear_2(publicationDate));
+
+summary = `
+${title}, a ${pages}-page long book, was written by ${author} 
+and published in ${getYear_2(publicationDate)}
+`;
+
+summary;
