@@ -463,6 +463,8 @@ console.log(getTotalReviewCount(book));
 
 */
 
+/*
+
 const books = getBooks();
 
 function getTotalReviewCount(book) {
@@ -594,7 +596,6 @@ sortedByPages;
 // - Le but est de ne pas modifier le tableau original
 // - Spread permet d'ajouter
 // - Filter permet de retirer
-
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
@@ -640,3 +641,44 @@ const booksAfterUpdate = booksAfterDelete.map((element) =>
   element.id === 1 ? { ...element, pages: 1000000 } : element
 );
 console.log(booksAfterUpdate);
+
+*/
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                        ASYNCHRONOUS JAVASCRIPT : PROMISES
+//-----------------------------------------------------------------------------------
+// - Fetch necessite une requête API, avant que les infos ne reviennent ici
+// - C'est donc décalé dans le temps : Asynchrone
+// - 3 réponses possibles : PENDING, REJECTED, FULFILLED
+// - Il faut donc donner des instructions pour quand les données reviendront
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+
+console.log("Sam");
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                        ASYNCHRONOUS JAVASCRIPT : ASYNCH / AWAIT
+//-----------------------------------------------------------------------------------
+// - Asynch permet de dire qu'il y aura des données en différées (asynchrones)
+// - Await permet d'attendre que la donnée arrive (met le script JS en attente)
+// - Le fait d'encapsuler les resultat du fetch + le json est plus "propre"
+// - ATTENTION : le Await fonctionne uniquement à l'intérieur de la fonction
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+async function getToDos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+
+  return data;
+}
+
+const todos = getToDos();
+console.log("Sam");
