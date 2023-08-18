@@ -327,11 +327,23 @@ console.log(`The book has ${pagesRange} pages`);
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
+//----------//----------//----------
+// ----- Fonction Classique
+//----------//----------//----------
+
 function getYear_1(str) {
   return str.split("-")[0];
 }
 
+//----------//----------//----------
+// ----- Fonction Arrow
+//----------//----------//----------
+
 const getYear_2 = (str) => str.split("-")[0];
+
+//----------//----------//----------
+// ----- Comparaison des 2 appels de fonction : similaire
+//----------//----------//----------
 
 console.log(getYear_1(publicationDate));
 console.log(getYear_2(publicationDate));
@@ -342,3 +354,107 @@ and published in ${getYear_2(publicationDate)}
 `;
 
 summary;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                  SHORT CIRCUITING and LOGICAL OPERATOR && || ??
+//-----------------------------------------------------------------------------------
+// - Permet de retourner rapidement des sortes de conditions
+// -
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+//----------//----------//----------
+// ----- Opérateur logique &&
+//            "Progresse" vers la droite quand c'est Truthy
+//            Le court-circuitage survient lors d'un Falsy
+// ----- [truthy ? continue : stop]
+//----------//----------//----------
+
+console.log(true && "Some string");
+console.log("jonas" && "Some string");
+
+// Court-circuit (Falsy)
+// falsy value : 0, '', null, undefined
+console.log(false && "Some string");
+console.log(0 && "Some string");
+console.log(null && "Some string");
+console.log(undefined && "Some string");
+
+// exemple
+console.log(hasMovieAdaptation && "This book has a movie");
+
+//----------//----------//----------
+// ----- Opérateur logique ||
+//            "Progresse" vers la droite quand c'est Falsy
+//            Le court-circuitage survient lors d'un Truthy
+// ----- [truthy ? stop : continue]
+// ----- TRES PRATIQUE POUR AJOUTER UNE INFORMATION -----
+//----------//----------//----------
+
+console.log(false || "Some string");
+console.log(null || "Some string");
+console.log(undefined || "Some string");
+console.log(0 || "Some string");
+
+// Court-circuit (Truthy)
+console.log(true || "Some string");
+console.log("Jonas" || "Some string");
+
+// exemple
+console.log(book.translations.spanish);
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+spanishTranslation;
+
+// PROBLEME AVEC LA VALEUR ZERO : ELLE DONNE UN RESULTAT EXISTANT MAIS FALSY
+console.log(book.reviews.librarything.reviewsCount);
+const countWrong = book.reviews.librarything.reviewsCount || "no data";
+countWrong;
+
+//----------//----------//----------
+// ----- Opérateur logique &&
+//            RÈGLE LE PROBLEME CONCERNANT LA VALEUR ZERO FALSY (0)
+//            "Progresse" vers la droite quand c'est Null ou Undefined
+//            Le court-circuitage survient lors d'un Truthy, 0, ''
+// ----- [null or undefined ? continue : stop]
+//----------//----------//----------
+
+console.log(null ?? "Some string");
+console.log(undefined ?? "Some string");
+
+// Court-circuit (tout sauf null et undefined)
+console.log(true ?? "Some string");
+console.log(false ?? "Some string");
+console.log(0 ?? "Some string");
+console.log("" ?? "Some string");
+
+// exemple
+const count = book.reviews.librarything.reviewsCount ?? "no data";
+count;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                                OPTIONAL CHAINING ?.
+//-----------------------------------------------------------------------------------
+// - Utile lorsqu'on n'est pas certain que la valeur existe
+// - Permet de lire la propriété suivante UNIQUEMENT si elle est existante
+// - Évite les erreurs (du style undefined.undefiined)
+// - [La valeur = undefined ou null ? Tu la lis, et tu continues : tu t'arrêtes et return undefined]
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+function getTotalReviewCount(book) {
+  // Sans l'optional chaining : risque d'erreur si propriété undefined / null
+  // const goodread_noSafe = book.reviews.goodreads.reviewsCount;
+
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+
+  // goodread_noSafe
+  goodreads;
+  librarything;
+
+  return goodreads + librarything;
+}
+
+console.log(getTotalReviewCount(book));
