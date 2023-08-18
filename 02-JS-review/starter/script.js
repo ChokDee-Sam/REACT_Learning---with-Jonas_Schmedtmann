@@ -531,9 +531,112 @@ longBooksWithMovie;
 const humorBooks = books.filter((element) => element.genres.includes("humor"));
 humorBooks;
 
-// exemple avec le genre aventure +
+// exemple avec le genre aventure + création d'un nouveau tableau avec uniquement les titres
 const adventureBooks = books
   .filter((element) => element.genres.includes("adventure"))
   .map((element) => element.title);
 
 adventureBooks;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                              ARRAY REDUCE METHOD
+//-----------------------------------------------------------------------------------
+// - La méthode .reduce a pour but de réduire les tableaux
+// - Cette méthode possède 2 paramètres de fonction : un accumulateur + un élément où agir
+// - On attribue la valeur de départ (à la fin)
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+// exemple avec un calcul cumulé des toutes les pages des livres
+const pagesAllBooks = books.reduce(
+  (accumulator, element) => accumulator + element.pages,
+  0
+);
+pagesAllBooks;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                              ARRAY SORT METHOD
+//-----------------------------------------------------------------------------------
+// - La méthode .sort a pour but de trier les tableaux dans un certain ordre
+// - Cette méthode possède 2 paramètres de fonction
+//  => a - b (pour un ordre ascendant)      => b - a (pour un ordre descendant)
+// - ATTENTION : cette méthode modifie le tableau original
+// - Pour éviter cette modification : utilisation du .slice() avant le .sort()
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+// exemple avec des nombres mal rangés
+const arr = [3, 1, 5, 9, 2, 0];
+const sorted = arr.sort((a, b) => b - a);
+
+// Le tableau original est lui aussi modifiié
+// De ce fait, pas besoin de forcement créer de nouveaux tableaux
+arr;
+sorted;
+
+// Astuce pour éviter de modifier le tableau original
+const newArr = [3, 1, 5, 9, 2, 0];
+const newSorted = newArr.slice().sort((a, b) => a - b);
+
+newArr;
+newSorted;
+
+// Exemple avec classement selon le nombre de pages des livres
+const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+sortedByPages;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                            WORKING WITH IMMUTABLE ARRAYS
+//-----------------------------------------------------------------------------------
+// - Le but est de ne pas modifier le tableau original
+// - Spread permet d'ajouter
+// - Filter permet de retirer
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+//----------//----------//----------
+// ----- Ajouter un objet dans un tableau
+//            Le but est de ne pas modifier le tableau original
+//            On utilise un Spread du tableau original
+// ----- Création d'un objet, puis création d'un nouveau tableau qui recevra le spread, et le nouvel element
+//----------//----------//----------
+
+const newBook = {
+  id: 6,
+  title: "Opération Condor",
+  author: "Jacky Chan",
+};
+
+// Recipe : Create a New Array, Spread the current elements, and add the new element
+const booksAfterAdd = [...books, newBook];
+console.log(booksAfterAdd);
+
+//----------//----------//----------
+// ----- Supprimer un objet dans un tableau
+//            Le but est de ne pas modifier le tableau original
+//            On utilise un .filter() du tableau
+// ----- Création d'un variable, qui a un tableau dans lequel on filtre tout ce qui n'est pas id:3
+//----------//----------//----------
+
+// Recipe : Filter pour réduire, afin de garder "tout ce qui est", ou "tout ce qui n'est pas"
+const booksAfterDelete = booksAfterAdd.filter((element) => element.id !== 3);
+console.log(booksAfterDelete);
+
+//----------//----------//----------
+// ----- Update un objet dans un tableau
+//            On utilise un .map() pour conserver la même longueur (on souhaite conserver toutes les données)
+//            On cible les conditions dans une ternaire, qui agiront durant la boucle map
+//            On peut donc y ajouter un objet, avec un spread de l'original, pour avoir tout le contenu original
+//
+// ----- Création d'un variable, qui a un tableau dans lequel on filtre tout ce qui n'est pas id:3
+//----------//----------//----------
+
+// Recipe : use the map method, because it creates an array with the same length as the original
+const booksAfterUpdate = booksAfterDelete.map((element) =>
+  element.id === 1 ? { ...element, pages: 1000000 } : element
+);
+console.log(booksAfterUpdate);
