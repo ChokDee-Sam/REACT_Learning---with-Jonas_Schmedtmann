@@ -145,6 +145,8 @@ function getBook(id) {
   // return data[id-1]
 }
 
+/*
+
 // Appel de la fonction dans une constante
 const book = getBook(2);
 book;
@@ -458,3 +460,80 @@ function getTotalReviewCount(book) {
 }
 
 console.log(getTotalReviewCount(book));
+
+*/
+
+const books = getBooks();
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+
+  // console.log(goodreads);
+  // console.log(librarything);
+
+  return goodreads + librarything;
+}
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                              ARRAY MAP METHOD
+//-----------------------------------------------------------------------------------
+// - La méthode .map crée un boucle sur chaque élément d'un tableau
+// - Puis crée un nouveau tableau, de même longueur, où chaque élément a reçu la fonction
+// - ASTUCE : pour éviter d'écrire {return}, une parenthese suffit => ()
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+// exemple pour un (nouveau) tableau qui sera multiplié par 2
+const x = [1, 2, 3, 4, 5].map((element) => element * 2);
+console.log(x);
+
+console.log(books);
+
+// exemple pour avec un (nouveau) tableau tous les titres
+const titles = books.map((element) => element.title);
+console.log(titles);
+
+// exemple pour avoir un (nouveau) tableau avec tous les auteurs + les titres + le total des reviews (via fonction)
+const essentialData = books.map((element) => ({
+  title: element.title,
+  author: element.author,
+  reviewsCount: getTotalReviewCount(element),
+}));
+
+essentialData;
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+//                              ARRAY FILTER METHOD
+//-----------------------------------------------------------------------------------
+// - La méthode .filter filtre des éléments selon condition
+// - Puis crée un nouveau tableau avec chaque élément remplissant la condition
+// -
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+// avec avec le nombre de pages
+const longBooks = books.filter((element) => element.pages > 500);
+longBooks;
+
+// avec le nombre de pages + l'adaptation en film
+const longBooksWithMovie = books
+  .filter((element) => element.pages > 500)
+  .filter((element) => element.hasMovieAdaptation);
+// écriture plus logique
+// .filter((element) => element.pages > 500 && element.hasMovieAdaptation);
+
+longBooksWithMovie;
+
+// exemple avec le genre humour
+const humorBooks = books.filter((element) => element.genres.includes("humor"));
+humorBooks;
+
+// exemple avec le genre aventure +
+const adventureBooks = books
+  .filter((element) => element.genres.includes("adventure"))
+  .map((element) => element.title);
+
+adventureBooks;
