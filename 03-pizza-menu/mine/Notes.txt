@@ -1,0 +1,25 @@
+Le strict mode :
+La seule chose qu'il fait, c'est que pendant le développement :
+
+- il va render tous les composants deux fois afin de trouver certains bugs.
+- React vérifiera si nous utilisons des parties obsolètes de l'API React
+
+Donc le mode strict n'a rien de révolutionnaire,
+mais c'est quand même une bonne idée de toujours l'activer
+lorsque nous développons des applications React.
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+Utilité première d'un composant ? Réusabilité
+composant = Data + Logic + Appearance
+
+Un composant doit toujours retourner une valeur (pas de null par exemple)
+Ne jamais imbriquer une déclaration de fonction elle-meme dans une autre fonction
+Toujours déclarer nos composants au top level
+
+
+diff decorations : astuce
+
+JSX est converti en JS grace à Babel 
+(via la fonction React.createElement)
