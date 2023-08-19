@@ -54,3 +54,54 @@ Les parents définissent l'apparence et le comportement des enfants
 - on envoit les props dans un composant (les parents ??)
 - on récupère les props (chez les enfants??)
 
+Tout peut être passé dans une props : 
+- une valeur
+- un tableau
+- un objet
+- une fonction
+- et même d'autres composants...
+
+Si on passe autre chose qu'une String dans une props : { }
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+ATTENTION : LES PROPS SONT READ-ONLY !!
+SEUL LE PARENT COMPOSANT PEUT UPDATE LE PROPS
+
+Les Props sont IMMUABLES : impossible à modifier chez l'enfant
+Pourquoi ? Car ce sont des objets, et modifier un objet enfant, revient à modifier l'objet dans le parent.
+
+Et si l'on modifie un objet situé en dehors du composant fonction ?
+Cette fonction créerait un "side effect" (not pure)
+
+REACT = pure functions !!
+C'est à dire des fonctions sans "side effects" 
+
+Voilà pourquoi les composants doivent être des fonctions pures en termes de Props et State 
+-  ça optimise l'application
+-  et ça évite des bugs lorsqu'on manipule de la Data externe
+
+De manière générale : un composant ne doit pas modifier une valeur à l'extérieur de sa function scope
+
+
+Pour modifier une props, on a besoin d'un STATE ()
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+ONE-WAY DATA FLOW : 
+la Data se passe uniquement de parents vers enfants 
+(en utilisant donc les props)
+ET jamais l'inverse !!!!
+
+Du haut vers le bas de l'arbre des composants
+
+Pourquoi ?
+Pour rendre l'Application :
+- plus prédictible
+- plus facile à comprendre
+- plus facile à débugger avec beaucoup de Data...
+
+--------------------------------------------------------------
+--------------------------------------------------------------
