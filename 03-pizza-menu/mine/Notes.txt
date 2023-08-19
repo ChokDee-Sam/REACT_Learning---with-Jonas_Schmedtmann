@@ -18,8 +18,39 @@ Un composant doit toujours retourner une valeur (pas de null par exemple)
 Ne jamais imbriquer une déclaration de fonction elle-meme dans une autre fonction
 Toujours déclarer nos composants au top level
 
+----------------------------------------------------------------
+----------------------------------------------------------------
 
 diff decorations : astuce
 
+React = separation of concerns
+(séparation des préoccupations/intérêts)
+----------------------------------------------------------------
+----------------------------------------------------------------
+
 JSX est converti en JS grace à Babel 
 (via la fonction React.createElement)
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+CSS : class en JSX devient className
+On peut soit relier un fichier CSS, soit ecrire directement un objet JS
+<h1 style={ { color: "red", fontSize: "48px" } }>Fast React Pizza Co.</h1>
+
+ou bien avec une variable 
+const style = { color: "red", fontSize: "48px" };
+<h1 style={style}>Fast React Pizza Co.</h1>
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+Les Props sont des propriétés de fonction
+Elles sont comme un moyen de communication entre un parent et un enfant (composant)
+
+Les parents définissent l'apparence et le comportement des enfants
+
+2 étapes : 
+- on envoit les props dans un composant (les parents ??)
+- on récupère les props (chez les enfants??)
+

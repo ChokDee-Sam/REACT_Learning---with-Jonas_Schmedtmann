@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -51,11 +52,11 @@ const pizzaData = [
 
 function App() {
   return (
-    <>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
-    </>
+    </div>
   );
 }
 
@@ -63,35 +64,66 @@ function App() {
 // ------------------------------------------------------
 
 function Header() {
-  return <h1>Fast React Pizza Co.</h1>;
+  // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+  const style = {};
+  return (
+    <header className="header">
+      <h1 style={style}>Fast React Pizza Co.</h1>
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <>
+    <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </>
+      <Pizza
+        name="Pizza Spinachi"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        price={10}
+        photoName="pizzas/spinaci.jpg"
+      />
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mushrooms"
+        price={12}
+        photoName="pizzas/funghi.jpg"
+      />
+    </main>
+  );
+}
+
+function Pizza(props) {
+  console.log(props);
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price + 3}</span>
+      </div>
+    </div>
   );
 }
 
 function Footer() {
+  // const hour = new Date().getHours();
+  // const openHour = 12;
+  // const closeHour = 22;
+  // const isOpen = hour >= openHour && hour <= closeHour;
+
+  // if (isOpen) alert("We are currently open !");
+  // else alert("Sorry, we are closed");
+
   // Sans Babel, on écrirait comme ça
   // return React.createElement("footer", null, "We're currently open");
 
   // Réelle façon d'écrire (avec Babel)
-  <footer>{new Date().toLocaleDateString()}. We're currently open</footer>;
-}
-
-function Pizza() {
   return (
-    <>
-      <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
-      <h2>Pizza Spinaci</h2>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </>
+    <footer className="footer">
+      {new Date().toLocaleDateString()}. We're currently open
+    </footer>
   );
 }
 
