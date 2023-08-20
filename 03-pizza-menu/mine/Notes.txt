@@ -105,3 +105,19 @@ Pour rendre l'Application :
 
 --------------------------------------------------------------
 --------------------------------------------------------------
+
+JSX fonctionne comme le HTML,
+sauf qu'on peut entrer en JS mode avec { } sur des textes ou attributs
+
+{ } On peut y mettre des expression JS à l'interieur
+        (reférence de variables, des arrays, objects, ternary...)
+Mais pas de Statement (if/else, for, switch...)
+
+On peut écrire du JSX à l'intérieur { }
+Et n'importe où dans un composant (dans if/else, affectation de variable, function...)
+
+Un élément JSX doit avoir uniquement 1 root Element (fragment <> </>)
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
