@@ -121,3 +121,15 @@ Un élément JSX doit avoir uniquement 1 root Element (fragment <> </>)
 --------------------------------------------------------------
 --------------------------------------------------------------
 
+Faire une liste grace à .map()
+
+{data.map((element) => (
+          <Component elemObject={element} key={element.name} />
+        ))}
+
+On fait un .map sur notre Data
+Dans chaque boucle de .map, on aura notre composant X avec une props qui sera l'élément Data de chaque tour
+Et on attribue une props key via une donnée de Data
+
+--------------------------------------------------------------
+--------------------------------------------------------------

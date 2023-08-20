@@ -79,31 +79,38 @@ function Menu() {
       <h2>Our Menu </h2>
 
       <ul className="pizzas">
-        <Pizza
-          name="Pizza Spinachi"
-          ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-          price={10}
-          photoName="pizzas/spinaci.jpg"
+        {/* Généralement, on passe l'objet entier dans un composant plus spécifique (Parent Pizza .map ??), et dans l'enfant, on sort les informations désirées de l'objet (composant Pizza enfant) */}
+
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+
+        {/* <Pizza
+        name="Pizza Spinachi"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        price={10}
+        photoName="pizzas/spinaci.jpg"
         />
         <Pizza
-          name="Pizza Funghi"
-          ingredients="Tomato, mushrooms"
-          price={12}
-          photoName="pizzas/funghi.jpg"
-        />
+        name="Pizza Funghi"
+        ingredients="Tomato, mushrooms"
+        price={12}
+        photoName="pizzas/funghi.jpg"
+      /> */}
       </ul>
     </main>
   );
 }
 
 function Pizza(props) {
+  // console.log(props);
   return (
     <li className="pizza">
-      <img src={props.photoName} alt={props.name} />
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price + 3}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price + 3}</span>
       </div>
     </li>
   );
