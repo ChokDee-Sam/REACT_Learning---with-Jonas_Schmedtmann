@@ -153,3 +153,17 @@ et qui donc ne fonctionnera pas dans du JSX.
 --------------------------------------------------------------
 --------------------------------------------------------------
 
+Conditional Rendering with Multiple Returns
+
+Dans notre composant (function), 
+en dehors du JSX, on peut effectuer des return sous conditions
+(if/else)
+Parfois, on veut juste return quelque chose de complétement différent,
+comme un null, ou un tout autre composant, pour sortir de la fonction.
+
+Générarement, dans du JSX, 
+on utilise le return des elements JSX basés sur une condition.
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
