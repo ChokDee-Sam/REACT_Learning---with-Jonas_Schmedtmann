@@ -82,7 +82,7 @@ function Menu() {
     <main className="menu">
       <h2>Our Menu </h2>
 
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {/* Généralement, on passe l'objet entier dans un composant plus spécifique (Parent Pizza .map ??), et dans l'enfant, on sort les informations désirées de l'objet (composant Pizza enfant) */}
 
@@ -103,6 +103,8 @@ function Menu() {
         photoName="pizzas/funghi.jpg"
       /> */}
         </ul>
+      ) : (
+        <p> We are still working on menu. Please come back later :) </p>
       )}
     </main>
   );
@@ -139,14 +141,18 @@ function Footer() {
   return (
     <footer className="footer">
       {/* {new Date().toLocaleDateString()}. We're currently open */}
-      {(isOpen && (
+      {isOpen ? (
         <div className="order">
           <p>
             We are open until {closeHour}:00. Come visit us, or order online.
           </p>
           <button className="btn">Order</button>
         </div>
-      )) || <p>We are close. We open at {openHour}:00 </p>}
+      ) : (
+        <p>
+          We are happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
     </footer>
   );
 }

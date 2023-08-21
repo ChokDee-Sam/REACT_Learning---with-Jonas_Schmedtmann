@@ -143,3 +143,13 @@ mais avec la longueur d'un tableau > 0
 --------------------------------------------------------------
 --------------------------------------------------------------
 
+Conditional Rendering Ternaries
+
+Meilleur à utiliser que le && dans certaines conditions.
+Il produit (return) une value, 
+contrairement à if/else qui est un statement, 
+et qui donc ne fonctionnera pas dans du JSX.
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
