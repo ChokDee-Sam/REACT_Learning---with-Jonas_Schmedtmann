@@ -167,3 +167,26 @@ on utilise le return des elements JSX basés sur une condition.
 
 --------------------------------------------------------------
 --------------------------------------------------------------
+
+Extracting JSX into a New Component
+
+Lorsque les Composants semblent trop longs, 
+il est pratique de les découper en plusieurs petits Composants.
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+Faire passer une variable sous forme de props (à un enfant)
+
+Et, parfois, il y a des variables dans le Composant parent
+qu'il faut passer à un autre Composant.
+
+Pour ça, on passe la variable sous forme de props
+<Component propsName={variableName}
+
+Et pour plus de faciliter de lecture,
+on peut donner le même nom de props que la variable
+<Component openHour={openHour}
+
+--------------------------------------------------------------
+--------------------------------------------------------------
