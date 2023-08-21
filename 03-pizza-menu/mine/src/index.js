@@ -74,18 +74,23 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  // const pizzas = [] // pour l'exemple uniquement
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu </h2>
 
-      <ul className="pizzas">
-        {/* Généralement, on passe l'objet entier dans un composant plus spécifique (Parent Pizza .map ??), et dans l'enfant, on sort les informations désirées de l'objet (composant Pizza enfant) */}
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+          {/* Généralement, on passe l'objet entier dans un composant plus spécifique (Parent Pizza .map ??), et dans l'enfant, on sort les informations désirées de l'objet (composant Pizza enfant) */}
 
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
 
-        {/* <Pizza
+          {/* <Pizza
         name="Pizza Spinachi"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
         price={10}
@@ -97,7 +102,8 @@ function Menu() {
         price={12}
         photoName="pizzas/funghi.jpg"
       /> */}
-      </ul>
+        </ul>
+      )}
     </main>
   );
 }
@@ -117,10 +123,11 @@ function Pizza(props) {
 }
 
 function Footer() {
-  // const hour = new Date().getHours();
-  // const openHour = 12;
-  // const closeHour = 22;
-  // const isOpen = hour >= openHour && hour <= closeHour;
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
   // if (isOpen) alert("We are currently open !");
   // else alert("Sorry, we are closed");
@@ -131,7 +138,15 @@ function Footer() {
   // Réelle façon d'écrire (avec Babel)
   return (
     <footer className="footer">
-      {new Date().toLocaleDateString()}. We're currently open
+      {/* {new Date().toLocaleDateString()}. We're currently open */}
+      {(isOpen && (
+        <div className="order">
+          <p>
+            We are open until {closeHour}:00. Come visit us, or order online.
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      )) || <p>We are close. We open at {openHour}:00 </p>}
     </footer>
   );
 }

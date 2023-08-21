@@ -133,3 +133,13 @@ Et on attribue une props key via une donnée de Data
 
 --------------------------------------------------------------
 --------------------------------------------------------------
+
+Conditional Rendering &&
+
+Penser à utiliser la condition, souvent non pas avec un tableau, 
+mais avec la longueur d'un tableau > 0
+(pour éviter certains désagréments comme un affichage du 0 si falsy)
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
