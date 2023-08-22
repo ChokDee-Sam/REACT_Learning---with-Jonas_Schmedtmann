@@ -190,3 +190,14 @@ on peut donner le même nom de props que la variable
 
 --------------------------------------------------------------
 --------------------------------------------------------------
+
+Props Destructuring
+
+function sansPropsDestructuring (props)
+function avecPropsDestructuring ({nomDeProps_1, nomDeProps_2})
+
+On utilise le destructuring pour plus de simplicité.
+Et dans notre JSX, on passe de {props.nomDeProps} à {nomDeProps}
+
+--------------------------------------------------------------
+--------------------------------------------------------------
