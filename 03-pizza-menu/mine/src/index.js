@@ -88,7 +88,7 @@ function Menu() {
       {numPizzas > 0 ? (
         <>
           <p>
-            Authenthic Italiancuisine. 6 creative dishes to choose from. All
+            Authenthic Italian cuisine. 6 creative dishes to choose from. All
             from our stone oven, all organic, all delicious.
           </p>
           <ul className="pizzas">
