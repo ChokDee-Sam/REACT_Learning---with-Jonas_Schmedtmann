@@ -463,33 +463,33 @@ const { author, title, pages, publicationDate, genres, hasMovieAdaptation } =
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-// function getTotalReviewCount(book) {
-//   // Sans l'optional chaining : risque d'erreur si propriété undefined / null
-//   // const goodread_noSafe = book.reviews.goodreads.reviewsCount;
+function getTotalReviewCount(book) {
+  // Sans l'optional chaining : risque d'erreur si propriété undefined / null
+  // const goodread_noSafe = book.reviews.goodreads.reviewsCount;
 
-//   const goodreads = book.reviews?.goodreads?.reviewsCount;
-//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
 
-//   // goodread_noSafe
-//   goodreads;
-//   librarything;
+  // goodread_noSafe
+  console.log(goodreads);
+  console.log(librarything);
 
-//   return goodreads + librarything;
-// }
+  return goodreads + librarything;
+}
 
-// console.log(getTotalReviewCount(book));
+console.log(getTotalReviewCount(book));
 
-// const books = getBooks();
+const books = getBooks();
 
-// function getTotalReviewCount(book) {
-//   const goodreads = book.reviews?.goodreads?.reviewsCount;
-//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
 
-//   // console.log(goodreads);
-//   // console.log(librarything);
+  console.log(goodreads);
+  console.log(librarything);
 
-//   return goodreads + librarything;
-// }
+  return goodreads + librarything;
+}
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
