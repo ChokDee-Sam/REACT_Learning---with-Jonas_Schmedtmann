@@ -147,7 +147,7 @@ function getBook(id) {
 
 // Appel de la fonction dans une constante
 const book = getBook(2);
-// book;
+console.log(book);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -216,9 +216,9 @@ const { author, title, pages, publicationDate, genres, hasMovieAdaptation } =
 //----------//----------//----------
 
 // exemple : 1 element de tableau, puis 1 autre, puis TOUT LE RESTE dans un tableau
-const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
-console.log(primaryGenre, secondaryGenre, otherGenres);
-console.log(otherGenres);
+// const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+// console.log(primaryGenre, secondaryGenre, otherGenres);
+// console.log(otherGenres);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -249,7 +249,7 @@ console.log(otherGenres);
 // ----- Peut se placer en début où l'on souhaite
 //----------//----------//----------
 
-const newGenres3 = [...genres, "epic fantasy"];
+// const newGenres3 = [...genres, "epic fantasy"];
 // newGenres3;
 
 //-----------------------------------------------------------------------------------
@@ -266,30 +266,30 @@ const newGenres3 = [...genres, "epic fantasy"];
 // ----- Objet SANS SPREAD sur le book : Objet puis un élément seul (indésirable pour l'exemple)
 //----------//----------//----------
 
-const updatedBook_wrong = {
-  // Integre l'objet book
-  book,
-  // Ajoute une nouvelle propriété dans l'objet, EN DEHORS de book
-  moviePublicationDate: "2001-12-19",
-  // Ajoute encore une nouvelle propriété dans l'objet, EN DEHORS de book
-  pages: 1210,
-};
-console.log(updatedBook_wrong);
+// const updatedBook_wrong = {
+// Integre l'objet book
+// book,
+// Ajoute une nouvelle propriété dans l'objet, EN DEHORS de book
+// moviePublicationDate: "2001-12-19",
+// Ajoute encore une nouvelle propriété dans l'objet, EN DEHORS de book
+// pages: 1210,
+// };
+// console.log(updatedBook_wrong);
 
 //----------//----------//----------
 // ----- Objet AVEC SPREAD sur le book : un seul objet
 //----------//----------//----------
 
-const updatedBook = {
-  // Integre book AVEC SPREAD
-  ...book,
-  // Ajoute une nouvelle propriété DANS l'objet book
-  moviePublicationDate: "2001-12-19",
-  // Données `pages` déjà existante !
-  // Écrase donc la valeur de la propriété existante (attention, si placée avant, se fera à son tour écrasée)
-  pages: 1210,
-};
-console.log(updatedBook);
+// const updatedBook = {
+// Integre book AVEC SPREAD
+// ...book,
+// Ajoute une nouvelle propriété DANS l'objet book
+// moviePublicationDate: "2001-12-19",
+// Données `pages` déjà existante !
+// Écrase donc la valeur de la propriété existante (attention, si placée avant, se fera à son tour écrasée)
+// pages: 1210,
+// };
+// console.log(updatedBook);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -300,33 +300,32 @@ console.log(updatedBook);
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-// let summary = `
-// ${title}, a ${pages}-page long book, was written by ${author} and published in ${
-//   publicationDate.split("-")[0]
-// }
-// `;
+let summary = `
+${title}, a ${pages}-page long book, was written by ${author} and published in ${
+  publicationDate.split("-")[0]
+}`;
 
-// summary;
+console.log(summary);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 //                                TERNARIES
 //-----------------------------------------------------------------------------------
-// - Permet de définir des valeurs selon des conditions
-// - Remplace if / else qui est un statement (et donc ne retourne pas de valeur)
+// - Permet de retourner des VALEURS, basées sur des conditions
+// - Remplace if / else qui est un STATEMENT (et donc, ne retourne pas de valeur)
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-// summary = `The book has ${
-//   hasMovieAdaptation ? "" : "not"
-// } been adapted as a movie`;
+summary = `The book has ${
+  hasMovieAdaptation ? "" : "not"
+} been adapted as a movie`;
 
-// summary;
+console.log(summary);
 
-// const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
-// pagesRange;
+const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+console.log(pagesRange);
 
-// console.log(`The book has ${pagesRange} pages`);
+console.log(`The book has ${pagesRange} pages`);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
