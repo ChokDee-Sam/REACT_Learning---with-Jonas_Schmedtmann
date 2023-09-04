@@ -300,12 +300,12 @@ const { author, title, pages, publicationDate, genres, hasMovieAdaptation } =
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-let summary = `
-${title}, a ${pages}-page long book, was written by ${author} and published in ${
-  publicationDate.split("-")[0]
-}`;
+// let summary = `
+// ${title}, a ${pages}-page long book, was written by ${author} and published in ${
+//   publicationDate.split("-")[0]
+// }`;
 
-console.log(summary);
+// console.log(summary);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -316,16 +316,16 @@ console.log(summary);
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-summary = `The book has ${
-  hasMovieAdaptation ? "" : "not"
-} been adapted as a movie`;
+// summary = `The book has ${
+//   hasMovieAdaptation ? "" : "not"
+// } been adapted as a movie`;
 
-console.log(summary);
+// console.log(summary);
 
-const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
-console.log(pagesRange);
+// const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+// console.log(pagesRange);
 
-console.log(`The book has ${pagesRange} pages`);
+// console.log(`The book has ${pagesRange} pages`);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -341,7 +341,7 @@ console.log(`The book has ${pagesRange} pages`);
 //----------//----------//----------
 
 // function getYear_1(str) {
-// return str.split("-")[0];
+//   return str.split("-")[0];
 // }
 
 //----------//----------//----------
@@ -362,14 +362,18 @@ console.log(`The book has ${pagesRange} pages`);
 // and published in ${getYear_2(publicationDate)}
 // `;
 
-// summary;
+// console.log(summary);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 //                  SHORT CIRCUITING and LOGICAL OPERATOR && || ??
 //-----------------------------------------------------------------------------------
 // - Permet de retourner rapidement des sortes de conditions
-// -
+// - Une autre façon d'écrire des conditions
+// - Le court circuitage se déclenche des valeurs :
+//      - Falsy (0, '', null, undefined),
+//      - Truthy (le reste)
+//      - Null et Undefined
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
@@ -379,6 +383,10 @@ console.log(`The book has ${pagesRange} pages`);
 //            Le court-circuitage survient lors d'un Falsy
 // ----- [truthy ? continue : stop]
 //----------//----------//----------
+
+// --- Pour synthétiser :
+// ---      Return la deuxième info si elle existe, sinon met la première info
+// ---    ou bien : Si la première info existe, met donc la seconde info
 
 // console.log(true && "Some string");
 // console.log("jonas" && "Some string");
@@ -400,6 +408,9 @@ console.log(`The book has ${pagesRange} pages`);
 // ----- [truthy ? stop : continue]
 // ----- TRES PRATIQUE POUR AJOUTER UNE INFORMATION -----
 //----------//----------//----------
+
+// --- Pour synthétiser :
+// ---      Return cette première info si elle existe, sinon, met donc la deuxième info
 
 // console.log(false || "Some string");
 // console.log(null || "Some string");
