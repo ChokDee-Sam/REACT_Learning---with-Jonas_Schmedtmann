@@ -145,11 +145,9 @@ function getBook(id) {
   // return data[id-1]
 }
 
-/*
-
 // Appel de la fonction dans une constante
 const book = getBook(2);
-book;
+// book;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -176,7 +174,9 @@ book;
 const { author, title, pages, publicationDate, genres, hasMovieAdaptation } =
   book;
 
-console.log(author, title, genres);
+// console.log(author);
+// console.log(title);
+// console.log(genres);
 
 //----------//----------//----------
 //----- SANS Destructuring : Tableau -----
@@ -194,12 +194,20 @@ console.log(author, title, genres);
 // const [primaryGenre, secondaryGenre] = genres;
 // console.log(primaryGenre, secondaryGenre);
 
+// ----- Explication complémentaire : le Destructuring de Tableau -----
+// L'ordre entre les crochets = l'ordre du tableau [0][1][2] etc...
+// Pour faire simple :
+// - le 1er element du destructuring = le 1er élément du tableau
+// - le 2ème element du destructuring = le 2ème élément du tableau
+// - Et ainsi de suite...
+
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 //                           REST
 //-----------------------------------------------------------------------------------
 // - Dans un Destructuring, Rest crée un tableau supplémentaire avec tout le "reste"
 // - Rest se place à la fin d'un DESTRUCTURING
+// - Fonctionne pour le Destructuring d'Objets ET le Destructuring de Tableaux
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
@@ -207,9 +215,10 @@ console.log(author, title, genres);
 //----- Destructuring + REST Operator = création d'un tableau supplémentaire  -----
 //----------//----------//----------
 
-// exemple : 1 element de tableau, puis 1 autre, puis un tableau entier
+// exemple : 1 element de tableau, puis 1 autre, puis TOUT LE RESTE dans un tableau
 const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 console.log(primaryGenre, secondaryGenre, otherGenres);
+console.log(otherGenres);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -222,26 +231,26 @@ console.log(primaryGenre, secondaryGenre, otherGenres);
 //-----------------------------------------------------------------------------------
 
 //----------//----------//----------
-//-----  Tableau + Élément = création d'un tableau supplémentaire  -----
+//-----  exemple pas top : Tableau + Élément = création d'un tableau supplémentaire  -----
 //----------//----------//----------
 
-// exemple : 1 tableau entier, puis un élément
-const newGenres = [genres, "epic fantasy"];
-newGenres;
+// exemple non désirable dans l'exemple : 1 tableau entier, puis un élément
+// const newGenres = [genres, "epic fantasy"];
+// newGenres;
 
 //----------//----------//----------
 //----- SPREAD Operator = un seul tableau qui reunit tout  -----
 //----------//----------//----------
 
-const newGenres2 = ["epic fantasy", ...genres];
-newGenres2;
+// const newGenres2 = ["epic fantasy", ...genres];
+// newGenres2;
 
 //----------//----------//----------
 // ----- Peut se placer en début où l'on souhaite
 //----------//----------//----------
 
 const newGenres3 = [...genres, "epic fantasy"];
-newGenres3;
+// newGenres3;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -254,19 +263,18 @@ newGenres3;
 //-----------------------------------------------------------------------------------
 
 //----------//----------//----------
-// ----- Objet sans SPREAD sur le book : Objet dans Objet (confusion)
+// ----- Objet SANS SPREAD sur le book : Objet puis un élément seul (indésirable pour l'exemple)
 //----------//----------//----------
 
 const updatedBook_wrong = {
-  // Integre book
+  // Integre l'objet book
   book,
-  // Ajoute une nouvelle propriété dans l'objet
+  // Ajoute une nouvelle propriété dans l'objet, EN DEHORS de book
   moviePublicationDate: "2001-12-19",
-
-  // Écrase une propriété existante
+  // Ajoute encore une nouvelle propriété dans l'objet, EN DEHORS de book
   pages: 1210,
 };
-updatedBook_wrong;
+console.log(updatedBook_wrong);
 
 //----------//----------//----------
 // ----- Objet AVEC SPREAD sur le book : un seul objet
@@ -275,13 +283,13 @@ updatedBook_wrong;
 const updatedBook = {
   // Integre book AVEC SPREAD
   ...book,
-  // Ajoute une nouvelle propriété dans l'objet
+  // Ajoute une nouvelle propriété DANS l'objet book
   moviePublicationDate: "2001-12-19",
-
-  // Écrase une propriété existante (attention, si placée avant, se fera à son tour écrasée)
+  // Données `pages` déjà existante !
+  // Écrase donc la valeur de la propriété existante (attention, si placée avant, se fera à son tour écrasée)
   pages: 1210,
 };
-updatedBook;
+console.log(updatedBook);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -292,13 +300,13 @@ updatedBook;
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-let summary = `
-${title}, a ${pages}-page long book, was written by ${author} and published in ${
-  publicationDate.split("-")[0]
-}
-`;
+// let summary = `
+// ${title}, a ${pages}-page long book, was written by ${author} and published in ${
+//   publicationDate.split("-")[0]
+// }
+// `;
 
-summary;
+// summary;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -309,16 +317,16 @@ summary;
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-summary = `The book has ${
-  hasMovieAdaptation ? "" : "not"
-} been adapted as a movie`;
+// summary = `The book has ${
+//   hasMovieAdaptation ? "" : "not"
+// } been adapted as a movie`;
 
-summary;
+// summary;
 
-const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
-pagesRange;
+// const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+// pagesRange;
 
-console.log(`The book has ${pagesRange} pages`);
+// console.log(`The book has ${pagesRange} pages`);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -333,29 +341,29 @@ console.log(`The book has ${pagesRange} pages`);
 // ----- Fonction Classique
 //----------//----------//----------
 
-function getYear_1(str) {
-  return str.split("-")[0];
-}
+// function getYear_1(str) {
+// return str.split("-")[0];
+// }
 
 //----------//----------//----------
 // ----- Fonction Arrow
 //----------//----------//----------
 
-const getYear_2 = (str) => str.split("-")[0];
+// const getYear_2 = (str) => str.split("-")[0];
 
 //----------//----------//----------
 // ----- Comparaison des 2 appels de fonction : similaire
 //----------//----------//----------
 
-console.log(getYear_1(publicationDate));
-console.log(getYear_2(publicationDate));
+// console.log(getYear_1(publicationDate));
+// console.log(getYear_2(publicationDate));
 
-summary = `
-${title}, a ${pages}-page long book, was written by ${author} 
-and published in ${getYear_2(publicationDate)}
-`;
+// summary = `
+// ${title}, a ${pages}-page long book, was written by ${author}
+// and published in ${getYear_2(publicationDate)}
+// `;
 
-summary;
+// summary;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -373,18 +381,18 @@ summary;
 // ----- [truthy ? continue : stop]
 //----------//----------//----------
 
-console.log(true && "Some string");
-console.log("jonas" && "Some string");
+// console.log(true && "Some string");
+// console.log("jonas" && "Some string");
 
-// Court-circuit (Falsy)
-// falsy value : 0, '', null, undefined
-console.log(false && "Some string");
-console.log(0 && "Some string");
-console.log(null && "Some string");
-console.log(undefined && "Some string");
+// // Court-circuit (Falsy)
+// // falsy value : 0, '', null, undefined
+// console.log(false && "Some string");
+// console.log(0 && "Some string");
+// console.log(null && "Some string");
+// console.log(undefined && "Some string");
 
-// exemple
-console.log(hasMovieAdaptation && "This book has a movie");
+// // exemple
+// console.log(hasMovieAdaptation && "This book has a movie");
 
 //----------//----------//----------
 // ----- Opérateur logique ||
@@ -394,24 +402,24 @@ console.log(hasMovieAdaptation && "This book has a movie");
 // ----- TRES PRATIQUE POUR AJOUTER UNE INFORMATION -----
 //----------//----------//----------
 
-console.log(false || "Some string");
-console.log(null || "Some string");
-console.log(undefined || "Some string");
-console.log(0 || "Some string");
+// console.log(false || "Some string");
+// console.log(null || "Some string");
+// console.log(undefined || "Some string");
+// console.log(0 || "Some string");
 
-// Court-circuit (Truthy)
-console.log(true || "Some string");
-console.log("Jonas" || "Some string");
+// // Court-circuit (Truthy)
+// console.log(true || "Some string");
+// console.log("Jonas" || "Some string");
 
-// exemple
-console.log(book.translations.spanish);
-const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
-spanishTranslation;
+// // exemple
+// console.log(book.translations.spanish);
+// const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+// spanishTranslation;
 
-// PROBLEME AVEC LA VALEUR ZERO : ELLE DONNE UN RESULTAT EXISTANT MAIS FALSY
-console.log(book.reviews.librarything.reviewsCount);
-const countWrong = book.reviews.librarything.reviewsCount || "no data";
-countWrong;
+// // PROBLEME AVEC LA VALEUR ZERO : ELLE DONNE UN RESULTAT EXISTANT MAIS FALSY
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || "no data";
+// countWrong;
 
 //----------//----------//----------
 // ----- Opérateur logique &&
@@ -421,18 +429,18 @@ countWrong;
 // ----- [null or undefined ? continue : stop]
 //----------//----------//----------
 
-console.log(null ?? "Some string");
-console.log(undefined ?? "Some string");
+// console.log(null ?? "Some string");
+// console.log(undefined ?? "Some string");
 
-// Court-circuit (tout sauf null et undefined)
-console.log(true ?? "Some string");
-console.log(false ?? "Some string");
-console.log(0 ?? "Some string");
-console.log("" ?? "Some string");
+// // Court-circuit (tout sauf null et undefined)
+// console.log(true ?? "Some string");
+// console.log(false ?? "Some string");
+// console.log(0 ?? "Some string");
+// console.log("" ?? "Some string");
 
-// exemple
-const count = book.reviews.librarything.reviewsCount ?? "no data";
-count;
+// // exemple
+// const count = book.reviews.librarything.reviewsCount ?? "no data";
+// count;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -445,37 +453,33 @@ count;
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-function getTotalReviewCount(book) {
-  // Sans l'optional chaining : risque d'erreur si propriété undefined / null
-  // const goodread_noSafe = book.reviews.goodreads.reviewsCount;
+// function getTotalReviewCount(book) {
+//   // Sans l'optional chaining : risque d'erreur si propriété undefined / null
+//   // const goodread_noSafe = book.reviews.goodreads.reviewsCount;
 
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+//   const goodreads = book.reviews?.goodreads?.reviewsCount;
+//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
 
-  // goodread_noSafe
-  goodreads;
-  librarything;
+//   // goodread_noSafe
+//   goodreads;
+//   librarything;
 
-  return goodreads + librarything;
-}
+//   return goodreads + librarything;
+// }
 
-console.log(getTotalReviewCount(book));
+// console.log(getTotalReviewCount(book));
 
-*/
+// const books = getBooks();
 
-/*
+// function getTotalReviewCount(book) {
+//   const goodreads = book.reviews?.goodreads?.reviewsCount;
+//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
 
-const books = getBooks();
+//   // console.log(goodreads);
+//   // console.log(librarything);
 
-function getTotalReviewCount(book) {
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-
-  // console.log(goodreads);
-  // console.log(librarything);
-
-  return goodreads + librarything;
-}
+//   return goodreads + librarything;
+// }
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -487,24 +491,24 @@ function getTotalReviewCount(book) {
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-// exemple pour un (nouveau) tableau qui sera multiplié par 2
-const x = [1, 2, 3, 4, 5].map((element) => element * 2);
-console.log(x);
+// // exemple pour un (nouveau) tableau qui sera multiplié par 2
+// const x = [1, 2, 3, 4, 5].map((element) => element * 2);
+// console.log(x);
 
-console.log(books);
+// console.log(books);
 
-// exemple pour avec un (nouveau) tableau tous les titres
-const titles = books.map((element) => element.title);
-console.log(titles);
+// // exemple pour avec un (nouveau) tableau tous les titres
+// const titles = books.map((element) => element.title);
+// console.log(titles);
 
-// exemple pour avoir un (nouveau) tableau avec tous les auteurs + les titres + le total des reviews (via fonction)
-const essentialData = books.map((element) => ({
-  title: element.title,
-  author: element.author,
-  reviewsCount: getTotalReviewCount(element),
-}));
+// // exemple pour avoir un (nouveau) tableau avec tous les auteurs + les titres + le total des reviews (via fonction)
+// const essentialData = books.map((element) => ({
+//   title: element.title,
+//   author: element.author,
+//   reviewsCount: getTotalReviewCount(element),
+// }));
 
-essentialData;
+// essentialData;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -516,29 +520,29 @@ essentialData;
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-// avec avec le nombre de pages
-const longBooks = books.filter((element) => element.pages > 500);
-longBooks;
+// // avec avec le nombre de pages
+// const longBooks = books.filter((element) => element.pages > 500);
+// longBooks;
 
-// avec le nombre de pages + l'adaptation en film
-const longBooksWithMovie = books
-  .filter((element) => element.pages > 500)
-  .filter((element) => element.hasMovieAdaptation);
-// écriture plus logique
-// .filter((element) => element.pages > 500 && element.hasMovieAdaptation);
+// // avec le nombre de pages + l'adaptation en film
+// const longBooksWithMovie = books
+//   .filter((element) => element.pages > 500)
+//   .filter((element) => element.hasMovieAdaptation);
+// // écriture plus logique
+// // .filter((element) => element.pages > 500 && element.hasMovieAdaptation);
 
-longBooksWithMovie;
+// longBooksWithMovie;
 
-// exemple avec le genre humour
-const humorBooks = books.filter((element) => element.genres.includes("humor"));
-humorBooks;
+// // exemple avec le genre humour
+// const humorBooks = books.filter((element) => element.genres.includes("humor"));
+// humorBooks;
 
-// exemple avec le genre aventure + création d'un nouveau tableau avec uniquement les titres
-const adventureBooks = books
-  .filter((element) => element.genres.includes("adventure"))
-  .map((element) => element.title);
+// // exemple avec le genre aventure + création d'un nouveau tableau avec uniquement les titres
+// const adventureBooks = books
+//   .filter((element) => element.genres.includes("adventure"))
+//   .map((element) => element.title);
 
-adventureBooks;
+// adventureBooks;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -551,11 +555,11 @@ adventureBooks;
 //-----------------------------------------------------------------------------------
 
 // exemple avec un calcul cumulé des toutes les pages des livres
-const pagesAllBooks = books.reduce(
-  (accumulator, element) => accumulator + element.pages,
-  0
-);
-pagesAllBooks;
+// const pagesAllBooks = books.reduce(
+//   (accumulator, element) => accumulator + element.pages,
+//   0
+// );
+// pagesAllBooks;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -570,24 +574,24 @@ pagesAllBooks;
 //-----------------------------------------------------------------------------------
 
 // exemple avec des nombres mal rangés
-const arr = [3, 1, 5, 9, 2, 0];
-const sorted = arr.sort((a, b) => b - a);
+// const arr = [3, 1, 5, 9, 2, 0];
+// const sorted = arr.sort((a, b) => b - a);
 
-// Le tableau original est lui aussi modifiié
-// De ce fait, pas besoin de forcement créer de nouveaux tableaux
-arr;
-sorted;
+// // Le tableau original est lui aussi modifiié
+// // De ce fait, pas besoin de forcement créer de nouveaux tableaux
+// arr;
+// sorted;
 
-// Astuce pour éviter de modifier le tableau original
-const newArr = [3, 1, 5, 9, 2, 0];
-const newSorted = newArr.slice().sort((a, b) => a - b);
+// // Astuce pour éviter de modifier le tableau original
+// const newArr = [3, 1, 5, 9, 2, 0];
+// const newSorted = newArr.slice().sort((a, b) => a - b);
 
-newArr;
-newSorted;
+// newArr;
+// newSorted;
 
-// Exemple avec classement selon le nombre de pages des livres
-const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
-sortedByPages;
+// // Exemple avec classement selon le nombre de pages des livres
+// const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+// sortedByPages;
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -606,15 +610,15 @@ sortedByPages;
 // ----- Création d'un objet, puis création d'un nouveau tableau qui recevra le spread, et le nouvel element
 //----------//----------//----------
 
-const newBook = {
-  id: 6,
-  title: "Opération Condor",
-  author: "Jacky Chan",
-};
+// const newBook = {
+//   id: 6,
+//   title: "Opération Condor",
+//   author: "Jacky Chan",
+// };
 
 // Recipe : Create a New Array, Spread the current elements, and add the new element
-const booksAfterAdd = [...books, newBook];
-console.log(booksAfterAdd);
+// const booksAfterAdd = [...books, newBook];
+// console.log(booksAfterAdd);
 
 //----------//----------//----------
 // ----- Supprimer un objet dans un tableau
@@ -624,8 +628,8 @@ console.log(booksAfterAdd);
 //----------//----------//----------
 
 // Recipe : Filter pour réduire, afin de garder "tout ce qui est", ou "tout ce qui n'est pas"
-const booksAfterDelete = booksAfterAdd.filter((element) => element.id !== 3);
-console.log(booksAfterDelete);
+// const booksAfterDelete = booksAfterAdd.filter((element) => element.id !== 3);
+// console.log(booksAfterDelete);
 
 //----------//----------//----------
 // ----- Update un objet dans un tableau
@@ -637,12 +641,10 @@ console.log(booksAfterDelete);
 //----------//----------//----------
 
 // Recipe : use the map method, because it creates an array with the same length as the original
-const booksAfterUpdate = booksAfterDelete.map((element) =>
-  element.id === 1 ? { ...element, pages: 1000000 } : element
-);
-console.log(booksAfterUpdate);
-
-*/
+// const booksAfterUpdate = booksAfterDelete.map((element) =>
+//   element.id === 1 ? { ...element, pages: 1000000 } : element
+// );
+// console.log(booksAfterUpdate);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -655,11 +657,11 @@ console.log(booksAfterUpdate);
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-fetch("https://jsonplaceholder.typicode.com/todos")
-  .then((res) => res.json())
-  .then((data) => console.log(data));
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
 
-console.log("Sam");
+// console.log("Sam");
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -672,13 +674,13 @@ console.log("Sam");
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-async function getToDos() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-  const data = await res.json();
-  console.log(data);
+// async function getToDos() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+//   const data = await res.json();
+//   console.log(data);
 
-  return data;
-}
+//   return data;
+// }
 
-const todos = getToDos();
-console.log("Sam");
+// const todos = getToDos();
+// console.log("Sam");
