@@ -628,7 +628,7 @@ const books = getBooks();
 //   author: "Jacky Chan",
 // };
 
-// Recipe : Create a New Array, Spread the current elements, and add the new element
+// // Recipe : Create a New Array, Spread the current elements, and add the new element
 // const booksAfterAdd = [...books, newBook];
 // console.log(booksAfterAdd);
 
@@ -636,10 +636,10 @@ const books = getBooks();
 // ----- Supprimer un objet dans un tableau
 //            Le but est de ne pas modifier le tableau original
 //            On utilise un .filter() du tableau
-// ----- Création d'un variable, qui a un tableau dans lequel on filtre tout ce qui n'est pas id:3
+// ----- On filtre TOUT CE QUI N'EST PAS (dans un nouveau tableau)
 //----------//----------//----------
 
-// Recipe : Filter pour réduire, afin de garder "tout ce qui est", ou "tout ce qui n'est pas"
+// // Recipe : Filter pour réduire, afin de garder "tout ce qui est", ou "tout ce qui n'est pas"
 // const booksAfterDelete = booksAfterAdd.filter((element) => element.id !== 3);
 // console.log(booksAfterDelete);
 
@@ -649,10 +649,11 @@ const books = getBooks();
 //            On cible les conditions dans une ternaire, qui agiront durant la boucle map
 //            On peut donc y ajouter un objet, avec un spread de l'original, pour avoir tout le contenu original
 //
-// ----- Création d'un variable, qui a un tableau dans lequel on filtre tout ce qui n'est pas id:3
+// ----- On crée un .map, dans lequel on cible un element precis
+// ----- Puis dans lequel on spread l'élément initiale, en rajoutant à la suite une donnée qui écrasera celle déjà existante (issue du spread)
 //----------//----------//----------
 
-// Recipe : use the map method, because it creates an array with the same length as the original
+// // Recipe : use the map method, because it creates an array with the same length as the original
 // const booksAfterUpdate = booksAfterDelete.map((element) =>
 //   element.id === 1 ? { ...element, pages: 1000000 } : element
 // );
