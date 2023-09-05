@@ -146,7 +146,7 @@ function getBook(id) {
 }
 
 // Appel de la fonction dans une constante
-const book = getBook(2);
+const book = getBook(3);
 console.log(book);
 
 //-----------------------------------------------------------------------------------
@@ -424,12 +424,12 @@ const { author, title, pages, publicationDate, genres, hasMovieAdaptation } =
 // // exemple
 // console.log(book.translations.spanish);
 // const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
-// spanishTranslation;
+// console.log(spanishTranslation);
 
 // // PROBLEME AVEC LA VALEUR ZERO : ELLE DONNE UN RESULTAT EXISTANT MAIS FALSY
 // console.log(book.reviews.librarything.reviewsCount);
 // const countWrong = book.reviews.librarything.reviewsCount || "no data";
-// countWrong;
+// console.log(countWrong);
 
 //----------//----------//----------
 // ----- Opérateur logique &&
@@ -450,7 +450,7 @@ const { author, title, pages, publicationDate, genres, hasMovieAdaptation } =
 
 // // exemple
 // const count = book.reviews.librarything.reviewsCount ?? "no data";
-// count;
+// console.log(count);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -458,38 +458,36 @@ const { author, title, pages, publicationDate, genres, hasMovieAdaptation } =
 //-----------------------------------------------------------------------------------
 // - Utile lorsqu'on n'est pas certain que la valeur existe
 // - Permet de lire la propriété suivante UNIQUEMENT si elle est existante
-// - Évite les erreurs (du style undefined.undefiined)
-// - [La valeur = undefined ou null ? Tu la lis, et tu continues : tu t'arrêtes et return undefined]
+// - De ce fait : ÉVITE LES ERREURS (du style undefined.undefiined)
+// - [La valeur est existante ? (ni undefined ou null) = Tu continues vers la droite
+// -    SI tu tombes sur un null ou undefined, tu return ça (et donc tu t'arrêtes de lire)
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-function getTotalReviewCount(book) {
-  // Sans l'optional chaining : risque d'erreur si propriété undefined / null
-  // const goodread_noSafe = book.reviews.goodreads.reviewsCount;
+// function getTotalReviewCount(book) {
+//   // Sans l'optional chaining : risque d'erreur si propriété undefined / null
+//   // (à tester en changeant le numero de book ligne 149)
 
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+//   // const goodreads_noSafe = book.reviews.goodreads.reviewsCount;
+//   // const librarything_noSafe = book.reviews.librarything.reviewsCount;
+//   // console.log(goodreads_noSafe);
+//   // console.log(librarything_noSafe);
+//   // return goodreads_noSafe + librarything_noSafe;
 
-  // goodread_noSafe
-  console.log(goodreads);
-  console.log(librarything);
+//   // Bonne pratique
+//   const goodreads = book.reviews?.goodreads?.reviewsCount;
+//   let librarything = book?.reviews?.librarything?.reviewsCount;
 
-  return goodreads + librarything;
-}
+//   // La solution idéale : mixer l'Optional Chaining + ??
+//   // (afin de justement donner une valeur en cas de null ou undefined )
+//   librarything = book.reviews?.librarything?.reviewsCount ?? 0;
 
-console.log(getTotalReviewCount(book));
+//   console.log(goodreads);
+//   console.log(librarything);
+//   return goodreads + librarything;
+// }
 
-const books = getBooks();
-
-function getTotalReviewCount(book) {
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-
-  console.log(goodreads);
-  console.log(librarything);
-
-  return goodreads + librarything;
-}
+// // console.log(getTotalReviewCount(book));
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -497,6 +495,7 @@ function getTotalReviewCount(book) {
 //-----------------------------------------------------------------------------------
 // - La méthode .map crée un boucle sur chaque élément d'un tableau
 // - Puis crée un nouveau tableau, de même longueur, où chaque élément a reçu la fonction
+// - Ne modifie pas le tableau original
 // - ASTUCE : pour éviter d'écrire {return}, une parenthese suffit => ()
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -505,6 +504,7 @@ function getTotalReviewCount(book) {
 // const x = [1, 2, 3, 4, 5].map((element) => element * 2);
 // console.log(x);
 
+const books = getBooks();
 // console.log(books);
 
 // // exemple pour avec un (nouveau) tableau tous les titres
@@ -512,19 +512,20 @@ function getTotalReviewCount(book) {
 // console.log(titles);
 
 // // exemple pour avoir un (nouveau) tableau avec tous les auteurs + les titres + le total des reviews (via fonction)
+// // - ASTUCE : pour éviter d'écrire {return}, une parenthese suffit => ()
 // const essentialData = books.map((element) => ({
 //   title: element.title,
 //   author: element.author,
 //   reviewsCount: getTotalReviewCount(element),
 // }));
 
-// essentialData;
+// console.log(essentialData);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 //                              ARRAY FILTER METHOD
 //-----------------------------------------------------------------------------------
-// - La méthode .filter filtre des éléments selon condition
+// - La méthode .filter filtre chaque élément du tableau selon condition(s)
 // - Puis crée un nouveau tableau avec chaque élément remplissant la condition
 // -
 //-----------------------------------------------------------------------------------
@@ -532,7 +533,7 @@ function getTotalReviewCount(book) {
 
 // // avec avec le nombre de pages
 // const longBooks = books.filter((element) => element.pages > 500);
-// longBooks;
+// console.log(longBooks);
 
 // // avec le nombre de pages + l'adaptation en film
 // const longBooksWithMovie = books
@@ -541,24 +542,25 @@ function getTotalReviewCount(book) {
 // // écriture plus logique
 // // .filter((element) => element.pages > 500 && element.hasMovieAdaptation);
 
-// longBooksWithMovie;
+// // console.log(longBooksWithMovie);
 
 // // exemple avec le genre humour
 // const humorBooks = books.filter((element) => element.genres.includes("humor"));
-// humorBooks;
+// console.log(humorBooks);
 
-// // exemple avec le genre aventure + création d'un nouveau tableau avec uniquement les titres
+// // // exemple avec le genre aventure + création d'un nouveau tableau avec uniquement les titres
 // const adventureBooks = books
 //   .filter((element) => element.genres.includes("adventure"))
 //   .map((element) => element.title);
 
-// adventureBooks;
+// console.log(adventureBooks);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 //                              ARRAY REDUCE METHOD
 //-----------------------------------------------------------------------------------
 // - La méthode .reduce a pour but de réduire les tableaux
+// - C'est une sorte de boucle sur chaque élément de tableau cumulé à l'élément précédent
 // - Cette méthode possède 2 paramètres de fonction : un accumulateur + un élément où agir
 // - On attribue la valeur de départ (à la fin)
 //-----------------------------------------------------------------------------------
