@@ -527,7 +527,6 @@ const books = getBooks();
 //-----------------------------------------------------------------------------------
 // - La méthode .filter filtre chaque élément du tableau selon condition(s)
 // - Puis crée un nouveau tableau avec chaque élément remplissant la condition
-// -
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
@@ -562,16 +561,17 @@ const books = getBooks();
 // - La méthode .reduce a pour but de réduire les tableaux
 // - C'est une sorte de boucle sur chaque élément de tableau cumulé à l'élément précédent
 // - Cette méthode possède 2 paramètres de fonction : un accumulateur + un élément où agir
-// - On attribue la valeur de départ (à la fin)
+// - On attribue la valeur d'accumulateur de départ à la fin de la fonction
+// - Cette valeur de départ peut être un nombre, un tableau, un objet, etc...
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-// exemple avec un calcul cumulé des toutes les pages des livres
+// // exemple avec un calcul cumulé des toutes les pages des livres
 // const pagesAllBooks = books.reduce(
 //   (accumulator, element) => accumulator + element.pages,
 //   0
 // );
-// pagesAllBooks;
+// console.log(pagesAllBooks);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
@@ -585,25 +585,25 @@ const books = getBooks();
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 
-// exemple avec des nombres mal rangés
+// // exemple avec des nombres mal rangés
 // const arr = [3, 1, 5, 9, 2, 0];
 // const sorted = arr.sort((a, b) => b - a);
 
-// // Le tableau original est lui aussi modifiié
-// // De ce fait, pas besoin de forcement créer de nouveaux tableaux
-// arr;
-// sorted;
+// // // Le tableau original est lui aussi modifiié
+// // // De ce fait, pas besoin de forcement créer de nouveaux tableaux
+// console.log(arr);
+// console.log(sorted);
 
-// // Astuce pour éviter de modifier le tableau original
+// // // Astuce pour éviter de modifier le tableau original
 // const newArr = [3, 1, 5, 9, 2, 0];
 // const newSorted = newArr.slice().sort((a, b) => a - b);
 
-// newArr;
-// newSorted;
+// console.log(newArr);
+// console.log(newSorted);
 
-// // Exemple avec classement selon le nombre de pages des livres
+// // // Exemple avec classement selon le nombre de pages des livres
 // const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
-// sortedByPages;
+// console.log(sortedByPages);
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
