@@ -84,12 +84,6 @@ Paramètres VSCode > diff decorations > None
 
 
 ----------------------------------------------------------------
----------------------------------------------------------------
-React = separation of concerns
-(séparation des préoccupations/intérêts)
-
-
-----------------------------------------------------------------
 JSX : c'est quoi ?
 ----------------------------------------------------------------
 C'est une "extension" de JavaScript
@@ -160,6 +154,7 @@ Pour résumer l'approche de React :
 - On utilise le JSX pour dire à React ce qu'on souhaite voir sur notre écran
 - Mais pas comment l'accomplir, de manière précise (step by step)
 
+
 ----------------------------------------------------------------
 Le Mode JavaScript dans notre JSX
 ----------------------------------------------------------------
@@ -171,6 +166,23 @@ Comment ?
 Exemple :
 <h1>{new Date().toLocaleDateString()} We are open</div>
 
+
+----------------------------------------------------------------
+React = separation of concerns
+---------------------------------------------------------------
+(séparation des préoccupations/intérêts)
+
+Avant, sans React :
+- 1 fichier par langage (HTML / CSS / JavaScript)
+
+Avec React :
+- 1 fichier par composant (Menu / Footer / Titre / etc...)
+
+Avantages :
+- Facilité de lecture, car fichiers moins longs
+- Facilité de modification, car plus localisée
+- Moins de bugs, car chaque élément est très ciblé
+- Donc facilement maintenable sur la durée
 
 
 ----------------------------------------------------------------
