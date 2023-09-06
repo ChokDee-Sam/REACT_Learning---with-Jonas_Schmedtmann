@@ -1,4 +1,28 @@
+----------------------------------------------------------------
+–––-–––––Rendering the Root Component
+----------------------------------------------------------------
+
+// ----- React v18
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+function App() {
+  return <h1>Hello React</h1>;
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+// ----- React before 18
+React.render(<App />)
+
+/ ------ PS : Dans certains fichiers, WebPack s'occupe de modifier ce genre d'URL
+<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+----------------------------------------------------------------
 Le strict mode :
+----------------------------------------------------------------
+
 La seule chose qu'il fait, c'est que pendant le développement :
 
 - il va render tous les composants deux fois afin de trouver certains bugs.
@@ -9,6 +33,23 @@ mais c'est quand même une bonne idée de toujours l'activer
 lorsque nous développons des applications React.
 
 ----------------------------------------------------------------
+Debugging : bonnes pratiques
+----------------------------------------------------------------
+
+--- Avant de commencer
+- Regarder si on a bien lancer l'App dans le navigateur (npm start)
+
+--- En cas d'absence d'affichage dans le navigateur
+- Restart l'App : control+C puis npm start
+- Faire un hard reload avec le navigateur (bouton ou raccourci)
+
+--- En cas d'erreurs
+- Toujours ouvrir la console du navigateur pour voir les erreurs
+- Checker le message d'erreur sur Google (App, console, etc )
+- Penser à modifier l'output de la console VSCode (ESLint, Prettier, etc)
+
+----------------------------------------------------------------
+Composants
 ----------------------------------------------------------------
 
 Utilité première d'un composant ? Réusabilité
@@ -25,13 +66,16 @@ diff decorations : astuce
 
 React = separation of concerns
 (séparation des préoccupations/intérêts)
+
 ----------------------------------------------------------------
+JSX
 ----------------------------------------------------------------
 
 JSX est converti en JS grace à Babel 
 (via la fonction React.createElement)
 
 ----------------------------------------------------------------
+CSS
 ----------------------------------------------------------------
 
 CSS : class en JSX devient className
