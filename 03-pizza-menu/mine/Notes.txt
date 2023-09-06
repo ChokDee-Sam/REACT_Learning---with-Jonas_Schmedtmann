@@ -1,7 +1,6 @@
 ----------------------------------------------------------------
 Rendering the Root Component
 ----------------------------------------------------------------
-
 // ----- React v18
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -19,10 +18,10 @@ React.render(<App />)
 / ------ PS : Dans certains fichiers, WebPack s'occupe de modifier ce genre d'URL
 <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
+
 ----------------------------------------------------------------
 Le strict mode :
 ----------------------------------------------------------------
-
 La seule chose qu'il fait, c'est que pendant le développement :
 
 - il va render tous les composants deux fois afin de trouver certains bugs.
@@ -32,10 +31,10 @@ Donc le mode strict n'a rien de révolutionnaire,
 mais c'est quand même une bonne idée de toujours l'activer
 lorsque nous développons des applications React.
 
+
 ----------------------------------------------------------------
 Debugging : bonnes pratiques
 ----------------------------------------------------------------
-
 --- Avant de commencer
 - Regarder si on a bien lancer l'App dans le navigateur (npm start)
 
@@ -48,10 +47,10 @@ Debugging : bonnes pratiques
 - Checker le message d'erreur sur Google (App, console, etc )
 - Penser à modifier l'output de la console VSCode (ESLint, Prettier, etc)
 
+
 ----------------------------------------------------------------
 Composants : définition et utilité
 ----------------------------------------------------------------
-
 Utilité première d'un composant ? Réusabilité
 Comment sont-ils généralement placés ? En imbrication
 Aspect clé principal : Les possibilités d'imbrications et réusabilités
@@ -65,10 +64,10 @@ Penser à créer un arbre de composants pour mieux comprendre notre "chantier"
 - les imbrications
 - et comment tous les composants sont reliés entre eux
 
+
 ----------------------------------------------------------------
 Composant : quelques règles importantes
 ----------------------------------------------------------------
-
 Son nom doit toujours commencer par une majuscule
 
 Un composant doit toujours retourner une valeur (pas de null par exemple)
@@ -77,24 +76,102 @@ Un composant doit toujours retourner une valeur (pas de null par exemple)
 Ne pas imbriquer une déclaration de fonction qui elle-meme dans une autre fonction
 Toujours déclarer nos composants au top level
 
+
 ----------------------------------------------------------------
 Astuce Ne pas voir les lignes de modifications
 ----------------------------------------------------------------
-
 Paramètres VSCode > diff decorations > None
 
-----------------------------------------------------------------
-----------------------------------------------------------------
 
+----------------------------------------------------------------
+---------------------------------------------------------------
 React = separation of concerns
 (séparation des préoccupations/intérêts)
 
-----------------------------------------------------------------
-JSX
-----------------------------------------------------------------
 
+----------------------------------------------------------------
+JSX : c'est quoi ?
+----------------------------------------------------------------
+C'est une "extension" de JavaScript
+Permet d'embarquer du JS, du CSS, et du React Composant en HTML
+
+Declarative synthaxe pour décrire à quoi :
+- à quoi ressemblera le composant 
+- comment il fonctionnera
+
+C'est le composant qui return le block JSX
+
+
+----------------------------------------------------------------
+JSX : la conversion de Babel nous simplifie la vie !
+----------------------------------------------------------------
 JSX est converti en JS grace à Babel 
-(via la fonction React.createElement)
+via l'appel de fonction React.createElement()
+
+Le nom des composants n'apparait pas dans le fichier HTML final
+On y voit uniquement ce qu'il y a à l'intérieur
+
+PS : on pourrait utiliser React sans JSX
+Mais on perdrait du temps à :
+- écrire des createElement
+- perdre en lisibilité
+
+Comparaison indiscutable :
+Return <Footer> We are open </Footer>
+return React.createElement("footer", null, "We are open")
+
+----------------------------------------------------------------
+L'approche IMPERATIVE de JavaScript
+----------------------------------------------------------------
+En JavaScript, on manipule directement le DOM
+L'idée est que la manipulation du Dom est une suite d'étape bien ordonnée
+afin de manuellement créer/modifier des éléments, puis de les placer
+
+Une approche Imperative : 
+- On indique manuellement chaque étape step by step de la manipulation du DOM
+- Ces étapes modifieront toute notre UI
+
+Pour résumer l'approche JavaScript :
+- On utilise la manipulation du DOM, étape par étape,
+pour dire exactement 'comment' réaliser les choses
+
+
+----------------------------------------------------------------
+L'approche DECLARATIVE de React
+----------------------------------------------------------------
+En React, on ne manipule JAMAIS le DOM directement
+L'idée est que l'UI est la reflection de la Data Actuelle (props,state)
+Et que cette Data laisse React automatiquement synchroniser l'UI avec celle-ci
+
+Une approche déclarative : 
+- On utilise JSX pour dire à React ce qu'on souhaite voir sur l'écran
+- Et ce sont les Data qui iront manipuler le DOM, pas nous
+
+La simplicité : 
+- On utilise le JSX en 'posant' des Data pour dire ce qu'on voit à l'écran
+- Et c'est tout !
+
+Car : 
+- React laissera ces Data se modifier automatiquement sous certaines conditions
+- Ces conditions laisseront les Data modifier le DOM
+- Cette modification du DOM génerera un nouveau rendu sur l'UI
+
+Pour résumer l'approche de React :
+- On utilise le JSX pour dire à React ce qu'on souhaite voir sur notre écran
+- Mais pas comment l'accomplir, de manière précise (step by step)
+
+----------------------------------------------------------------
+Le Mode JavaScript dans notre JSX
+----------------------------------------------------------------
+Permet de combiner le JavaScript dans notre HTML
+
+Comment ?
+- Juste en mettant une expression JavaScript entre les accolades
+
+Exemple :
+<h1>{new Date().toLocaleDateString()} We are open</div>
+
+
 
 ----------------------------------------------------------------
 CSS
