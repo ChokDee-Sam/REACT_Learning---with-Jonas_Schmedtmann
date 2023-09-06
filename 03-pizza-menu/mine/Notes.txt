@@ -1,5 +1,5 @@
 ----------------------------------------------------------------
-–––-–––––Rendering the Root Component
+Rendering the Root Component
 ----------------------------------------------------------------
 
 // ----- React v18
@@ -49,20 +49,42 @@ Debugging : bonnes pratiques
 - Penser à modifier l'output de la console VSCode (ESLint, Prettier, etc)
 
 ----------------------------------------------------------------
-Composants
+Composants : définition et utilité
 ----------------------------------------------------------------
 
 Utilité première d'un composant ? Réusabilité
-composant = Data + Logic + Appearance
+Comment sont-ils généralement placés ? En imbrication
+Aspect clé principal : Les possibilités d'imbrications et réusabilités
+
+Composant = Data + Logic + Appearance
+La clé est de savoir "divisé" des parties de Design en Composants
+
+Penser à créer un arbre de composants pour mieux comprendre notre "chantier"
+Ça facilite la compréhension du projet, grace à :
+- la hiérachisation (parent, enfant)
+- les imbrications
+- et comment tous les composants sont reliés entre eux
+
+----------------------------------------------------------------
+Composant : quelques règles importantes
+----------------------------------------------------------------
+
+Son nom doit toujours commencer par une majuscule
 
 Un composant doit toujours retourner une valeur (pas de null par exemple)
-Ne jamais imbriquer une déclaration de fonction elle-meme dans une autre fonction
+À partir de 2 composants qui s'affichent, ils doivent être dans une div ou Fragment
+
+Ne pas imbriquer une déclaration de fonction qui elle-meme dans une autre fonction
 Toujours déclarer nos composants au top level
 
 ----------------------------------------------------------------
+Astuce Ne pas voir les lignes de modifications
 ----------------------------------------------------------------
 
-diff decorations : astuce
+Paramètres VSCode > diff decorations > None
+
+----------------------------------------------------------------
+----------------------------------------------------------------
 
 React = separation of concerns
 (séparation des préoccupations/intérêts)
