@@ -188,19 +188,26 @@ Avantages :
 ----------------------------------------------------------------
 CSS
 ----------------------------------------------------------------
+En JSX, on utilise un objet JS pour le inline-style
+Et donc, pour écrire du JS, on doit entrer en mode JS { }
+puis encore avec une double accolade, pour créer un objet {{ }}
+MAIS, pour l'interet de la "separation of concerns", on oublie
 
 CSS : class en JSX devient className
 On peut soit relier un fichier CSS, soit ecrire directement un objet JS
 <h1 style={ { color: "red", fontSize: "48px" } }>Fast React Pizza Co.</h1>
 
-ou bien avec une variable 
+ou bien avec une variable (mais pas recommandé sur des vrais projets...)
 const style = { color: "red", fontSize: "48px" };
 <h1 style={style}>Fast React Pizza Co.</h1>
 
+PS : Attention au camelCase pour notre CSS dans du JS
+
 --------------------------------------------------------------
+PROPS
 --------------------------------------------------------------
 
-Les Props sont des propriétés de fonction
+Les Props sont des arguments de fonction (d'objets)
 Elles sont comme un moyen de communication entre un parent et un enfant (composant)
 
 Les parents définissent l'apparence et le comportement des enfants
@@ -217,6 +224,11 @@ Tout peut être passé dans une props :
 - et même d'autres composants...
 
 Si on passe autre chose qu'une String dans une props : { }
+exemple : permet de mettre un nombre dans le composant parent
+        price={10}
+ et d'ajouter, par exemple, +3 dans l'enfant
+      <span>{props.price + 3}</span>
+
 
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -237,10 +249,10 @@ Voilà pourquoi les composants doivent être des fonctions pures en termes de Pr
 -  ça optimise l'application
 -  et ça évite des bugs lorsqu'on manipule de la Data externe
 
-De manière générale : un composant ne doit pas modifier une valeur à l'extérieur de sa function scope
-
+De manière générale : un composant ne doit pas modifier une valeur à l'extérieur de sa function scope !
 
 Pour modifier une props, on a besoin d'un STATE ()
+
 
 --------------------------------------------------------------
 --------------------------------------------------------------
