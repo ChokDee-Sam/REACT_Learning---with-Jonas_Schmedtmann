@@ -285,6 +285,7 @@ Et n'importe où dans un composant (dans if/else, affectation de variable, funct
 PS : Un élément JSX doit avoir uniquement 1 root Element (fragment <> </>)
 
 --------------------------------------------------------------
+
 --------------------------------------------------------------
 
 Faire une liste grace à .map()
