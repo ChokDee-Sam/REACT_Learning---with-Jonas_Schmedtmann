@@ -73,7 +73,7 @@ Son nom doit toujours commencer par une majuscule
 Un composant doit toujours retourner une valeur (pas de null par exemple)
 À partir de 2 composants qui s'affichent, ils doivent être dans une div ou Fragment
 
-Ne pas imbriquer une déclaration de fonction qui elle-meme dans une autre fonction
+Ne pas imbriquer une déclaration de fonction qui elle-meme dans une autre fonction.
 Toujours déclarer nos composants au top level
 
 
@@ -89,11 +89,11 @@ JSX : c'est quoi ?
 C'est une "extension" de JavaScript
 Permet d'embarquer du JS, du CSS, et du React Composant en HTML
 
-Declarative synthaxe pour décrire à quoi :
+Synthaxe declarative pour décrire :
 - à quoi ressemblera le composant 
 - comment il fonctionnera
 
-C'est le composant qui return le block JSX
+C'est le composant qui return le block JSX.
 
 
 ----------------------------------------------------------------
@@ -106,13 +106,13 @@ Le nom des composants n'apparait pas dans le fichier HTML final
 On y voit uniquement ce qu'il y a à l'intérieur
 
 PS : on pourrait utiliser React sans JSX
-Mais on perdrait du temps à :
-- écrire des createElement
-- perdre en lisibilité
+Mais on perdrait :
+- du temps à écrire des createElement
+- ainsi que de la lisibilité
 
-Comparaison indiscutable :
-Return <Footer> We are open </Footer>
-return React.createElement("footer", null, "We are open")
+Comparaison indiscutable qui montre la différence :
+        Return <Footer> We are open </Footer>
+        return React.createElement("footer", null, "We are open")
 
 ----------------------------------------------------------------
 L'approche IMPERATIVE de JavaScript
@@ -182,6 +182,7 @@ Avantages :
 - Facilité de lecture, car fichiers moins longs
 - Facilité de modification, car plus localisée
 - Moins de bugs, car chaque élément est très ciblé
+- Plus simple à debugger
 - Donc facilement maintenable sur la durée
 
 
@@ -191,13 +192,13 @@ CSS
 En JSX, on utilise un objet JS pour le inline-style
 Et donc, pour écrire du JS, on doit entrer en mode JS { }
 puis encore avec une double accolade, pour créer un objet {{ }}
-MAIS, pour l'interet de la "separation of concerns", on oublie
+MAIS, pour l'interet de la "separation of concerns", on oublie...
 
 CSS : class en JSX devient className
 On peut soit relier un fichier CSS, soit ecrire directement un objet JS
 <h1 style={ { color: "red", fontSize: "48px" } }>Fast React Pizza Co.</h1>
 
-ou bien avec une variable (mais pas recommandé sur des vrais projets...)
+Ou bien avec une variable (mais pas recommandé sur des vrais projets...)
 const style = { color: "red", fontSize: "48px" };
 <h1 style={style}>Fast React Pizza Co.</h1>
 
@@ -206,15 +207,14 @@ PS : Attention au camelCase pour notre CSS dans du JS
 --------------------------------------------------------------
 PROPS
 --------------------------------------------------------------
-
 Les Props sont des arguments de fonction (d'objets)
 Elles sont comme un moyen de communication entre un parent et un enfant (composant)
 
 Les parents définissent l'apparence et le comportement des enfants
 
 2 étapes : 
-- on envoit les props dans un composant (les parents ??)
-- on récupère les props (chez les enfants??)
+- on définit les props dans un composant Parent (les noms des propriétés + valeurs)
+- on récupère les props dans le composant Enfant (uniquement les noms des propriétés)
 
 Tout peut être passé dans une props : 
 - une valeur
@@ -226,14 +226,13 @@ Tout peut être passé dans une props :
 Si on passe autre chose qu'une String dans une props : { }
 exemple : permet de mettre un nombre dans le composant parent
         price={10}
- et d'ajouter, par exemple, +3 dans l'enfant
+ et d'ajouter, par exemple, +3 dans le composant enfant
       <span>{props.price + 3}</span>
 
 
 --------------------------------------------------------------
---------------------------------------------------------------
-
 ATTENTION : LES PROPS SONT READ-ONLY !!
+--------------------------------------------------------------
 SEUL LE PARENT COMPOSANT PEUT UPDATE LE PROPS
 
 Les Props sont IMMUABLES : impossible à modifier chez l'enfant
@@ -255,10 +254,9 @@ Pour modifier une props, on a besoin d'un STATE ()
 
 
 --------------------------------------------------------------
---------------------------------------------------------------
-
 ONE-WAY DATA FLOW : 
-la Data se passe uniquement de parents vers enfants 
+--------------------------------------------------------------
+La Data se passe uniquement de parents vers enfants 
 (en utilisant donc les props)
 ET jamais l'inverse !!!!
 
@@ -271,19 +269,20 @@ Pour rendre l'Application :
 - plus facile à débugger avec beaucoup de Data...
 
 --------------------------------------------------------------
+JSX : quelques infos
 --------------------------------------------------------------
+JSX fonctionne comme le HTML, sauf qu'avec des accolades { }
 
-JSX fonctionne comme le HTML,
-sauf qu'on peut entrer en JS mode avec { } sur des textes ou attributs
+- On peut entrer en JS mode avec { } sur des textes ou attributs
 
-{ } On peut y mettre des expression JS à l'interieur
+- On peut y mettre des expression JS à l'interieur de { }
         (reférence de variables, des arrays, objects, ternary...)
-Mais pas de Statement (if/else, for, switch...)
+                Mais pas de Statement (if/else, for, switch...)
 
-On peut écrire du JSX à l'intérieur { }
+- et on peut même écrire du JSX à l'intérieur
 Et n'importe où dans un composant (dans if/else, affectation de variable, function...)
 
-Un élément JSX doit avoir uniquement 1 root Element (fragment <> </>)
+PS : Un élément JSX doit avoir uniquement 1 root Element (fragment <> </>)
 
 --------------------------------------------------------------
 --------------------------------------------------------------
