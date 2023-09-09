@@ -268,6 +268,7 @@ Pour rendre l'Application :
 - plus facile à comprendre
 - plus facile à débugger avec beaucoup de Data...
 
+
 --------------------------------------------------------------
 JSX : quelques infos
 --------------------------------------------------------------
@@ -284,19 +285,59 @@ Et n'importe où dans un composant (dans if/else, affectation de variable, funct
 
 PS : Un élément JSX doit avoir uniquement 1 root Element (fragment <> </>)
 
---------------------------------------------------------------
 
 --------------------------------------------------------------
-
+Liste avec .map()
+--------------------------------------------------------------
 Faire une liste grace à .map()
 
 {data.map((element) => (
           <Component elemObject={element} key={element.name} />
         ))}
 
-On fait un .map sur notre Data
-Dans chaque boucle de .map, on aura notre composant X avec une props qui sera l'élément Data de chaque tour
-Et on attribue une props key via une donnée de Data
+Dans chaque boucle de .map:
+- la boucle s'effectuera autant de fois que la longueur du tableau
+- et à chaque passage de boucle, 
+        on effectuera la fonction flêchée sur l'élément du tableau en question
+
+Donc, dans cette fonction flechée .map, 
+à chaque tour de boucle, on aura un nouveau composant avec 2 props 
+- une Props qui aura pour valeur l'élément (complet) du tableau
+- Et une autre Props qui sera la valeur de l'element.name
+
+Ce qui donnera plusieurs composant
+dont chacun aura un element en entier, ainsi que son nom 
+
+
+--------------------------------------------------------------
+Liste : Props parents inutiles ? Place à l'argument de fonction
+--------------------------------------------------------------
+Dans le Composant Parent : 
+        Plutôt que d'écrire chaque Props avec sa valeur
+        on définit une Props qui récupère la propriété de fonction
+
+ {pizzaData.map((element) => (
+          <Pizza pizzaObject={element} />
+        ))}
+
+
+Et dans le Composant Enfant :
+        On ajoute simplement le nom de la Props parent
+        Puis on y ajoute la propriété d'object dans la Props d'objet
+
+<div className="pizza">
+      <h3>{props.pizzaObject.name}</h3>
+</div>
+
+
+--------------------------------------------------------------
+Liste : la Props Key unique
+--------------------------------------------------------------
+Dans notre fonction .map(), mettre une Props key unique
+
+{pizzaData.map((element) => (
+          <Pizza pizzaObject={element} key={element.name} />
+))}
 
 --------------------------------------------------------------
 --------------------------------------------------------------
