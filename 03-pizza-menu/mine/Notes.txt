@@ -383,20 +383,16 @@ on utilise le return des elements JSX basés sur une condition.
 
 
 --------------------------------------------------------------
---------------------------------------------------------------
-
 Extracting JSX into a New Component
-
+--------------------------------------------------------------
 Lorsque les Composants semblent trop longs, 
 il est pratique de les découper en plusieurs petits Composants.
 
 
 --------------------------------------------------------------
---------------------------------------------------------------
-
 Faire passer une variable sous forme de props (à un enfant)
-
-Et, parfois, il y a des variables dans le Composant parent
+--------------------------------------------------------------
+Parfois, il y a des variables dans le Composant parent
 qu'il faut passer à un autre Composant.
 
 Pour ça, on passe la variable sous forme de props
@@ -408,33 +404,35 @@ on peut donner le même nom de props que la variable
 
 
 --------------------------------------------------------------
+Destructuring Props ( { } )
 --------------------------------------------------------------
-
-Destructuring Props
-
 function sansPropsDestructuring (props)
 function avecPropsDestructuring ({nomDeProps_1, nomDeProps_2})
 
 On utilise le destructuring pour plus de simplicité.
 Et dans notre JSX, on passe de {props.nomDeProps} à {nomDeProps}
 
+Et si le {nomDeProps} est un objet, on va directement l'écrire
+de manière plus lisible.
+
+Dans une fonction, 
+si on passe une props qui n'existe pas dans le composant Parent
+        => elle sera Undefined
 
 --------------------------------------------------------------
---------------------------------------------------------------
-
 Fragments
-
+--------------------------------------------------------------
 Permet d'avoir plus d'un seul élément de JSX dans le code (cote à cote)
 Ne laisse aucune trace dans le DOM
 
 Si on souhaite y mettre une key 
-<React.Fragment key={nomDeKey}>
-</React.Fragment>
+        <React.Fragment key={nomDeKey}>
+        </React.Fragment>
 Et ne pas oublier d'import React from 'react'
 
 Sinon, un fragment vide suffit :
-<>
-</>
+        <>
+        </>
 
 
 --------------------------------------------------------------

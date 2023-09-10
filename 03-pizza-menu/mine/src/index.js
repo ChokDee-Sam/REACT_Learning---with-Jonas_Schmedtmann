@@ -82,6 +82,7 @@ function Header() {
 
 function Menu() {
   const pizzas = pizzaData;
+  // const pizzas = [];
   const numPizzas = pizzas.length;
 
   return (
@@ -89,11 +90,17 @@ function Menu() {
       <h2>Our Menu</h2>
 
       {numPizzas ? (
-        <ul className="pizzas">
-          {pizzas.map((element) => (
-            <Pizza pizzaObject={element} key={element.name} />
-          ))}
-        </ul>
+        <>
+          <p>
+            Authenthic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((element) => (
+              <Pizza pizzaObject={element} key={element.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We are still working on our menu. Please come back later :)</p>
       )}
@@ -114,12 +121,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>
-            We are open until {closeHour}:00. Come visit us, of order online.
-          </p>
-          <button className="btn">Order</button>
-        </div>
+        <Order closeHour={closeHour} openHour={openHour} />
       ) : (
         <p>
           We are happy to welcome you between {openHour}:00 and {closeHour}:00.
@@ -132,14 +134,30 @@ function Footer() {
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-function Pizza(props) {
+function Pizza({ pizzaObject }) {
+  console.log(pizzaObject);
   return (
     <li className="pizza">
-      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
-      <h3>{props.pizzaObject.name}</h3>
-      <p>{props.pizzaObject.ingredients}</p>
-      <span>{props.pizzaObject.price + 3}</span>
+      <img src={pizzaObject.photoName} alt={pizzaObject.name} />
+      <h3>{pizzaObject.name}</h3>
+      <p>{pizzaObject.ingredients}</p>
+      <span>{pizzaObject.price + 3}</span>
     </li>
+  );
+}
+
+// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+function Order({ closeHour, openHour }) {
+  return (
+    <div className="order">
+      <p>
+        We are open from {openHour}:00 until {closeHour}:00. Come visit us, of
+        order online.
+      </p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
