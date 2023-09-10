@@ -81,15 +81,22 @@ function Header() {
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <ul className="pizzas">
-        {pizzaData.map((element) => (
-          <Pizza pizzaObject={element} key={element.name} />
-        ))}
-      </ul>
+      {numPizzas ? (
+        <ul className="pizzas">
+          {pizzas.map((element) => (
+            <Pizza pizzaObject={element} key={element.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We are still working on our menu. Please come back later :)</p>
+      )}
     </main>
   );
 }
@@ -98,17 +105,26 @@ function Menu() {
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 function Footer() {
-  //   const hour = new Date().getHours();
-  //   const openHour = 12;
-  //   const closeHour = 22;
-  //   const isOpen = hour >= openHour && hour <= closeHour;
-
-  //   if (hour >= openHour && hour <= closeHour) alert("We are open !");
-  //   else alert("Sorry, we are close...");
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  // console.log(isOpen)
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()} - We are currently open
+      {isOpen ? (
+        <div className="order">
+          <p>
+            We are open until {closeHour}:00. Come visit us, of order online.
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          We are happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
     </footer>
   );
 }

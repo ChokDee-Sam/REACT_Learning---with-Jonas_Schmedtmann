@@ -339,33 +339,42 @@ Dans notre fonction .map(), mettre une Props key unique
           <Pizza pizzaObject={element} key={element.name} />
 ))}
 
---------------------------------------------------------------
---------------------------------------------------------------
 
+--------------------------------------------------------------
 Conditional Rendering &&
-
-Penser à utiliser la condition, souvent non pas avec un tableau, 
+--------------------------------------------------------------
+Penser à utiliser la condition, non pas avec un tableau, 
 mais avec la longueur d'un tableau > 0
 (pour éviter certains désagréments comme un affichage du 0 si falsy)
 
---------------------------------------------------------------
---------------------------------------------------------------
+Préferez une condition true or false très claire, ou une ternaire
+        {numPizzas > 0 
+                && (........)}
 
+
+--------------------------------------------------------------
 Conditional Rendering Ternaries
-
+--------------------------------------------------------------
 Meilleur à utiliser que le && dans certaines conditions.
-Il produit (return) une value, 
+Il produit (return) une value.
+
 contrairement à if/else qui est un statement, 
-et qui donc ne fonctionnera pas dans du JSX.
+et qui donc ne fonctionnera pas dans du JSX
+
 
 --------------------------------------------------------------
---------------------------------------------------------------
-
 Conditional Rendering with Multiple Returns
-
+--------------------------------------------------------------
 Dans notre composant (function), 
 en dehors du JSX, on peut effectuer des return sous conditions
 (if/else)
+
+En gros, on peut utiliser des if/else dans la fonction Composant
+et si X condition, on peut définir un return anticipé.
+
+Pas vraiment utile pour des petits bouts de code
+Mais utile pour return un Composant en entier par exemple
+
 Parfois, on veut juste return quelque chose de complétement différent,
 comme un null, ou un tout autre composant, pour sortir de la fonction.
 
@@ -380,6 +389,7 @@ Extracting JSX into a New Component
 
 Lorsque les Composants semblent trop longs, 
 il est pratique de les découper en plusieurs petits Composants.
+
 
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -396,6 +406,7 @@ Et pour plus de faciliter de lecture,
 on peut donner le même nom de props que la variable
 <Component openHour={openHour}
 
+
 --------------------------------------------------------------
 --------------------------------------------------------------
 
@@ -406,6 +417,7 @@ function avecPropsDestructuring ({nomDeProps_1, nomDeProps_2})
 
 On utilise le destructuring pour plus de simplicité.
 Et dans notre JSX, on passe de {props.nomDeProps} à {nomDeProps}
+
 
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -424,6 +436,7 @@ Sinon, un fragment vide suffit :
 <>
 </>
 
+
 --------------------------------------------------------------
 --------------------------------------------------------------
 
@@ -436,6 +449,7 @@ Mode JS > template literal > ternaire
 Pour une condition de texte :
 Mode JS {} > Ternaire
         <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
+
 
 --------------------------------------------------------------
 --------------------------------------------------------------
