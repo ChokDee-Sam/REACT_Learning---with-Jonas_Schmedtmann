@@ -436,17 +436,16 @@ Sinon, un fragment vide suffit :
 
 
 --------------------------------------------------------------
---------------------------------------------------------------
-
 Setting Classes and Text Conditionally
+--------------------------------------------------------------
+Pour une condition de texte :
+        Mode JS {} > Ternaire
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
 
 Pour une condition de Classes :
-Mode JS > template literal > ternaire
+        Mode JS > template literal > ternaire
         <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
 
-Pour une condition de texte :
-Mode JS {} > Ternaire
-        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
 
 
 --------------------------------------------------------------
