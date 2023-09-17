@@ -36,6 +36,49 @@ Utiliser les camelCases en JSX
         Changer le State = Changer l'UI
 
 
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Ajout d'une nouvelle variable de State
+2 - L'utiliser dans le Code (généralement du JSX)
+3 - Puis Update le Piece of State dans certains Event Handler
+
+const arr = useState(1)
+Écrire useState déclenche automatiquement la ligne d'import de la fonction UseState
+De ce fait, on défini un argument de départ dans cet appel de fonction
+    (default value State variable)
+
+
+Lorsqu'on observe un useState(valeurChoisi), on y voit un tableau avec 
+    - En premier : notre valeur choisi
+    - En second : une fonction qui mettra à jour notre variable State
+
+De ce fait, on fait immédiatement un Destructuring
+        const step = 1
+        const [step, setStep ]
+
+Et ensuite, pour modifier la variable du State par défaut, on utilise la fonction setStep
+JAMAIS MANUELLEMENT !
+        function ajout() {
+            setStep(step+1)
+            }
+
+Les Hooks commencent tous par use...
+Et doivent tous être utilisés au top de notre Composant
+JAMAIS APRÈS, et encore moins à l'intérieur d'autre chose
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    REACT = immuabilité et Fonctional State Update
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Ne jamais muter/updater une variable sans son Setter.
+    Toujours voir le State comme une valeur immuable si on veut le modifier nous-même !
+    Et si on souhaite le modifier, ce ne sera pas nous même, mais avec les outils de React.
+    Donc ici, ce sera avec une Setter Function.
+
+
+
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Pourquoi on en a besoin ?
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
