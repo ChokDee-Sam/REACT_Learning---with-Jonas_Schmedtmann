@@ -67,12 +67,12 @@ function App() {
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 function Header() {
-  //   const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+  // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
   const style = {};
 
   return (
     <header className="header">
-      <h1 style={style}>Fast React Pizza Co.</h1>;
+      <h1 style={style}>Fast React Pizza Co.</h1>
     </header>
   );
 }
@@ -82,7 +82,7 @@ function Header() {
 
 function Menu() {
   const pizzas = pizzaData;
-  // const pizzas = [];
+  // const pizzas = [] // pour comprendre l'exemple de la Ternaire
   const numPizzas = pizzas.length;
 
   return (
@@ -106,6 +106,21 @@ function Menu() {
       )}
     </main>
   );
+
+  // --------------------------------------------------------
+
+  function Pizza({ pizzaObject }) {
+    console.log(pizzaObject);
+
+    return (
+      <li className={`pizza ${pizzaObject.soldOut ? `sold-out` : ""}`}>
+        <img src={pizzaObject.photoName} alt={pizzaObject.name} />
+        <h3>{pizzaObject.name}</h3>
+        <p>{pizzaObject.ingredients}</p>
+        <span>{pizzaObject.soldOut ? `SOLD OUT` : pizzaObject.price}</span>
+      </li>
+    );
+  }
 }
 
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -131,24 +146,7 @@ function Footer() {
   );
 }
 
-// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-function Pizza({ pizzaObject }) {
-  console.log(pizzaObject);
-
-  return (
-    <li className={`pizza ${pizzaObject.soldOut ? `sold-out` : ""}`}>
-      <img src={pizzaObject.photoName} alt={pizzaObject.name} />
-      <h3>{pizzaObject.name}</h3>
-      <p>{pizzaObject.ingredients}</p>
-      <span>{pizzaObject.soldOut ? `SOLD OUT` : pizzaObject.price}</span>
-    </li>
-  );
-}
-
-// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// --------------------------------------------------------
 
 function Order({ closeHour, openHour }) {
   return (

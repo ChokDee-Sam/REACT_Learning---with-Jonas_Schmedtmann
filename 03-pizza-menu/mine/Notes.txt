@@ -60,7 +60,7 @@ La clé est de savoir "divisé" des parties de Design en Composants
 
 Penser à créer un arbre de composants pour mieux comprendre notre "chantier"
 Ça facilite la compréhension du projet, grace à :
-- la hiérachisation (parent, enfant)
+- la hiérarchie (parent, enfant)
 - les imbrications
 - et comment tous les composants sont reliés entre eux
 
@@ -78,7 +78,7 @@ Toujours déclarer nos composants au top level
 
 
 ----------------------------------------------------------------
-Astuce Ne pas voir les lignes de modifications
+Astuce : Ne pas voir les lignes de modifications
 ----------------------------------------------------------------
 Paramètres VSCode > diff decorations > None
 
@@ -119,7 +119,7 @@ L'approche IMPERATIVE de JavaScript
 ----------------------------------------------------------------
 En JavaScript, on manipule directement le DOM
 L'idée est que la manipulation du Dom est une suite d'étape bien ordonnée
-afin de manuellement créer/modifier des éléments, puis de les placer
+afin de manuellement créer/modifier des éléments, puis de les placer.
 
 Une approche Imperative : 
 - On indique manuellement chaque étape step by step de la manipulation du DOM
@@ -127,7 +127,7 @@ Une approche Imperative :
 
 Pour résumer l'approche JavaScript :
 - On utilise la manipulation du DOM, étape par étape,
-pour dire exactement 'comment' réaliser les choses
+pour dire exactement 'comment' réaliser les choses.
 
 
 ----------------------------------------------------------------
@@ -139,15 +139,15 @@ Et que cette Data laisse React automatiquement synchroniser l'UI avec celle-ci
 
 Une approche déclarative : 
 - On utilise JSX pour dire à React ce qu'on souhaite voir sur l'écran
-- Et ce sont les Data qui iront manipuler le DOM, pas nous
+- Et ce sont les Data qui iront manipuler le DOM, pas nous.
 
 La simplicité : 
-- On utilise le JSX en 'posant' des Data pour dire ce qu'on voit à l'écran
+- On utilise le JSX en 'posant' des Data pour dire ce qu'on souhaite voir à l'écran
 - Et c'est tout !
 
 Car : 
 - React laissera ces Data se modifier automatiquement sous certaines conditions
-- Ces conditions laisseront les Data modifier le DOM
+- Ces conditions laisseront donc ces Data modifier le DOM
 - Cette modification du DOM génerera un nouveau rendu sur l'UI
 
 Pour résumer l'approche de React :
@@ -189,7 +189,7 @@ Avantages :
 ----------------------------------------------------------------
 CSS
 ----------------------------------------------------------------
-En JSX, on utilise un objet JS pour le inline-style
+En JSX, on peut utiliser un objet JS pour le inline-style
 Et donc, pour écrire du JS, on doit entrer en mode JS { }
 puis encore avec une double accolade, pour créer un objet {{ }}
 MAIS, pour l'interet de la "separation of concerns", on oublie...
@@ -199,8 +199,8 @@ On peut soit relier un fichier CSS, soit ecrire directement un objet JS
 <h1 style={ { color: "red", fontSize: "48px" } }>Fast React Pizza Co.</h1>
 
 Ou bien avec une variable (mais pas recommandé sur des vrais projets...)
-const style = { color: "red", fontSize: "48px" };
-<h1 style={style}>Fast React Pizza Co.</h1>
+const textStyle = { color: "red", fontSize: "48px" };
+<h1 style={textStyle}>Fast React Pizza Co.</h1>
 
 PS : Attention au camelCase pour notre CSS dans du JS
 
@@ -266,13 +266,14 @@ Pourquoi ?
 Pour rendre l'Application :
 - plus prédictible
 - plus facile à comprendre
-- plus facile à débugger avec beaucoup de Data...
+- plus facile à débugger si beaucoup de Data...
 
 
 --------------------------------------------------------------
 JSX : quelques infos
 --------------------------------------------------------------
-JSX fonctionne comme le HTML, sauf qu'avec des accolades { }
+JSX fonctionne comme le HTML, sauf qu'avec des accolades :
+{ }
 
 - On peut entrer en JS mode avec { } sur des textes ou attributs
 
