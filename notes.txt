@@ -1,0 +1,62 @@
+utiliser handleXXX pour nommer une action
+
+Utiliser les camelCases en JSX
+    onclick en HTML devient onClick en JSX
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    LES STATES
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Le State est le concept le plus important de React.
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Qu'est-ce qu'un State ?
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    C'est une Data qu'un composant peut "garder" dans le temps.
+    Nécessairement utilisé pour que le Composant se souvienne d'informations 
+    dont il a besoin durant la durée de vie de l'App.
+
+    Mémoire de Composant (Component's Memory)
+
+    State Variable / Piece of State
+        Une variable dans un composant
+    
+    Le terme State réunis l'ensemble de tous les "Piece of State"
+
+    La modification d'un State déclenche le re-Render d'un Composant dans l'UI
+        se qui déchenche un nouveau (mise à jour) "Component View"
+        PS : un Component View est juste le rendu visuel du composant à l'écran
+
+    Un Render de composant est une vue
+    Toutes les vues combinées
+
+    Le State se résume à :
+        Comment React conserve l'interface utilisateur en synchronisation avec la Data
+        Changer le State = Changer l'UI
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Pourquoi on en a besoin ?
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    1 - Permet de mettre à jour la Vue du Composant (avec un re-Render du Composant)
+        Ce qui donne un moyen de modifier une seule partie de l'UI
+
+    2 - Conserve les variables locales entre plusieurs Render
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Comment utiliser un State ?
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    - useState
+    - useReducer
+    - context API
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Penser au State :
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    - Quand l'utiliser ?
+    - Où le placer ?
+    - Les types de States
