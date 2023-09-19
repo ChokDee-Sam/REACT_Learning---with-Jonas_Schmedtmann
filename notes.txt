@@ -16,8 +16,7 @@ Utiliser les camelCases en JSX
     C'est une Data qu'un composant peut "garder" dans le temps.
     Nécessairement utilisé pour que le Composant se souvienne d'informations 
     dont il a besoin durant la durée de vie de l'App.
-
-    Mémoire de Composant (Component's Memory)
+        Mémoire de Composant (Component's Memory)
 
     State Variable / Piece of State
         Une variable dans un composant
@@ -50,7 +49,7 @@ De ce fait, on défini un argument de départ dans cet appel de fonction
     (default value State variable)
 
 
-Lorsqu'on observe un useState(valeurChoisi), on y voit un tableau avec 
+Lorsqu'on console.log useState(valeurChoisi), on y voit un tableau avec 
     - En premier : notre valeur choisi
     - En second : une fonction qui mettra à jour notre variable State
 
@@ -63,6 +62,10 @@ JAMAIS MANUELLEMENT !
         function ajout() {
             setStep(step+1)
             }
+
+On peut écrire proprement, avec la valeur de base de step (sans variable comme précédemment)
+  const [step, setStep] = useState(1);
+
 
 Les Hooks commencent tous par use...
 Et doivent tous être utilisés au top de notre Composant
@@ -77,7 +80,9 @@ JAMAIS APRÈS, et encore moins à l'intérieur d'autre chose
     Et si on souhaite le modifier, ce ne sera pas nous même, mais avec les outils de React.
     Donc ici, ce sera avec une Setter Function.
 
-
+  function handleFunction() {
+    setStep(step + 1);
+  }
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Pourquoi on en a besoin ?
@@ -103,3 +108,65 @@ JAMAIS APRÈS, et encore moins à l'intérieur d'autre chose
     - Quand l'utiliser ?
     - Où le placer ?
     - Les types de States
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Updating State based on Current State
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+TOUJOURS utiliser un Callback      (pour éviter des bugs)
+Update un State basé sur la Current Value State :
+    
+GOOD PRACTICE
+    if (step > 1) setStep((s) => s - 1);
+
+BAD Practice :
+    if (step > 1) setStep(step - 1); 
+
+GOOD PRACTICE
+    onClick={() => setIsOpen((is) => !is)}
+
+BAD PRACTICE
+    onClick={() => setIsOpen(!isOpen)}
+
+
+PS : Si la modification du State n'a pas besoin de prendre en compte la current Value State
+        > possibilité de changer sans fonction Callback
+ 
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    La Philosophie UI
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Une State est isolé des autres composants (même similaires)
+Si on update un State dans un Composant : ça ne modifie pas les autres Composants Similaire
+
+L'UI est une sorte de fonction de State
+La Vue de l'UI est le reflet de la Data changeante dans le temps
+De ce fait, on décrit le reflet de la Data avec des States, des events handlers, et du JSX
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    State Guidelines
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Utiliser une variable State pour que le composant doive s'en souvenir dans le temps.
+Cette Data changera à certains points.
+(Un peu comme une variable Let en JavaScript, ou un tableau/objet mis à jour)
+
+Quand on veut une "chose" dynamique dans un Composant, on crée un "Piece of State"
+en rapport à cette "chose"
+    puis on modifie la State quand cette chose doit changer (aka "be dynamic")
+
+Si on souhaite changer le look d'un Composant, ou la Data qu'il affiche : Update State.
+Cet Update se fait généralement avec un Event Handler.
+
+Au moment de construire un Composant :
+    Imaginer que la Vue est le reflet d'un State qui change à travers le temps.
+
+
+PS : Attention à ne pas tout mettre en State !
+Une Data qui doit Re-Render = State
+Une Data qui ne doit pas Re-Render = une variable
