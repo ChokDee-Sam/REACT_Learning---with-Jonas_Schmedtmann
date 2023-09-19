@@ -36,4 +36,20 @@ Avec tout ça, React se charge réellement du State et de l'élément entièreme
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    STATE vs PROPS
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+State :
+- Data interne, possédée par le Composant, dans lequelle elle est déclarée
+- "Mémoire de Composant"
+- Update par le Composant lui-même (qui entraine un Re-Render)
+
+Props :
+- Data externe, possédée par un Composant Parent
+- Similaire à "un paramètre de fonction"
+- Data reçue, car transmise du Composant Parent vers l'Enfant
+- Read Only : ne peut pas être modifiée par le Composant Enfant qui la reçoit !!
+- SURPRISE : Recevoir de nouvelles Props cause un Re-Render (Généralement quand le State Parent a été modifié)
+- Utilisés par les Parents pour configurer les Composants Enfants (settings)
+
+Les Props peuvent être vu comme des settings de Composants Enfants que les Composants Parents définissent comme ils le souhaitent.
