@@ -1,5 +1,39 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Controlled Element
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ 
+ 
  onSubmit = validation click bouton ET en cliquant sur entrée dans l'input
  onClick = validation ONLY click button
 
 e.preventdefault()
 console.log(e)         target > input > value          e.target[1].value
+
+En React, pour les Forms, on n'utilise pas cette façon de faire
+
+En Vanilla, les valeurs d'input/select sont dans le DOM
+Problème : difficulté à lire les valeurs, et gérer disparition/modifications
+Ce n'est pas l'idéal...
+
+Nous souhaitons avoir tous nos States centralisés dans notre App React,
+et pas à l'intérieur du DOM !
+Pour cela, avec React, on utilise une technique nommée Controlled Elements.
+
+3 étapes :
+    1 - Piece of State > State Hook > Define value > import State
+    2 - dans element qu'on veut controler (input/select)  value={stateInitialValue}
+    3 - puis,               onChange={(e)=> setDescription(e.target.value)}
+
+PS : target.value = String
+Penser à Number()
+
+Pour récapituler
+1 - On crée notre Piece of State
+2 - Dans l'élément qu'on veut controler, on "force" pour qu'il prenne toujours en value notre variable initiale de State
+3 - Enfin, on Update notre variable de State avec son Setter, en prenant sa e.target.value sur chaque onChange (ce qui modifiera la State initiale dans Value)
+
+Avec tout ça, React se charge réellement du State et de l'élément entièrement, sans qu'on ait à trifouiller dans le DOM.
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
