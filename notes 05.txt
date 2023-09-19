@@ -1,0 +1,5 @@
+ onSubmit = validation click bouton ET en cliquant sur entrée dans l'input
+ onClick = validation ONLY click button
+
+e.preventdefault()
+console.log(e)         target > input > value          e.target[1].value
