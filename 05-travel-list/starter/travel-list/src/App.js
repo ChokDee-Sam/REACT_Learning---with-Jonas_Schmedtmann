@@ -46,10 +46,10 @@ function Form() {
 
     setDescription("");
     setQuantity(Number(1));
-    console.log(quantity, description);
+    // console.log(quantity, description);
 
-    initialItems.push(newItem);
-    console.log(initialItems);
+    // initialItems.push(newItem);
+    // console.log(initialItems);
   }
 
   return (
