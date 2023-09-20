@@ -1,0 +1,43 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    PROCESS pour les INPUTS
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+On crée 2 inputs (un Select, et un Text)
+    - On leur crée un State chacun
+
+Dans chacun de ses inputs
+    - value = { StateValue }
+    - onChange = {(e) => setState(e.target.value)}
+
+Maintenant, à chaque changement dans ces 2 Inputs, on Update nos 2 States variables.
+
+
+On crée donc une fonction handleSubmit(e) :
+    - On désactive le comportement par default
+    - On annule l'action si l'input texte est vide
+
+    - On récupère les 2 valeurs de nos States Variables pour les mettre dans un Objet
+        - On va se faire une fonction juste après, un handleAdd,
+             qui va récupérer cet objet afin de le mettre dans une 3eme State [ {} ]
+    - On réinitialise nos 2 States d'inputs avec leurs valeurs initiales.
+
+On crée donc un 3eme State (tableau vide), puis une fonction handleAdd pour :
+    - Setter ce State avec un spread [...tableau vide, Objet issus de l'handle précédent]
+    - Et de ce fait, rester en React immuable, en évitant la mutation de données avec un .push()
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+     PARTAGER CE 3ème State à un COMPOSANT FRERE (PackingList)
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - On remonte le 3eme State au Composant Parent en commun (voir Arbre React Dev Tools)
+    Dans App(), avant Return bien sur !
+
+2 - Dans ce Composant Parent, on fait passer la State Variable en props, dans PackingList
+
+3 - On va récupérer cette Props dans le Composant Enfant PackingList, via Destructuring
+    On n'oublie pas de placer cette Props !
+
+4 - On remonte la function handleAddItems (contient le Setter du 3eme State) au Compo Parent
+    On n'oublie pas de passer cette fonction en Props pour Form, puis de la récupérer chez Form

@@ -35,6 +35,9 @@ Pour cela, avec React, on utilise une technique nommée Controlled Elements.
 PS : target.value = String
 Penser à Number()
 
+PS 2 : Dans un onChange / onClick, SI volonté de fonction 
+    => faire une fonction flechée pour éviter le lancement automatique de la fonction
+
 
 
 Pour récapituler

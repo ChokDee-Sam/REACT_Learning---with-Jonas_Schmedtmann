@@ -1,0 +1,107 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    PENSER REACT en tant que PROCESS
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Le Process de "Penser en React"
+
+1 - Décomposer des élément de l'UI en Composant
+    et établir un "Arbre de Composants"
+
+2 - Faire une version "Statique" de notre UI en React
+    sans States
+
+3 - Réfléchir au sujet des States
+    - Quand les utiliser ?
+    - Quel types ? (Local vs Global)
+    - Où les placer ?
+
+4 - Établir un Data Flow
+    - One-Way Data Flow
+    - Child-to-Parent communication
+    - Accessibilité de la Global State
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    CE PROCESS SAURA REPONDRE À TOUTES CES QUESTIONS :
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    - Comment décomposer une UI en Composant ?
+    - Comment choisir et rendre certains Composants réutilisables ?
+    - Comment assembler une UI à partir de Composants réutilisables ?
+
+    - Quels sont les States dont j'ai besoin pour créer de l'interactivité ?
+    - Quels sont les Composants qui "obtiendront" un State ?
+    - Où placer chaque State ?
+
+    - Quels types de State puis-je, ou dois-je utiliser ?
+    - Comment créer et gérer le Data Flow dans l'App ?
+
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    STATE MANAGEMENT : Les Fondamentaux
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+        Quand créer un nouveau State ?
+        Quel type de State ?
+        Où le placer dans notre Code ?
+        Comment gérer le Data Flow dans l'App ?
+
+
+    Analogie des pièces d'une Maison
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Local State vs Global State
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Local State : Usage très délimité
+    - Utilisé pour 1 Composant, voir quelques uns
+    - Définie et utilisable dans un Composant, ainsi que ses Enfants
+    - TOUJOURS commencer avec une Local State
+
+Global State : Usage partagé dans diverses zones de l'UI
+    - Utilisable par plusieurs Composants
+    - Partagée dans TOUTE l'App
+    - Context API, Redux
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    STATE : Quand ?
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Besoin de conserver de la Data
+
+     La Data changera dans le temps ?
+        Non : variable Const basique
+
+        Oui : Cette Data peut être calculée par un State/Props deja existant ?
+            Oui : Utiliser le State déjà existant
+
+            Non : Cette Data doit re-Render un Composant ?
+                Non : Ref (useRef, plus d'infos dans les cours suivants)
+                Oui : Créer un nouveau State dans le Composant
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    STATE : Où ?
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Le State sera UNIQUEMENT utilisé dans ce Composant ?
+        Oui : laisser le State dans ce Composant
+
+        Non : Le State sera AUSSI utilisé par un Composant Enfant ?
+            Oui : Transmettre au Composant Enfant via Props
+
+            Non : Le State sera utilisé par un ou plusieurs Composants Frères ?
+                Oui : Lift le State au premier Composant Parent Commun
+                Non : Probablement un Global State !
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

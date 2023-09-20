@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const initialItems = [
-  { id: 1, description: "Passports", quantity: 2, packed: false },
+  { id: 1, description: "Passports", quantity: 2, packed: true },
   { id: 2, description: "Socks", quantity: 12, packed: false },
 ];
 
@@ -10,11 +10,34 @@ const initialItems = [
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 export default function App() {
+  const [items, setItems] = useState(initialItems);
+
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+    // ATTENTIION : le .push() crée une Mutation, donc interdit en React Immuable
+  }
+
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((element) => element.id !== id));
+  }
+
+  function handleToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackingList />
+      <Form onAddItems={handleAddItems} />
+      <PackingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+      />
       <Stats />
     </div>
   );
@@ -32,7 +55,7 @@ function Logo() {
 // FORM
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-function Form() {
+function Form({ onAddItems }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -40,16 +63,15 @@ function Form() {
     e.preventDefault();
 
     if (!description) return;
-
     const newItem = { id: Date.now(), description, quantity, packed: false };
-    console.log(newItem);
+
+    // handleAddItems(newItem);
+    onAddItems(newItem);
 
     setDescription("");
     setQuantity(Number(1));
     // console.log(quantity, description);
-
-    // initialItems.push(newItem);
-    // console.log(initialItems);
+    // console.log(items);
   }
 
   return (
@@ -83,27 +105,36 @@ function Form() {
 // LISTE ET COMPO ITEM
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-function PackingList() {
+function PackingList({ items, onDeleteItem, onToggleItem }) {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((element) => (
-          <Item item={element} key={element.id} />
+        {items.map((element) => (
+          <Item
+            item={element}
+            onDeleteItem={onDeleteItem}
+            onToggleItem={onToggleItem}
+            key={element.id}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItem, onToggleItem }) {
   return (
     <li>
+      <input
+        type="checkBox"
+        value={item.packed}
+        onChange={() => onToggleItem(item.id)}
+      ></input>
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
-        <input type="checkBox"></input>
-        {` ` + item.quantity}
+        {item.quantity}
         {` ` + item.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
   );
 }
