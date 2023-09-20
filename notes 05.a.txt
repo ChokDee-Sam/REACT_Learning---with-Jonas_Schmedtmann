@@ -2,28 +2,26 @@
     Controlled Element
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
  
- 
+ // onSubmit VS onClick
  onSubmit = validation click bouton ET en cliquant sur entrée dans l'input
  onClick = validation ONLY click button
 
+// Manière de procéder en Vanilla JS
 e.preventdefault()
 console.log(e)         target > input > value          e.target[1].value
 
 En React, pour les Forms, on n'utilise pas cette façon de faire
 
-
-
+// Le problème du Dom...
 En Vanilla, les valeurs d'input/select sont dans le DOM
 Problème : difficulté à lire les valeurs, et gérer disparition/modifications
 Ce n'est pas l'idéal...
 
 
 
-
 Nous souhaitons avoir tous nos States centralisés dans notre App React,
 et pas à l'intérieur du DOM !
 Pour cela, avec React, on utilise une technique nommée Controlled Elements.
-
 
 
 

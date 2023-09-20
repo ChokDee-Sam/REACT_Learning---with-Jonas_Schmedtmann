@@ -41,3 +41,4 @@ On crée donc un 3eme State (tableau vide), puis une fonction handleAdd pour :
 
 4 - On remonte la function handleAddItems (contient le Setter du 3eme State) au Compo Parent
     On n'oublie pas de passer cette fonction en Props pour Form, puis de la récupérer chez Form
+
