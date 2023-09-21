@@ -40,7 +40,7 @@ PS 2 : Dans un onChange / onClick, SI volonté de fonction
 
 Pour récapituler
 1 - On crée notre Piece of State
-2 - Dans l'élément qu'on veut controler, on "force" pour qu'il prenne toujours en value notre variable initiale de State (puis les values suivantes)
+2 - Dans l'élément qu'on veut controler, on "force" pour qu'il prenne toujours en value notre variable de State (puis les values qui suivront au fur et à mesure)
 3 - Enfin, on Update notre variable de State avec son Setter, en prenant sa e.target.value sur chaque onChange (ce qui modifiera la State initiale dans Value)
 
 Avec tout ça, React se charge réellement du State et de l'élément entièrement, sans qu'on ait à trifouiller dans le DOM.

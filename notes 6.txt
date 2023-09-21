@@ -1,0 +1,43 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Deriving State
+    Plutôt que de créer plusieurs States : utiliser la variable State ailleurs
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+-------------------------
+Exemple de cas de figure :
+-------------------------
+
+  const [cart, setCart] = useState([
+    { name: "JavaScript Course", price: 15.99 },
+    { name: "React Course", price: 15.99 }
+  ]);
+
+------------------
+2 States de trop :
+------------------
+
+  const [numItems, setNumItems] = useState(2);
+  const [totalPrice, setTotalPrice] = useState(30.98);
+
+----------------------------------------------
+Pour éviter des Re-Render inutiles, préférez :
+----------------------------------------------
+
+const numItems =    cart.length
+const totalPrice =  cart.reduce((acc, cur)=> acc + cur.price, 0)
+
+
+------------------------
+Conclusion des avantage : 
+- Utiliser des variables simples, vers une source de Confiance (State)
+- Supprimer des fonction de Setter reliées entre eux (confusion...)
+- Éviter des conflits de synchronisation entre eux, et des Re-Render inutiles
+- Éviter le boulot additionel
+- Augmenter la lisibilité du Code
+------------------------
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

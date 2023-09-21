@@ -23,7 +23,7 @@ Le Process de "Penser en React"
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    CE PROCESS SAURA REPONDRE À TOUTES CES QUESTIONS :
+    CE PROCESS REPONDRA À TOUTES CES QUESTIONS :
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
     - Comment décomposer une UI en Composant ?
@@ -50,7 +50,7 @@ Le Process de "Penser en React"
         Comment gérer le Data Flow dans l'App ?
 
 
-    Analogie des pièces d'une Maison
+   TIPS : Analogie des pièces d'une Maison
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -72,7 +72,7 @@ Global State : Usage partagé dans diverses zones de l'UI
     STATE : Quand ?
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-Besoin de conserver de la Data
+Besoin de conserver de la Data : Process de Questionnement
 
      La Data changera dans le temps ?
         Non : variable Const basique
@@ -97,7 +97,7 @@ Besoin de conserver de la Data
 
             Non : Le State sera utilisé par un ou plusieurs Composants Frères ?
                 Oui : Lift le State au premier Composant Parent Commun
-                Non : Probablement un Global State !
+                Non : Probable utilisation d'un Global State !
 
 
 

@@ -10,14 +10,14 @@ Dans chacun de ses inputs
     - value = { StateValue }
     - onChange = {(e) => setState(e.target.value)}
 
-Maintenant, à chaque changement dans ces 2 Inputs, on Update nos 2 States variables.
+Maintenant, à chaque changement dans ces 2 Inputs = Update nos 2 States variables.
 
 
 On crée donc une fonction handleSubmit(e) :
     - On désactive le comportement par default
     - On annule l'action si l'input texte est vide
 
-    - On récupère les 2 valeurs de nos States Variables pour les mettre dans un Objet
+    - On récupère les 2 valeurs de nos Update States pour les mettre dans un Objet
         - On va se faire une fonction juste après, un handleAdd,
              qui va récupérer cet objet afin de le mettre dans une 3eme State [ {} ]
     - On réinitialise nos 2 States d'inputs avec leurs valeurs initiales.
@@ -42,3 +42,47 @@ On crée donc un 3eme State (tableau vide), puis une fonction handleAdd pour :
 4 - On remonte la function handleAddItems (contient le Setter du 3eme State) au Compo Parent
     On n'oublie pas de passer cette fonction en Props pour Form, puis de la récupérer chez Form
 
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    COMPRENDRE LA LOGIQUE  : 3 Méthodes qui crées nos intéractions
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+function add(item) {
+    setItems((items) => [...items, item]);
+  }
+
+  function delete(id) {
+    setItems((items) => items.filter((element) => element.id !== id));
+  }
+
+  function toggle(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    COMPRENDRE LA LOGIQUE, NE PAS SUPPRIMER OU AJOUTER : RETURN UN NOUVEL ELEMENT
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Spread : 
+- Reprend un tableau déjà existant, pour en Return un plus grand, 
+    em ajoutant un nouvel élément à l'intérieur
+
+FILTER :
+- Reprend un tableau déjà existant, pour en Return un plus court, 
+    en ayant filtrer une valeur d'élément, afin de l'exclure
+
+MAP :
+- Reprend un tableau déjà existant, pour en recréer un de même taille, 
+    en modifiant une valeur d'élément
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
