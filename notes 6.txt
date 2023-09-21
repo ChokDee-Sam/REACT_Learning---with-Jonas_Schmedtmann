@@ -37,7 +37,55 @@ Conclusion des avantage :
 ------------------------
 
 
-
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    DERIVATING STATE + SLICE pour SORT
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+----------------
+Permet d'avoir :
+----------------
+    - une variable de State qui se met à jour automatiquement
+    - une impossibilité de Mutate notre variable de State
+    - différentes façon de trier nos données sur un nouveau tableau
+
+
+----------------
+Derivating State    let sortedItems
+----------------
+  
+
+--------------------------
+Trie par ordre de Création
+--------------------------
+  if (sortBy === "input") sortedItems = items;
+
+
+---------------------------
+Trie par ordre Alphabétique
+---------------------------
+  if (sortBy === "description")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+
+
+----------------
+Trie par Boolean
+----------------
+  if (sortBy === "packed")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => Number(a.packed) - Number(b.packed));
+
+
+-----------------
+Trie par Quantité
+-----------------
+  if (sortBy === "quantity")
+    sortedItems = items.slice().sort((a, b) => a.quantity - b.quantity);
+
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

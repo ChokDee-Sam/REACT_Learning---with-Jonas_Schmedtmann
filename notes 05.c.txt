@@ -1,19 +1,26 @@
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     PROCESS pour les INPUTS
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 
+----------------------------------------
 On crée 2 inputs (un Select, et un Text)
+----------------------------------------
     - On leur crée un State chacun
 
-Dans chacun de ses inputs
+---------------------------
+Dans chacun de ses inputs :
+---------------------------
     - value = { StateValue }
     - onChange = {(e) => setState(e.target.value)}
 
+----------------------------------------------------------------------------------
 Maintenant, à chaque changement dans ces 2 Inputs = Update nos 2 States variables.
+----------------------------------------------------------------------------------
 
-
+-------------------------------------------
 On crée donc une fonction handleSubmit(e) :
+-------------------------------------------
     - On désactive le comportement par default
     - On annule l'action si l'input texte est vide
 
@@ -22,14 +29,18 @@ On crée donc une fonction handleSubmit(e) :
              qui va récupérer cet objet afin de le mettre dans une 3eme State [ {} ]
     - On réinitialise nos 2 States d'inputs avec leurs valeurs initiales.
 
+-----------------------------------------------------------------------------
 On crée donc un 3eme State (tableau vide), puis une fonction handleAdd pour :
+-----------------------------------------------------------------------------
     - Setter ce State avec un spread [...tableau vide, Objet issus de l'handle précédent]
     - Et de ce fait, rester en React immuable, en évitant la mutation de données avec un .push()
 
 
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      PARTAGER CE 3ème State à un COMPOSANT FRERE (PackingList)
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 
 1 - On remonte le 3eme State au Composant Parent en commun (voir Arbre React Dev Tools)
     Dans App(), avant Return bien sur !
@@ -44,9 +55,9 @@ On crée donc un 3eme State (tableau vide), puis une fonction handleAdd pour :
 
 
 
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     COMPRENDRE LA LOGIQUE  : 3 Méthodes qui crées nos intéractions
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 function add(item) {
     setItems((items) => [...items, item]);
@@ -65,24 +76,83 @@ function add(item) {
   }
 
 
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    COMPRENDRE LA LOGIQUE, NE PAS SUPPRIMER OU AJOUTER : RETURN UN NOUVEL ELEMENT
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    COMPRENDRE LA LOGIQUE, NE PAS SUPPRIMER / AJOUTER : RETURN UN NEW ELEMENT
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+--------
 Spread : 
-- Reprend un tableau déjà existant, pour en Return un plus grand, 
-    em ajoutant un nouvel élément à l'intérieur
+--------
+    en ajoutant un nouvel élément à l'intérieur
 
+--------
 FILTER :
+--------
 - Reprend un tableau déjà existant, pour en Return un plus court, 
     en ayant filtrer une valeur d'élément, afin de l'exclure
 
+-----
 MAP :
+-----
 - Reprend un tableau déjà existant, pour en recréer un de même taille, 
     en modifiant une valeur d'élément
 
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    SORT Method = Mutation !!       Ajouter SLICE 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+----------------------------------
+Penser à chainer .slice().sort() :
+----------------------------------
+    - pour créer une Copie 
+    - et donc ne pas Mutate l'Original
+
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    DERIVATING STATE + SLICE pour SORT
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+----------------
+Permet d'avoir :
+----------------
+    - une variable de State qui se met à jour automatiquement
+    - une impossibilité de Mutate notre variable de State
+    - différentes façon de trier nos données sur un nouveau tableau
+
+
+----------------
+Derivating State    let sortedItems
+----------------
+  
+
+--------------------------
+Trie par ordre de Création
+--------------------------
+  if (sortBy === "input") sortedItems = items;
+
+
+---------------------------
+Trie par ordre Alphabétique
+---------------------------
+  if (sortBy === "description")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+
+
+----------------
+Trie par Boolean
+----------------
+  if (sortBy === "packed")
+    sortedItems = items
+      .slice()
+      .sort((a, b) => Number(a.packed) - Number(b.packed));
+
+
+-----------------
+Trie par Quantité
+-----------------
+  if (sortBy === "quantity")
+    sortedItems = items.slice().sort((a, b) => a.quantity - b.quantity);
