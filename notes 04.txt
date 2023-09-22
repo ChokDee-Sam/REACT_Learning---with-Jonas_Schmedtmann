@@ -53,17 +53,17 @@ Lorsqu'on console.log useState(valeurChoisi), on y voit un tableau avec
     - En premier : notre valeur choisi
     - En second : une fonction qui mettra à jour notre variable State
 
-De ce fait, on fait immédiatement un Destructuring
+De ce fait, imaginons utiliser un Destructuring
         const step = 1
         const [step, setStep ]
 
-Et ensuite, pour modifier la variable du State par défaut, on utilise la fonction setStep
+Et ensuite, pour modifier la variable du State par défaut, on utiliserait la fonction setStep
 JAMAIS MANUELLEMENT !
         function ajout() {
             setStep(step+1)
             }
 
-On peut écrire proprement, avec la valeur de base de step (sans variable comme précédemment)
+Mais ça, il faut l'écrire proprement, avec la valeur de base de step (sans variable comme précédemment)
   const [step, setStep] = useState(1);
 
 
@@ -152,12 +152,12 @@ De ce fait, on décrit le reflet de la Data avec des States, des events handlers
     State Guidelines
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-Utiliser une variable State pour que le composant doive s'en souvenir dans le temps.
+Utiliser une variable State pour que le composant puisse s'en souvenir dans le temps.
 Cette Data changera à certains points.
 (Un peu comme une variable Let en JavaScript, ou un tableau/objet mis à jour)
 
 Quand on veut une "chose" dynamique dans un Composant, on crée un "Piece of State"
-en rapport à cette "chose"
+en rapport à cette "chose",
     puis on modifie la State quand cette chose doit changer (aka "be dynamic")
 
 Si on souhaite changer le look d'un Composant, ou la Data qu'il affiche : Update State.

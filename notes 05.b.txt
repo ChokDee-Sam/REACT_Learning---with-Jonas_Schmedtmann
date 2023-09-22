@@ -72,7 +72,7 @@ Global State : Usage partagé dans diverses zones de l'UI
     STATE : Quand ?
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-Besoin de conserver de la Data : Process de Questionnement
+Besoin de conserver de la Data = Process de Questionnement
 
      La Data changera dans le temps ?
         Non : variable Const basique
@@ -96,7 +96,7 @@ Besoin de conserver de la Data : Process de Questionnement
             Oui : Transmettre au Composant Enfant via Props
 
             Non : Le State sera utilisé par un ou plusieurs Composants Frères ?
-                Oui : Lift le State au premier Composant Parent Commun
+                Oui : Lift le State au premier Composant Parent en Commun
                 Non : Probable utilisation d'un Global State !
 
 

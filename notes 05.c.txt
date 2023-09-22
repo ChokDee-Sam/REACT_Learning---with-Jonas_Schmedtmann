@@ -2,7 +2,6 @@
     PROCESS pour les INPUTS
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-
 ----------------------------------------
 On crée 2 inputs (un Select, et un Text)
 ----------------------------------------
@@ -11,7 +10,7 @@ On crée 2 inputs (un Select, et un Text)
 ---------------------------
 Dans chacun de ses inputs :
 ---------------------------
-    - value = { StateValue }
+    - value = { State }
     - onChange = {(e) => setState(e.target.value)}
 
 ----------------------------------------------------------------------------------
@@ -25,7 +24,7 @@ On crée donc une fonction handleSubmit(e) :
     - On annule l'action si l'input texte est vide
 
     - On récupère les 2 valeurs de nos Update States pour les mettre dans un Objet
-        - On va se faire une fonction juste après, un handleAdd,
+        - On va se faire une fonction juste après, un handleAdd (souvent onAdd---),
              qui va récupérer cet objet afin de le mettre dans une 3eme State [ {} ]
     - On réinitialise nos 2 States d'inputs avec leurs valeurs initiales.
 
@@ -40,7 +39,6 @@ On crée donc un 3eme State (tableau vide), puis une fonction handleAdd pour :
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
      PARTAGER CE 3ème State à un COMPOSANT FRERE (PackingList)
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
 
 1 - On remonte le 3eme State au Composant Parent en commun (voir Arbre React Dev Tools)
     Dans App(), avant Return bien sur !

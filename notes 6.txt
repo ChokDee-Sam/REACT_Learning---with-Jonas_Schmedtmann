@@ -31,9 +31,9 @@ const totalPrice =  cart.reduce((acc, cur)=> acc + cur.price, 0)
 Conclusion des avantage : 
 - Utiliser des variables simples, vers une source de Confiance (State)
 - Supprimer des fonction de Setter reliées entre eux (confusion...)
-- Éviter des conflits de synchronisation entre eux, et des Re-Render inutiles
-- Éviter le boulot additionel
-- Augmenter la lisibilité du Code
+- Évite des conflits de synchronisation entre eux, et des Re-Render inutiles
+- Évite le boulot additionel
+- Augmente la lisibilité du Code
 ------------------------
 
 

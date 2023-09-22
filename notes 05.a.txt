@@ -12,7 +12,7 @@ console.log(e)         target > input > value          e.target[1].value
 
 En React, pour les Forms, on n'utilise pas cette façon de faire
 
-// Le problème du Dom...
+// Le problème du DOM...
 En Vanilla, les valeurs d'input/select sont dans le DOM
 Problème : difficulté à lire les valeurs, et gérer disparition/modifications
 Ce n'est pas l'idéal...
@@ -27,20 +27,20 @@ Pour cela, avec React, on utilise une technique nommée Controlled Elements.
 
 3 étapes :
     1 - Piece of State > State Hook > Define value > import State
-    2 - dans element qu'on veut controler (input/select)  value={stateInitialVariable}
-    3 - puis,               onChange={(e)=> setDescription(e.target.value)}
+    2 - dans element qu'on veut controler (input/select)  value={state}
+    3 - puis,               onChange={(e)=> setState(e.target.value)}
 
 PS : target.value = String
 Penser à Number()
 
 PS 2 : Dans un onChange / onClick, SI volonté de fonction 
-    => faire une fonction flechée pour éviter le lancement automatique de la fonction
+    => faire une fonction flechée pour éviter le lancement automatique de la fonction !
 
 
 
-Pour récapituler
+Pour récapituler :
 1 - On crée notre Piece of State
-2 - Dans l'élément qu'on veut controler, on "force" pour qu'il prenne toujours en value notre variable de State (puis les values qui suivront au fur et à mesure)
+2 - Dans l'élément qu'on veut controler, on "force" pour qu'il prenne toujours en value notre variable de State (puis les values qui seront Setter)
 3 - Enfin, on Update notre variable de State avec son Setter, en prenant sa e.target.value sur chaque onChange (ce qui modifiera la State initiale dans Value)
 
 Avec tout ça, React se charge réellement du State et de l'élément entièrement, sans qu'on ait à trifouiller dans le DOM.
