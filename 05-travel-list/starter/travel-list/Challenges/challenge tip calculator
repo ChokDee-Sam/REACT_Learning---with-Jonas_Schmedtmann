@@ -1,0 +1,116 @@
+import { useState } from "react";
+import "./styles.css";
+// –––––––––––––---------------------------------------------------------
+// –––––––––––––---------------------------------------------------------
+
+export default function App() {
+  // –––––––––––––-----------------
+  // –––––––––––––-----------------
+  const [bill, setBill] = useState("");
+  console.log(bill);
+  // –––––––––––––-----------------
+  const [percentage1, setPercentage1] = useState(0);
+  console.log(percentage1);
+  // –––––––––––––-----------------
+  const [percentage2, setPercentage2] = useState(0);
+  console.log(percentage2);
+  // –––––––––––––-----------------
+  const tip = (percentage1 * (bill / 100) + percentage2 * (bill / 100)) / 2;
+  // –––––––––––––-----------------
+  function handleReset() {
+    setBill("");
+    setPercentage1(0);
+    setPercentage2(0);
+  }
+  // –––––––––––––-----------------
+
+  return (
+    <div className="App">
+      <BillInput bill={bill} onSetBill={setBill}></BillInput>
+
+      <SelectPercentage percentage={percentage1} onSelect={setPercentage1}>
+        How did you like the service ?
+      </SelectPercentage>
+
+      <SelectPercentage percentage={percentage2} onSelect={setPercentage2}>
+        How did your friend like the service ?
+      </SelectPercentage>
+
+      {bill > 0 && (
+        <>
+          <Output
+            bill={bill}
+            percentage1={percentage1}
+            percentage2={percentage2}
+            tip={tip}
+          />
+
+          <Reset onReset={handleReset} />
+        </>
+      )}
+    </div>
+  );
+}
+
+// –––––––––––––-----------------
+// –––––––––––––-----------------
+
+function BillInput({ bill, onSetBill }) {
+  return (
+    <>
+      <label>How much was the Bill ? </label>
+      <input
+        type="number"
+        placeholder="Bill value"
+        value={bill}
+        onChange={(e) => onSetBill(Number(e.target.value))}
+      ></input>
+    </>
+  );
+}
+
+// –––––––––––––-----------------
+// –––––––––––––-----------------
+
+function SelectPercentage({ percentage, onSelect, children }) {
+  const satisfaction = [
+    { percent: 0, quote: "so bad...(0%)" },
+    { percent: 5, quote: "not good (5%)" },
+    { percent: 10, quote: "it was good (10%)" },
+    { percent: 20, quote: "Absolutely amazing ! (20%)" }
+  ];
+
+  return (
+    <>
+      <p>{children}</p>
+      <select
+        value={percentage}
+        onChange={(e) => onSelect(Number(e.target.value))}
+      >
+        {satisfaction.map((el, i) => (
+          <option value={el.percent} key={i}>
+            {el.quote}
+          </option>
+        ))}
+      </select>
+    </>
+  );
+}
+
+// –––––––––––––-----------------
+// –––––––––––––-----------------
+
+function Output({ bill, percentage1, percentage2, tip }) {
+  return (
+    <h3>
+      You pay {bill + tip} : ({percentage1}% + {percentage2}% tip)
+    </h3>
+  );
+}
+
+// –––––––––––––-----------------
+// –––––––––––––-----------------
+
+function Reset({ onReset }) {
+  return <button onClick={onReset}>Reset</button>;
+}
