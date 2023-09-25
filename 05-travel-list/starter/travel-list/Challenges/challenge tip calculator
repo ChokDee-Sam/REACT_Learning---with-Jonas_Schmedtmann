@@ -102,9 +102,9 @@ function SelectPercentage({ percentage, onSelect, children }) {
 
 function Output({ bill, percentage1, percentage2, tip }) {
   return (
-    <h3>
+    <h2>
       You pay {bill + tip} : ({percentage1}% + {percentage2}% tip)
-    </h3>
+    </h2>
   );
 }
 
