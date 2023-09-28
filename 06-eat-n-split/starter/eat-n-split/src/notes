@@ -1,0 +1,12 @@
+- Création d'une liste provenant d'un tableau
+
+- Création d'un Toggle sur un Bouton
+  > Ouverture d'une Div avec 2 inputs
+  > Mise à jour de la Liste lors d'ajout
+
+- Detecter sur quel bouton d'un element de Liste
+
+  > Relier cet element avec le Split Bill
+
+- Mettre en place les Labels + Inputs + Select
+  > onSubmit = Mise à jour de la Liste (juste la 'balance')

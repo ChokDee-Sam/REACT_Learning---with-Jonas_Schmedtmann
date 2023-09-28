@@ -69,9 +69,12 @@ export default function App() {
           selectedFriend={selectedFriend}
           onSelected={choiceFriend}
         />
+
         {toggle && <BlocAddFriend onAddFriend={addNewFriend} />}
+
         <Button onClick={toggleButton}>{toggle ? "X" : "Open"}</Button>
       </div>
+
       {selectedFriend && (
         <BlocBill selectedFriend={selectedFriend} splitBill={splitBill} />
       )}
@@ -83,13 +86,6 @@ export default function App() {
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 function ListUsers({ friends, selectedFriend, onSelected }) {
-  // return (
-  // <ul>
-  //   {friends.map((element) => (
-  //     <User key={element.id} friend={element} />
-  //   ))}
-  //   {console.log(element)}
-  // </ul>
   return (
     <ul>
       {friends.map((element) => (
@@ -103,6 +99,7 @@ function ListUsers({ friends, selectedFriend, onSelected }) {
     </ul>
   );
 }
+
 // --------------------------
 
 function User({ friend, selectedFriend, onSelected }) {
@@ -120,14 +117,12 @@ function User({ friend, selectedFriend, onSelected }) {
 
       {/* Cas 1 */}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
-
       {/* Cas 2 */}
       {friend.balance < 0 && (
         <p className="red">
           You owe {friend.name} {friend.balance}$
         </p>
       )}
-
       {/* Cas 3 */}
       {friend.balance > 0 && (
         <p className="green">
@@ -142,6 +137,7 @@ function User({ friend, selectedFriend, onSelected }) {
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 function Button({ children, onClick }) {
   return (
     <button className="button" onClick={onClick}>
@@ -149,6 +145,7 @@ function Button({ children, onClick }) {
     </button>
   );
 }
+
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
