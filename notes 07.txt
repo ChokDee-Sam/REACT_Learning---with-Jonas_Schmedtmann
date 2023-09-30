@@ -18,7 +18,7 @@ PS : On est sur de devoir réutiliser un élément? Alors GO !
 Process :
 1 - Separation logique du contenu / du layout
 2 - Réutilisation
-3 - Responsabilités / complexité
+3 - Responsabilités / complexité (beaucoup de States)
 4 - Coding style personnel
 
 
