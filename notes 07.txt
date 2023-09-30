@@ -1,0 +1,79 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//  Découpe de Composants
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Composant trop grand ou trop petit = mauvaise pratique
+
+En cas de doute : 
+    Commencer par un Composant relativement grand,
+        puis découper en plus petit Composants si nécessaire.
+
+PS : On est sur de devoir réutiliser un élément? Alors GO !
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//  Process de questionnement
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Process :
+1 - Separation logique du contenu / du layout
+2 - Réutilisation
+3 - Responsabilités / complexité
+4 - Coding style personnel
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//  Réfléxion de chaque étape du process :
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Le Composant contient des éléments de contenu ou de layout qui ne vont pas ensemble ?
+
+2 - Est-il possible de réutiliser un morceau de ce Composant ?
+    Est-ce que tu as envie, ou un besoin de réutiliser ce morceau de Composant ?
+
+3 - Est-ce que ton Composant  :
+        - fait beaucoup de choses différentes ?
+        - est relié à trop de Props ?
+        - a trop de States et/ou d'effets ?
+        - a un code trop complexe, trop confus ?
+
+4 - Tu preferes des Composants/Functions plus grands / plus petits ?
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//  Conseils pratiques
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    - Créer de nouveaux Composants =  new Abstractions = basculer avant/arrière = coût en energie
+    - Nommer un Composant en fonction de ce qu'il fait ou de ce qu'il affiche (nom long : ok)
+
+    - Ne jamais déclarer un New Composant dans un autre Composant
+
+    - Co-localiser des Composant connexe dans le même fichier
+    - Ne pas les séparer dans différents fichiers trop tôt
+    
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//  Les 3 tailles de Composants
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    il est normal qu'une App possède des Composants de différentes tailles 
+        (autant des très petits, que des très grands)
+
+Petit Composant :
+    - très réutilisable
+    - peu complexe
+    - souvent nécessaire
+
+Grand Composant :
+    - peu réutilisable
+    - Ne signifie pas forcément une réutilisation (no problem)
+
+Composant moyen :
+    - différents degrés de tailles, de réutilisation, de responsabilités, et complexité
+
+Une App aura donc un spectre de taille de Composants forcément différents.
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
