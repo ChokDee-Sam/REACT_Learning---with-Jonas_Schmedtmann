@@ -45,7 +45,7 @@ Process :
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
     - Créer de nouveaux Composants =  new Abstractions = basculer avant/arrière = coût en energie
-    - Nommer un Composant en fonction de ce qu'il fait ou de ce qu'il affiche (nom long : ok)
+    - Nommer un Composant en fonction de ce qu'il fait, et/ou, de ce qu'il affiche (nom long : ok)
 
     - Ne jamais déclarer un New Composant dans un autre Composant
 
@@ -67,13 +67,35 @@ Petit Composant :
 
 Grand Composant :
     - peu réutilisable
-    - Ne signifie pas forcément une réutilisation (no problem)
+    - Ne signifie pas forcément une réutilisation (aucun probleme)
 
 Composant moyen :
     - différents degrés de tailles, de réutilisation, de responsabilités, et complexité
 
-Une App aura donc un spectre de taille de Composants forcément différents.
+Une App aura donc des tailles de Composants "naturellement" différents.
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    2 Catégories
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Pour simplifier les 2 grandes catégories de Composants, 
+    on pourrait dire qu'il y a les :
+
+- Stateless Component / Presentation Components
+- State Components 
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Prop Drilling
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+Prop Drilling = Faire passer une Prop à travers plusieurs éléments enfants imbriqués, dans le but de donner cette Prop à un Composant enfant imbriqué en profondeur.
+
+La conséquence de tout ça, c'est qu'un grand nombre d'éléments se retrouvent avec cette Prop dont ils n'ont pas besoin. Ils servent de "relais" juste pour que la Prop aille en profondeur dans notre Arbre de Composants.
+
+Ce n'est pas toujours la meilleure solution, surtout si on doit passer la Prop a de nombreux niveaux de profondeur dans nore Arbre.
+
+Il existe une solution pour éviter des cas de Prop Drilling complexes ("out of control")
