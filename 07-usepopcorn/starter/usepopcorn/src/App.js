@@ -125,7 +125,7 @@ function Main({ movies }) {
     <main className="main">
       <ListBox movies={movies} />
       <WatchedBox />
-    </main>
+    </main>  
   );
 }
 // --------------------------------------

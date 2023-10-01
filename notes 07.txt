@@ -83,14 +83,12 @@ Pour simplifier les 2 grandes catégories de Composants,
     on pourrait dire qu'il y a les :
 
 - Stateless Component / Presentation Components
-- State Components 
-
+- State Components
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Prop Drilling
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
 
 Prop Drilling = Faire passer une Prop à travers plusieurs éléments enfants imbriqués, dans le but de donner cette Prop à un Composant enfant imbriqué en profondeur.
 
@@ -99,3 +97,25 @@ La conséquence de tout ça, c'est qu'un grand nombre d'éléments se retrouvent
 Ce n'est pas toujours la meilleure solution, surtout si on doit passer la Prop a de nombreux niveaux de profondeur dans nore Arbre.
 
 Il existe une solution pour éviter des cas de Prop Drilling complexes ("out of control")
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Component Composition
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Plutot que d'utiliser un Composant imbriqué dans un autre
+    On imbrique cette fois ci un {Children}, qui nous permettra de mettre tout ce que l'on souhaite, sans avoir à le définir en avance.
+
+On nomme ça : Composant Composition, 
+car celui-ci combine différents Composants utilisant la Prop Children
+(ou des Props bien définies explicitement)
+
+Avantages :
+    - Crée des Composants/{Children} très réutilisables, et très fléxibles
+    - Règle les problèmes de Prop Drilling complexes (great for layout)
+        => les Composants n'ont pas besoin de connaitre leurs Children en avance
+
+Super pour les Layouts :
+Les Components Composition n'ont pas besoin de connaitre leur Children en avance
+    => Ce qui permet de laisser un champs vide dispo (à l'intérieur du Children)
+
