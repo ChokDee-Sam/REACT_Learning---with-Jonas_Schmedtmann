@@ -100,7 +100,7 @@ Il existe une solution pour éviter des cas de Prop Drilling complexes ("out of 
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    Component Composition
+    Component Composition       { children }
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 Plutot que d'utiliser un Composant imbriqué dans un autre
@@ -127,3 +127,22 @@ Le Composant qui déclare des enfants
     = n'a plus besoin de passer des Props sans les utiliser (Drilling)
     = devra faire un State Lift si besoin
 
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Passer un Element en tant que Prop  (alternative au Children)
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1.  Créer une Prop 
+2.  Y mettre notre JSX (donc même des Composants)
+3.  Recevoir la Prop chez le Composant Enfant
+
+Cette manière est utilisé dans certaines Librairie (par exemple, React Router)
+C'est un Pattern viable dans le cas où nous devons :
+    - "passer" de multiples éléments
+    - et leur donner des noms différents
+
+Le cas pratique parfait, c'est :
+    - utiliser un Prop Element, 
+    - ou tout autre Prop avec un autre nom
+        => Au lieu d'un Prop Children implicite.

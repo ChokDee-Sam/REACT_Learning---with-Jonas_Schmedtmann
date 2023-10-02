@@ -140,6 +140,8 @@ function Main({ children }) {
 // --------------------------------------
 
 function Box({ children }) {
+// function Box({ element }) {
+  //
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -149,6 +151,7 @@ function Box({ children }) {
       </button>
 
       {isOpen && children}
+      {/* {isOpen && element} */}
     </div>
   );
 }
