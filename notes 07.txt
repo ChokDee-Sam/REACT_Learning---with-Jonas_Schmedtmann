@@ -185,7 +185,7 @@ Le cas pratique parfait, c'est :
   
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    Création des Stars : onMouseEnter / onMouseLeave
+    Création des Stars : onMouseEnter / onMouseLeave (video 117)
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 1 - Création d'un nouveau State (tempRating)
@@ -206,3 +206,7 @@ Le cas pratique parfait, c'est :
 
 6 - Penser à afficher tempRating dans le paragraphe
     - {tempRating || rating || ""}
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
