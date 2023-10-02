@@ -146,3 +146,63 @@ Le cas pratique parfait, c'est :
     - utiliser un Prop Element, 
     - ou tout autre Prop avec un autre nom
         => Au lieu d'un Prop Children implicite.
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+- Composant Parent : Passer un onClick avec une fonction
+- Composant Enfant : Récupérer le onClick
+
+Évite de passer plein de Props (const + Setter + index, etc...)
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Détail de la création des Stars
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Création d'un State 
+    Celui ci recevra le numéro index (i) (généré lors du map de nos étoiles)
+
+2 - Création d'une function qui récupèrera l'index cliqué dans le Setter
+
+3 - Création d'une sorte de map, avec un Array.from(), avec 2 arguments :
+    - la longueur (définie ou non)
+    - et un (_,i)
+    Cela nous donnera une sorte de .map avec une longueur et des index
+
+4 - Dans ce pseudo-map, on y met notre composant Star, avec :
+    - sa key
+    - sa fonction handleClick à transmettre (qui va Setter le State avec l'index)
+    - et une condition qui fera en sorte de comparé la valeur du State afin de choisir :
+        - soit une étoile pleine (true = condition complete)
+        - soit une étoile vide (false : condition incomplete, pour les étoiles suivantes)
+    résumé : Le State >= i+1 ? condition remplie = Étoile pleine, et ensuite Étoile vides
+  
+5 - Récupérer dans le composant :
+    - la fonction dans un onClick ou autre
+    - et la condition qui retournera true ou false, afin de faire une Condition en JSX    
+  
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Création des Stars : onMouseEnter / onMouseLeave
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Création d'un nouveau State (tempRating)
+
+2 - Création de 2 nouvelles Props dans Star qui Add et Reset les Star
+    - onHoverIn={() => setTempRating(i + 1)}
+    - onHoverOut={() => setTempRating(0)}
+
+3 - Recevoir les 2 Props dans Star
+
+4 - Et les intégrer :
+    - onMouseEnter={onHoverIn}
+    -  onMouseLeave={onHoverOut}
+
+5 - Modifier la condition d'affichages, en passant de :
+    - ça        full={rating >= i + 1}
+    - à ça      tempRating ? tempRating >= i + 1 : rating >= i + 1
+
+6 - Penser à afficher tempRating dans le paragraphe
+    - {tempRating || rating || ""}
