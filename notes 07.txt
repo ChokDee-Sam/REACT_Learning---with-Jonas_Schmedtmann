@@ -115,7 +115,15 @@ Avantages :
     - Règle les problèmes de Prop Drilling complexes (great for layout)
         => les Composants n'ont pas besoin de connaitre leurs Children en avance
 
-Super pour les Layouts :
+Super pour les Layouts : On peut "mieux" voir la composition de notre App.
+
 Les Components Composition n'ont pas besoin de connaitre leur Children en avance
     => Ce qui permet de laisser un champs vide dispo (à l'intérieur du Children)
+
+
+
+Le Composant qui déclare des enfants 
+    = généralement ne change pas (Présentation, ou même avec State)
+    = n'a plus besoin de passer des Props sans les utiliser (Drilling)
+    = devra faire un State Lift si besoin
 
