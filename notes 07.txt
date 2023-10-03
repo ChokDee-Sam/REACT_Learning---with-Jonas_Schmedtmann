@@ -121,12 +121,10 @@ Les Components Composition n'ont pas besoin de connaitre leur Children en avance
     => Ce qui permet de laisser un champs vide dispo (à l'intérieur du Children)
 
 
-
 Le Composant qui déclare des enfants 
     = généralement ne change pas (Présentation, ou même avec State)
     = n'a plus besoin de passer des Props sans les utiliser (Drilling)
     = devra faire un State Lift si besoin
-
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -272,3 +270,24 @@ Dans le Composant Parent :
 
 Permet de : 
     Définir par défaut des Setter passés en Props, qui modifieront le Setter de l'Enfant.
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    PropTypes
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Permet de définir le Type de Props, afin d'éviter des erreurs.
+De base, c'est un package pré-installé dans Create React App.
+
+Exemple : string, number, array, object, func, bool
+
+1 - Importer PropTypes dans notre document 
+    import PropTypes from "prop-types";
+
+2 - Définir le type, juste avant la fonction de Composant
+    Composant.propTypes = { maxRating: PropTypes.number }
+        Possibilité de chaining avec .isRequired    ()
+
+PS : 
+    - C'est parfois un non-sens de mettre un .isRequired lorsqu'on a des defaultValues
+    - TypeScript est plus adapté que PropTypes !

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
@@ -14,6 +15,16 @@ const starContainerStyle = {
 // En plaçant ce CSS à l'extérieur : pas besoin de le re-Render plusieurs fois
 // -------------------------------------------
 
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  defaultRating : PropTypes.number,
+  color : PropTypes.string,
+  size : PropTypes.number,
+  messages : PropTypes.array,
+  className : PropTypes.string,
+  onSetRating : PropTypes.func,
+};
+
 export default function StarRating({
   color = "#fcc419",
   size = 48,
@@ -28,7 +39,7 @@ export default function StarRating({
 
   function handleRating(rating) {
     setRating(rating);
-    onSetRating(rating)
+    onSetRating(rating);
   }
 
   const textStyle = {
@@ -39,6 +50,7 @@ export default function StarRating({
   };
 
   // -----------------------------------
+
   return (
     <div style={containerStyle} className={className}>
       <div style={starContainerStyle}>
