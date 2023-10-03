@@ -243,6 +243,11 @@ En cas de réutilisation de ce Composant, en définissant une Prop + value au Pa
     - cela vient écraser la valeur par défaut du Composant Enfant
     - cela permet d'initialiser une valeur de State par défaut
 
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Initialiser le State avec un Props = mauvaise pratique ?
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 Parfois, on peut lire qu'il ne faut pas initialiser une valeur de State avec une Props.
 C'est vrai seulement si :
     - on veut qu'une valeur de State soit synchronisé avec une valeur de Props
@@ -250,3 +255,20 @@ C'est vrai seulement si :
 
 Ce qui n'est pas du tout le cas dans notre exemple.
 Et puis, ceci était surtout vrai dans les anciennes périodes de React (avant les Hooks).
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    ACCÉDER À UN STATE EN DEHORS DE SON COMPOSANT (sans Lift)
+    Update un State dans un Compo Parent, grace à un autre State du Compo Enfant
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Dans le Composant Enfant :
+    - imaginons qu'il y a un State déjà établi, Updaté par un HandleClick
+
+Dans le Composant Parent :
+    - Créer un State > Passer son Setter en Props dans le Composant Enfant
+        - Le recevoir en Props dans le Composant Enfant
+        - Le Updater en même temps que le Setter du Compo Enfant (via handleClic)
+
+Permet de : 
+    Définir par défaut des Setter passés en Props, qui modifieront le Setter de l'Enfant.
