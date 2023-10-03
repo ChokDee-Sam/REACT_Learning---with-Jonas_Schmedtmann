@@ -209,4 +209,44 @@ Le cas pratique parfait, c'est :
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    PROPS  en tant qu' API
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Trop peu de Props : coté l'utilisateur
+    - manque de flexibilité 
+    - pourrait ne pas être utile    
+
+Beaucoup de Props : coté codeur
+    - Ajoute trop de complexité mentale
+    - Difficile à utiliser
+    - Difficile à écrire le code
+    - Si obligatoire : fournir de bonnes valeurs par défault
+
+
+Nous avons besoin de trouver le juste équilibre entre trop peu, et trop de Props,
+autant pour le codeur que du l'utilisateur.
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Améliorer la réutilisation avec les Props
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Lorsqu'on appelle un Composant en JSX, on peut lui donner une Props
+    <StarRating maxRating={10} />
+
+Le Composant Enfant recevra les Props, 
+MAIS il est possible de définir à cette Prop une valeur par défaut
+(dans le cas où le Composant Parent ne lui aurait pas transmis cette Prop+PropValue)
+    function StarRating({ maxRating = 5 })
+
+En cas de réutilisation de ce Composant, en définissant une Prop + value au Parent
+    - cela vient écraser la valeur par défaut du Composant Enfant
+    - cela permet d'initialiser une valeur de State par défaut
+
+Parfois, on peut lire qu'il ne faut pas initialiser une valeur de State avec une Props.
+C'est vrai seulement si :
+    - on veut qu'une valeur de State soit synchronisé avec une valeur de Props
+    (en d'autre terme : qu'une variable de State s'Update quand la Prop s'update)
+
+Ce qui n'est pas du tout le cas dans notre exemple.
+Et puis, ceci était surtout vrai dans les anciennes périodes de React (avant les Hooks).
