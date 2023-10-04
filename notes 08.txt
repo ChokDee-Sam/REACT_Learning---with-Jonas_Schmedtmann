@@ -1,0 +1,63 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Component, Component Instance, and React Element
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Composant :
+    - Une description d'un morceau de l'UI
+    - Un Template / Blueprint
+    - C'est une fonction qui return un React Element (element tree)
+        (généralement écrit en JSX)
+
+
+Component Instance :
+    - créé lorsqu'on "utilise" le Composant
+    - React appelle en interne le Composant
+    - C'est la manifestation "physique" de notre Composant
+        (vivant dans le Component Tree)
+    - Possède ses propres States / Props
+    - Possède son cycle de vie (naît, vit, et meurt)
+        (un peu comme un organisme vivant)
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Savoir être précis : ne jamais omettre l'instance de Composant
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    - cycle de vie d'un Composant = cycle de vie d'une INSTANCE de Composant
+    - une UI est faite de Composants = une UI est faite d'INSTANCE de Composants
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    JSX  >  React.createElement()  >  React Element
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Le JSX du Composant est convertit en plusieurs function React.createElement()
+2 - Puis React appelle ces function React.createElement()
+3 - Ce qui créera des React Elements
+
+Un React Element = le simple fait d'écrire un Composant 
+
+Pour résumer un React Element :
+    - c'est le résultat des appels de fonctions (React.createElement)
+    - c'est un gros object JavaScript immutable que React garde en mémoire
+
+Mais que contient ce gros Object JS ?
+TOUTES les infos nécessaires pour créer les Element Dom de cette Instance de Composant
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    React Element (inseré dans le DOM) >  DOM Element (html)
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+potentiel conversion > Affichage à l'ecran dans le navigateur
+
+Les DOM Elements sont :
+    l'actuelle représentation visuelle FINALE de l'instance du Composant
+        dans le navigateur
+
+ATTENTION : Ce n'est pas le React Element qui est Render dans le DOM
+
+Les React Elements vivent dans l'App React et ne font rien avec le DOM
+ils sont simplement convertit en DOM Element quand ils sont affichés sur écran
+
+// à préciser
