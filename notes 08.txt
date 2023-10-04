@@ -61,3 +61,36 @@ Les React Elements vivent dans l'App React et ne font rien avec le DOM
 ils sont simplement convertit en DOM Element quand ils sont affichés sur écran
 
 // à préciser
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Instances et Elements           $$$type of : Symbol
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Possibilité de voir ce que contient une instance avec un console.log()
+    console.log( <ComposantName /> )
+    console.log( ComposantName() )
+
+On aura toujours un React.element mais, le deuxieme exemple fera en sorte de :
+    - montrer uniquement le type brut (div, etc)
+    - modifier la ligne des Props
+
+De ce fait : 
+    - React ne pas cela comme une instance de Composant
+    - À la place, il voit ça comme un React Element brut
+
+Ce n'est pas ce que nous voulons !
+
+Imaginons utiliser la fonction() plutot que l'instance de Composant
+Ses Hooks seront apparants, mais n'appartiendront à aucun Composant...
+Donc, impossible de manager ses propres States = ce n'est pas un Composant.
+
+On "utilise un Composant" pour que React le voit comme une instance de Composant
+(et pas comme un output element brut)
+Et donc, il n'existera pas dans l'Arbre de Composants !
+
+Pour toutes ces raisons, nous pouvons conclure : 
+    - ne jamais faire utiliser les fonctions de Composants à la place d'Instances
+    - cela nous évitera les problèmes et "violations" des règles de Hooks
+    - placer les instances dans du JSX pour être vu en tant que Compo Instances
