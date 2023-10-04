@@ -94,3 +94,48 @@ Pour toutes ces raisons, nous pouvons conclure :
     - ne jamais faire utiliser les fonctions de Composants à la place d'Instances
     - cela nous évitera les problèmes et "violations" des règles de Hooks
     - placer les instances dans du JSX pour être vu en tant que Compo Instances
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Rendering Process
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Le Render est déclenché 
+    par un update de State par exemple
+
+2 - Le Render Phase
+    - React appelle la function de Composant
+    - React comprend donc comment le DOM doit être Update
+
+3 - Le Commit Phase
+    React écrit dans le DOM : Update, insert, et/ou supprime des éléments
+
+4 - Affichage dans le navigateur
+
+Dans React :
+    - Le Rendering n'Update pas le DOM, et n'affiche rien de particulier à l'écran
+    - Le Rendering se passe uniquement à l'intérieur de React, sans modif visuel
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    2 situations qui font un Trigger Render
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    1 - L'initial Render d'une App
+    2 - L'Update d'un State, dans un ou plusieurs Instances de Composants (Re-Render)
+
+Le Processus de Render se déclenche dans l'Application toute entière
+Mais ça ne veut pas dire que le DOM tout entier est Update
+
+En pratique :
+    On dirait que React Re-Render uniquement le Composant où le State est Update
+    mais ce n'est pas ce qui se passe "derrière la scene"
+
+Une précision :
+    Les Renders ne sont pas déclenchés immédiatement après un State Update,
+    mais programmés quand le moteur JavaScript aura du temps libre (en millisecondes)
+
+    Il y a aussi des cas de figure, comme plusieurs setState dans la même function,
+    où les Render seront regroupés dans le gestionnaire d'event
