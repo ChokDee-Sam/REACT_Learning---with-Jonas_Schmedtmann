@@ -139,3 +139,156 @@ Une précision :
 
     Il y a aussi des cas de figure, comme plusieurs setState dans la même function,
     où les Render seront regroupés dans le gestionnaire d'event
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Le New Virtual DOM
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Re-Render d'un Composant = Re=Render de tous les Composants Enfants
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Le Current Tree Fiber
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    L'arbre interne a une fibre de chaque Instance Composant et des Dom Elements
+    Sera modifié (mutable), lors d'un Update, après la Reconciliation/Diffing
+
+    La "Fibre" se compose de : 
+        - Current State
+        - Props
+        - Side Effects
+        - Used Hooks
+        - Queue of Work
+
+    Le Process peut être Asynchrone selon les taches prioritaires, etc.
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Reconciliation/Diffing  >  Update Fiber Tree
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Décide quel éléments du DOM a besoin d'être :
+        - ajouté
+        - supprimé
+        - mis à jour
+
+    Avec ces informations, le Fiber Tree va Update
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Update Fiber Tree  >  List of DOM updates
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Après l'Update du Fiber Tree : 
+TOUTES les modifications de cet arbre seront placées dans une List of Effects.
+
+Celle ci sera utilisé dans la Phase 3 : Commit Phase
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Phase 3 : Commit Phase      L'utilisation de la List pour ReactDOM
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Ce sera ReactDOM qui modifiera le DOM avec les éléments de cette Liste.
+
+Cette Phase 3 de Commit sera synchro.
+Aucune interruptions pour éviter des problèmes, ou des résultats partiels.
+Le but est de garantir un UI consistant (constamment en synchro avec les States)
+
+    ReactDOM modifiera le DOM avec :
+        - des ajouts
+        - des suppressions
+        - des mises à jour
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Phase 4 : Browser Paint      L'Update du l'UI dans notre navigateur
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Une fois que ReactDOM aura terminé la modification du DOM, 
+    le navigateur affichera l'UI
+
+
+
+//  LES 4 PHASES
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+[1] TRIGGER : intial Render / State Update
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+[2] RENDER PHASE
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+UPDATE React Element
+        ⬇️     
+  New Virtual DOM           Current Fiber Tree
+               ⬇️           ⬇️
+             Reconciliation + Diffing
+                      ⬇️
+               UPDATE Fiber Tree
+                      ⬇️
+              List of DOM updates
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+[3] COMMIT PHASE
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+                      ⬇️
+                  UPDATED DOM
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+[4] BROWSER PAINT
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+                      ⬇️
+             UPDATED UI on screen
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Résumé pour comprendre l'essentiel
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Durant la Phase 1 (Trigger)
+    - Le but est de déclenchée un Render
+    - via l'Initial Render, ou un State Update
+
+Durant la Phase 2 (Render)
+    - Le but final de cette phase est de générer une Liste
+    - React ne touche pas le DOM !
+    - Cette phase ne produit AUCUN output visuel
+    - Chaque Composant Render va aussi Render tous ses Composants Enfants
+    - Cette Phase peut être Asynchrone (selon le découpage, les priorités, etc)
+
+Durant la Phase 3 (Commit)
+    - Le but est que ReactDOM modifie le DOM grace à cette Liste
+    - Cette Phase est Synchrone, afin de conserver un UI consistant
+
+Durant la Phase 4 (Browser Paint)
+    - De manière automatique, le navigateur va détecter un changement d'UI
+    - De ce fait, il l'affichera pour notre utilisateur
+
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Comment fonctionne le Diffing
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Le Diffing a 2 manière de procéder :
+Cas 1 : 2 éléments de différents types = Nouvel Arbre
+Cas 2 : Des éléments avec une "Key Pro Stable" = restent les même durant le Render
+
+
+Cas 1 : La même Position, mais un élément différent     
+        DOM différent, ou React Element (Composant Instance)
+
+        - React suppose que le sous-arbre entier n'est plus valable
+        - Les "anciens" élements sont détruits et retirés du DOM (States inclus)
+        - L'arbre se reconstruit, le sous-Arbre également, 
+          même s'il n'est pas modifié (= State Reset)
+
+
+Cas 2 : La même Position, avec le même Element  (mais avec des attributs différents)
+        DOM similaire, ou React Element (Instance de Composant)
+
+        - Les éléments seront conserver STATE INCLUS 
+          (ainsi que les Enfants / sous-branche)
+        - Les nouveaux Props / Attribut seront transmis
+        - Attention : parfois, ce n'est pas ce qu'on souhaite, donc on utilise Key
