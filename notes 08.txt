@@ -330,3 +330,63 @@ Exemple pour un reset State
 
     - En MODIFIANT une Key
         = State reset
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    REACT COMPOSANTS : 2 TYPES DE LOGIQUE
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 : Render Logic
+    - le Code "vis" au top level de notre Composant function
+    - Le Code participe à décrire à quoi ressemble la Vue de ce Composant
+    - Est exécuté chaque fois que le Composant Render
+
+2 : Event Handler Function
+    - Est exécuté en tant que conséquence d'un Event que le gestionnaire écoute
+    - Le Code "fait des choses" : 
+        Update State, HTTP Request, lire un champs Input, etc...
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    SIDE EFFECT     PURE FUNCTION
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Side Effect :
+        Dépendence ou modification de Data en dehors de la Function Scope
+        "Interaction avec le monde extérieur"
+        Exemple : muter des var externes, HTTP Request, écrire dans le DOM
+
+    LES SIDE EFFECTS NE SONT PAS MAUVAIS !
+    Un programme peut être utile que s'il a des interactions avec l'exterieur
+
+    Pure Function :
+        Une fonction qui n'a pas de Side Effects.
+            - Ne modifie aucune variable en dehors de sa Scope
+            - Avec le même Input, une Pure Function reçoit toujours le même Output
+                = un Output "prédictible"
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    LES REGLES POUR UN RENDER LOGIC
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Les Composants doivent être purs quand ils sont dans le Render Logic
+    = avec la même Props (input), l'Instance Composant Return le même JSX (output)
+
+Render Logic doit produire aucun Side Effects
+    = aucune interaction avec le "monde extérieur" est permise
+
+De ce fait, le Render Logic :
+    - NE FAIT PAS de Network Requests (API Call)
+    - NE DEMARRE PAS de Timers
+    - N'UTILISE PAS directement le DOM API
+    - NE MANIPULE PAS d'Objets Muté ou de variables en dehors de sa Function Scope
+    - N'UPDATE PAS de States, ou Refs : ceci créerait une boucle infinie
+
+Les Side Effects sont permis (et encouragés) dans des Event Handler Function !
+Il y a un Hook spécial pour les Side Effects (useEffect)
+
+
