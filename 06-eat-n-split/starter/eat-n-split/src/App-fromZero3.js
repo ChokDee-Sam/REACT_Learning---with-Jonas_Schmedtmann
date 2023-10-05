@@ -96,7 +96,11 @@ export default function App() {
         <Button onClick={handleToggle}>{toggle ? "x" : "Open"} </Button>
       </div>
       {selectFriend && (
-        <SplitBill selectFriend={selectFriend} onSplit={splittingBill} />
+        <SplitBill
+          selectFriend={selectFriend}
+          onSplit={splittingBill}
+          key={selectFriend.id}
+        />
       )}
     </div>
   );
