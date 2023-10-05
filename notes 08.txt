@@ -288,7 +288,45 @@ Cas 1 : La même Position, mais un élément différent
 Cas 2 : La même Position, avec le même Element  (mais avec des attributs différents)
         DOM similaire, ou React Element (Instance de Composant)
 
-        - Les éléments seront conserver STATE INCLUS 
-          (ainsi que les Enfants / sous-branche)
+        - Les éléments seront conservés STATE INCLUS 
+            (ainsi que les Enfants / sous-branche)
         - Les nouveaux Props / Attribut seront transmis
-        - Attention : parfois, ce n'est pas ce qu'on souhaite, donc on utilise Key
+            Attention : parfois, ce n'est pas ce qu'on souhaite, donc on utilise Key
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Key
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+C'est une Prop spéciale qu'on utilise pour dire au Diffing que l'Element est unique.
+Permet à React de faire la distinction entre plusieurs instances du même type de Composant.
+
+Avantage de conserver la même Key : 
+Quand la Key reste la même à travers les Render : l'Element sera conservé dans le DOM.
+        exemple d'utilisation : Utiliser les Key dans les Listes
+
+Avantage de modifier la Key :
+L'Element sera détruit et un nouveau sera créé 
+(même si la position dans l'Arbre est la même)
+        exemple d'utilisation : Utiliser les Key pour un reset State
+
+
+Exemple dans une Liste :
+    Sans Key :
+        - les mêmes Elements + position différente dans l'Arbre
+            = Element retirés du DOM, et recréé dans le DOM
+            = Bad performance
+
+    Avec Key :
+        - Position différente dans l'Arbre + les mêmes Key
+            = Elements qui restent dans le DOM
+            = Good performance
+
+
+Exemple pour un reset State
+    - Si on a le même Element + la même position dans l'Arbre
+        = DOM Element + State conservé
+
+    - En MODIFIANT une Key
+        = State reset
