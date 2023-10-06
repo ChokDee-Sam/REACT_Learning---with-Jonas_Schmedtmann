@@ -511,3 +511,25 @@ Library : le sur-mesure
                       Donc chercher, comparer, telecharger, apprendre, et faire les MAJ
 
 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Exemples de Third Party Libraries de l'Ecosysteme React
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Routing                     React Router, React Location
+2 - HTTP Request                JS Fetch, Axios
+3 - Remote State management     React Query, SWR, Apollo
+4 - Global State management     Content API, Redux, Zustand
+5 - Styling                     CSS Module, Styled Components, Tailwind CSS
+6 - Form Management             React Hook Form, Formik
+7 - Animations / Transitions    Motion, React Spring
+8 - UI Components               Material UI, Chakra UI, Mantine
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Frameworks Features  : Front-End / Full-Stack
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Server-Side Rendering (SSR)
+    Static Site Generation (SSG)
+    Better Developer Experience (DX)
+    Etc...
