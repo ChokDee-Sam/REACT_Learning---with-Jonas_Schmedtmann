@@ -493,3 +493,21 @@ En React :
     - Attache "Capture" si besoin de handle pendant une Capture Phase 
         (onClickCapture)
 
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Library vs Framework
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Framework : le kit tout en 1
+    - Avantages : Tout est inclus pour build une App complète
+    - inconvenients : On est "bloqué" avec les outils du Framework et les conventions 
+                      (Ce qui n'est pas toujours un inconvenient)
+
+Library : le sur-mesure
+    - Avantage : Liberté de choisir les Third Party Libraries pour notre App
+    - Inconvénients : Obligé de choisir ! D
+                      Donc chercher, comparer, telecharger, apprendre, et faire les MAJ
+
+
