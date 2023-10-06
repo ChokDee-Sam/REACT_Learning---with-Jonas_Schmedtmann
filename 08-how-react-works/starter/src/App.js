@@ -19,15 +19,15 @@ const content = [
 ];
 
 export default function App() {
-  console.log(<DifferentContent />)
-  console.log(DifferentContent())
+  console.log(<DifferentContent />);
+  console.log(DifferentContent());
   return (
     <div>
       <Tabbed content={content} />
     </div>
   );
 }
- 
+
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
 
@@ -47,7 +47,10 @@ function Tabbed({ content }) {
 
       {activeTab <= 2 ? (
         // <TabContent item={content[activeTab]} />
-        <TabContent item={content.at(activeTab)} key={content.at(activeTab).summary}/>
+        <TabContent
+          item={content.at(activeTab)}
+          key={content.at(activeTab).summary}
+        />
       ) : (
         <DifferentContent />
       )}
@@ -75,14 +78,25 @@ function Tab({ num, activeTab, onClick }) {
 function TabContent({ item }) {
   const [showDetails, setShowDetails] = useState(true);
   const [likes, setLikes] = useState(0);
-  const [SuperLikes, setSuperLikes] = useState(0);
+
+  console.log("RENDER");
 
   function handleInc() {
-    setLikes(likes + 1);
+    setLikes((like) => like + 1);
   }
-  function superHandleInc() {
-    setSuperLikes(SuperLikes + 3);
+  function handleTripleInc() {
+    setLikes((c) => c + 1);
+    setLikes((c) => c + 1);
+    setLikes((c) => c + 1);
   }
+
+  function handleUndo() {
+    setShowDetails(true);
+    setLikes(0);
+  }
+
+  function handleUndoLater() {
+    setTimeout(handleUndo, 2000);}
 
   return (
     <div className="tab-content">
@@ -97,14 +111,13 @@ function TabContent({ item }) {
         <div className="hearts-counter">
           <span>{likes} ❤️</span>
           <button onClick={handleInc}>+</button>
-          <span>{SuperLikes} ❤️</span>
-          <button onClick={superHandleInc}>+++</button>
+          <button onClick={handleTripleInc}>+++</button>
         </div>
       </div>
 
       <div className="tab-undo">
-        <button>Undo</button>
-        <button>Undo in 2s</button>
+        <button onClick={handleUndo}>Undo</button>
+        <button onClick={handleUndoLater}>Undo in 2s</button>
       </div>
     </div>
   );

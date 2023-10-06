@@ -450,4 +450,46 @@ Pour résumer :
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    DOM REFRESHER : EVENT PROPAGATION AND DELEGATION    (à creuser)
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+En JavaScript 
+1 - Capturing Phase : 
+L'Objet descend du haut du DOM, et descend dans l'Arborescence jusqu'à la Target
+2 - Target Element : Attrape sa Target
+3 - Buble Phase : Depuis la Target Element, l'Objet remonte l'Arbo jusqu'au Top DOM
+
+
+En React :
+Tous les Event Handler ne sont pas sur l'Element target, 
+    mais dans le root DOM Container
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Synthetic Events
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    PointerEvent, MouseEvent,KeyboardEvent, etc...
+
+En React :
+    - ils sont "wrappés" dans un SyntheticEvent
+    - ils ont la même "interface"qu'un Native Event Object 
+        (comme stopPropagation() et preventDefault())
+    - ils apportent des correctifs concernant l'inconsistance des navigateurs web
+        (donc les Event fonctionnent de la même manière dans tous les navigateurs)
+    -  La plupart des Synthetic Events "Buble" (focus et change inclus)
+        (sauf pour le scroll)
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Event handlers in React vs in JavaScript
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    - Les Attributs d'event Handlers s'écrire en cameCase
+        (onclick / onClick)
+    - Le comportement par défaut ne peut pas être évité en returnant false
+        (seulement en utilisant preventDefault)
+    - Attache "Capture" si besoin de handle pendant une Capture Phase 
+        (onClickCapture)
+
