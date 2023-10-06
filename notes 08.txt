@@ -390,3 +390,64 @@ Les Side Effects sont permis (et encouragés) dans des Event Handler Function !
 Il y a un Hook spécial pour les Side Effects (useEffect)
 
 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    STATES UPDATES are BATCHED
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Les Renders ne sont pas déclenchés automatiquement, mais sont plannfiés 
+pour quand le moteur JS aura du "temps libre".
+
+Ils peuvent être regroupés, mis en lot (batched) en plusieurs setStates
+d'un Event Handler (gestionnaire d'evenement)
+
+React ne fait pas plusieurs Updates lors du même Event Handler.
+    = React fait 1 seul Update Batched par Event Handler 
+    = Batched State Update => Render + Commit
+    = Pas de Renders de trop = meilleur performance
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    STATES UPDATES is ASYNCHRONOUS
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Stale State (State vicié) = une State avant son Update (durant le process)
+
+La State va dans le Render Tree durant la Render Phase
+À ce moment-là, le Re-Render n'a pas encore été effectué
+De ce fait, la State contient toujours sa valeur actuelle (car non Updatée)
+
+Pour résumer : 
+    - un State Update n'est pas immédiatement disponible après un setState
+        Mais seulement après son Re-Render
+    - Que ce soit pour 1 seul State ou plusieurs, c'est pareil (car Batched)
+    - Si on souhaite un State Update basé sur la précédente Update
+        useState avec CallBack      setState(abc=> ...)
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Les Batched des Handler Functions
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Avant React 18 : ceux-ci n'étaient pas Batched
+        - TimeOut
+        - Promises
+        - Native Handler
+    Event Handler était la seule chose Batched
+
+    Dès React 18 : ils sont tous batched automatiquement
+        - Event Handler
+        - TimeOut
+        - Promises
+        - Native Handler
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Éviter un Batched automatique
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Wrapper ls State Update dans :
+        ReactDOM.flushSync()
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
