@@ -1,0 +1,140 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    CYCLE DE VIE D'UN COMPOSANT
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - Mount / Initial Render
+    - L'instance de Composant est Render pour la première fois
+    - State et Props sont créés
+
+
+2 - Re-Render (optionnel)
+    Se passe quand :
+    - State change 
+    - Props change 
+    - Parent Re-Render
+    - Context change
+
+3 - UnMount
+    - L'instance de Composant est détruite et retirée
+    - State et Props sont détruits
+
+
+PS : Nous pouvons définir le code à exécuter à certains moment spécifique
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Data Fetch dans un Render Logic = Boucle infinie
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Afin de respecter les règles du Render Logic se doit d'être pur
+    Utiliser Fetch pour y intégrer le résultat à un Set = Re-Render du State
+    Re-Render du State = Re-Fetch
+    Re-Fetch = Re-Render du State, et ainsi de suite...
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    UseEffect = ne pas créer de boucle infinie
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    useEffect(function () {
+        fetch(`http://www.omdbapi.com/?apikey=${key}&s=matrix`)
+            .then((res) => res.json())
+            .then((data) => setMovies(data.Search));
+  }, []);
+
+  PS : Ne pas oublier l'élément après l'appel de function. (Dependency Array)
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Event Handlers VS Effects
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Event Handlers : En réaction d'un Event
+    Quand ? Lors que l'Event est exécuté
+    De loin la meilleure manière de créer un Side Effects
+
+useEffect : Penser en terme de Synchronisation (et non en cycle de vie)
+    - Quand ? 
+        Après l'inital Render (Mount Component), 
+        ET après les rendus ultérieurs (selon l'array Dependency)
+    - L'avantage
+        Utilisé pour conserver un Composant synchronisé avec un Systeme Externe
+        Exemple : avec une API de films
+
+        
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Asynch Function
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Beaucoup de Code pour gérer une promesse => async function 
+
+Les fonctions CallBack sont Synchrone pour éviter les "conditions de concurrences"
+    - De ce fait, mettre Async ne fonctionnerait pas = pas de return Promesse
+      
+Solution : 
+    - ne pas mettre la fonction Async directement en CallBack
+    - créer une nouvelle fonction en callback, pour y mettre notre function Async
+    - puis appeler notre function async
+
+useEffect(function () {
+      async function fetchMovies() {
+        const res = await fetch(`http://www.omdbapi.com/?apikey=${key}&s=${query}`);
+        const data = await res.json();
+        setMovies(data.Search);
+      }
+    fetchMovies();
+    }, [])
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    The Dependency Array
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Par défaut, affects s’exécute après chaque Render.
+On peut modifier ça avec un tableau de dépendance. 
+Chaque fois que l’une des dépendances change, l’effet s’exécute. 
+
+Sinon, sans tableau de dépendance : React ne sait pas quand exécuter l’effet.
+
+Toutes les States et Props utilisés dans l’Effet DOIVENT être inclus dans le tableau des dépendances. 
+(Sinon, ça donne un “stale closure”, à voir plus tard…)
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    La Mécanique de l’Effet
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+UseEffect est comme un Évent Listener pour les dépendances du tableau. 
+Quand une dépendance change = Effet s’exécute
+De ce fait, useEffect est “réactif”. 
+
+Le State/Props change à l’extérieur de useEffect
+useEffect se synchronise en mettant à jour
+Le Side Effect se produit
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useEffect et cycle de vie
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+On sait donc que lors de chaque update concernant les dépendances,
+le UseEffect est exécuté + le Composant est Re-Render
+De ce fait : le UseEffect et le cycle de vie des Composants sont profondément connectés.
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useEffect : 3 cas de tableau de dépendances
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+1 - UseEffect avec tableau de dépendances => synchro avec chaque dépendance
+    Cycle de vie = Initial Render + Re-Render à chaque Update
+
+2 - UseEffect avec tableau vide = aucune synchro
+    Cycle de vie = Initial Render (uniquement)
+
+3 - UseEffect sans tableaux de dépendances = synchro avec tout !!
+    Cycle de vie = s’exécute sur tous les Render = Mauvaise pratique 
+
+
+PS : Le UseEffect s’effectue après le Browser Paint

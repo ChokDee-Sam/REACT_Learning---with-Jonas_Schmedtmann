@@ -19,8 +19,8 @@ const content = [
 ];
 
 export default function App() {
-  console.log(<DifferentContent />);
-  console.log(DifferentContent());
+  // console.log(<DifferentContent />);
+  // console.log(DifferentContent());
   return (
     <div>
       <Tabbed content={content} />
