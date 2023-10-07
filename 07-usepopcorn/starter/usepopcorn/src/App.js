@@ -57,13 +57,21 @@ const key = `8047cb10`;
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState([]);
+  const query = "matrix";
 
   useEffect(function () {
-    fetch(`http://www.omdbapi.com/?apikey=${key}&s=matrix`)
-      .then((res) => res.json())
-      .then((data) => setMovies(data.Search));
+    async function fetchMovies() {
+      const res = await fetch(
+        `http://www.omdbapi.com/?apikey=${key}&s=${query}`
+      );
+      const data = await res.json();
+      setMovies(data.Search);
+      // console.log(movies);
+      // console.log(data.Search);
+    }
+    fetchMovies();
   }, []);
 
   return (
