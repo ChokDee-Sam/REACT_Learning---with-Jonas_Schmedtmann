@@ -46,6 +46,9 @@ export default function MovieDetails({
   } = movie;
   console.log(title, year);
 
+  // const compare = watched.filter((element) => element.includes(selectedId));
+  const isWatched = watched.map((movie) => movie.imdbId).includes(selectedId);
+
   function handleAdd() {
     const newWatchedMovie = {
       imdbId: selectedId,
@@ -87,11 +90,13 @@ export default function MovieDetails({
 
           <section>
             <div className="rating">
-              <StarRating
-                maxRating={10}
-                size={24}
-                onSetRating={setUserRating}
-              />
+              {!isWatched && (
+                <StarRating
+                  maxRating={10}
+                  size={24}
+                  onSetRating={setUserRating}
+                />
+              )}
 
               {userRating > 0 && (
                 <button className="btn-add" onClick={handleAdd}>
