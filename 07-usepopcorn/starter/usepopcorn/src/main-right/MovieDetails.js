@@ -56,9 +56,12 @@ export default function MovieDetails({
     function () {
       if (!title) return;
       document.title = `Movie | ${title}`;
-      // document.title = `Movie | ${selectedId === null ? null : title}`;
+
+      return function () {
+        document.title = "usePopCorn";
+      };
     },
-    [title, selectedId]
+    [title]
   );
 
   const watchedUserRating = watched.find(
