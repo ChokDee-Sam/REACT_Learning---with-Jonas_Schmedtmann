@@ -13,24 +13,7 @@ export default function MovieDetails({
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
-  const [match, setMatch] = useState(false);
-
-  useEffect(
-    function () {
-      async function getMovieDetails() {
-        setIsLoading(true);
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${key}&i=${selectedId}`
-        );
-        const data = await res.json();
-        console.log(data);
-        setMovie(data);
-        setIsLoading(false);
-      }
-      getMovieDetails();
-    },
-    [selectedId]
-  );
+  // const [pageTitle, setPageTitle] = useState("");
 
   const {
     Title: title,
@@ -45,6 +28,42 @@ export default function MovieDetails({
     Genre: genre,
   } = movie;
   console.log(title, year);
+
+  useEffect(
+    function () {
+      async function getMovieDetails() {
+        setIsLoading(true);
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${key}&i=${selectedId}`
+        );
+        const data = await res.json();
+        console.log(data);
+        setMovie(data);
+        setIsLoading(false);
+        // setPageTitle(title);
+
+        // selectedId ? setPageTitle(title) : setPageTitle("vide");
+        // changeTitlePage(title);
+        // title === pageTitle ? setPageTitle("rien") : setPageTitle(title);
+      }
+      // document.title = pageTitle;
+      getMovieDetails();
+    },
+    [selectedId]
+  );
+
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
+      // document.title = `Movie | ${selectedId === null ? null : title}`;
+    },
+    [title, selectedId]
+  );
+
+  const watchedUserRating = watched.find(
+    (movie) => movie.imdbId === selectedId
+  )?.userRating;
 
   // const compare = watched.filter((element) => element.includes(selectedId));
   const isWatched = watched.map((movie) => movie.imdbId).includes(selectedId);
@@ -63,6 +82,10 @@ export default function MovieDetails({
     onAddWatched(newWatchedMovie);
     onCloseMovie();
   }
+
+  // function changeTitlePage(title) {
+  //   setPageTitle((cur) => (title === cur ? null : title));
+  // }
 
   return (
     <div className="details">
@@ -90,18 +113,24 @@ export default function MovieDetails({
 
           <section>
             <div className="rating">
-              {!isWatched && (
-                <StarRating
-                  maxRating={10}
-                  size={24}
-                  onSetRating={setUserRating}
-                />
-              )}
+              {!isWatched ? (
+                <>
+                  <StarRating
+                    maxRating={10}
+                    size={24}
+                    onSetRating={setUserRating}
+                  />
 
-              {userRating > 0 && (
-                <button className="btn-add" onClick={handleAdd}>
-                  Add to list
-                </button>
+                  {userRating > 0 && (
+                    <button className="btn-add" onClick={handleAdd}>
+                      Add to list
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>
+                  You rated this movie {watchedUserRating} <span>⭐️</span>
+                </p>
               )}
             </div>
             <p>
