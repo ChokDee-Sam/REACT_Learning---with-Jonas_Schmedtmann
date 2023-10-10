@@ -61,7 +61,7 @@ const key = `8047cb10`;
 // –––––––––––––––––––––––––––––––
 
 export default function App() {
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
 
   const [selectedId, setSelectedId] = useState(null);
@@ -90,6 +90,8 @@ export default function App() {
 
   // ----------------------------------
 
+  // ----------------------------------
+
   useEffect(
     function () {
       const controller = new AbortController();
@@ -115,9 +117,8 @@ export default function App() {
           setMovies(data.Search);
           setError("");
         } catch (err) {
-          console.error(err.message);
+          console.log(err.message);
 
-          // if (err.name !== "AbortError") {
           if (err.name !== "AbortError") {
             setError(err.message);
           }
@@ -132,7 +133,7 @@ export default function App() {
         setError("");
         return;
       }
-
+      handleCloseMovie();
       fetchMovies();
 
       return function () {
@@ -141,6 +142,8 @@ export default function App() {
     },
     [query]
   );
+
+  // ----------------------------------
 
   return (
     <>

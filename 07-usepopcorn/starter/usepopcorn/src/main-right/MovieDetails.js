@@ -13,7 +13,6 @@ export default function MovieDetails({
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
-  // const [pageTitle, setPageTitle] = useState("");
 
   const {
     Title: title,
@@ -27,7 +26,24 @@ export default function MovieDetails({
     Director: director,
     Genre: genre,
   } = movie;
-  console.log(title, year);
+  // console.log(title, year);
+
+  useEffect(
+    function () {
+      function callback(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+          // console.log("CLOSE");
+        }
+      }
+      document.addEventListener("keydown", callback);
+
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [onCloseMovie]
+  );
 
   useEffect(
     function () {
@@ -37,16 +53,10 @@ export default function MovieDetails({
           `http://www.omdbapi.com/?apikey=${key}&i=${selectedId}`
         );
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         setMovie(data);
         setIsLoading(false);
-        // setPageTitle(title);
-
-        // selectedId ? setPageTitle(title) : setPageTitle("vide");
-        // changeTitlePage(title);
-        // title === pageTitle ? setPageTitle("rien") : setPageTitle(title);
       }
-      // document.title = pageTitle;
       getMovieDetails();
     },
     [selectedId]
@@ -81,7 +91,7 @@ export default function MovieDetails({
       runtime: Number(runtime.split(" ").at(0)),
       userRating,
     };
-    console.log(newWatchedMovie);
+    // console.log(newWatchedMovie);
     onAddWatched(newWatchedMovie);
     onCloseMovie();
   }
