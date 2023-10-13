@@ -1,0 +1,74 @@
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Hooks
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Ce sont des fonctions natives, en interne, 
+    qui nous permettent de nous "connecter" à l'intérieu de React
+
+        - Créer et acceder aux States depuis le Fiber Tree 
+        - Enregistrer un Side Effect dans le Fiber Tree 
+        - Selectionner le DOM manuellement
+        - Et plein d'autres choses...
+
+    Le nom des Hooks comment toujours avec "use"
+
+    Permet facilement la réutilisation de "Non-Visual Logic"
+    On peut composer des multiples Hooks dans notre propre Custom Hook.
+
+    Donne à un Function Composant le droit d'avoir son propre State et Side Effect
+    (Avant la version 16.8, la seule possibilité était les Class Composants)
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Plusieurs Hooks
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Les plus utilisés :
+    - useState
+    - useEffect
+    - useReducer
+    - useContext
+
+
+Les moins utilisés (à apprendre) : 
+    - useRef
+    - useCallback
+    - useMemo
+    - useTransition
+    - useDeferredValue
+
+Les moins utilisés (à mettre de coté pour le moment)
+    - useLayoutEffect
+    - useDebugValue
+    - useImperativeHandle
+    - useImperativeHandle
+
+Uniquement pour les librairies :
+    - useSyncExternalStore
+    - useInsertionEffect
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Les 2 Règles de Hook
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    1 - Call les Hooks au Top Level
+        - Pas de Call dans :
+            - une condition
+            - une boucle
+            - une fonction imbriquée
+            - ou après un Early Return
+
+        - Car : les Hooks doivent TOUJOURS être Call dans le même Ordre 
+
+
+    2 - Les Hooks doivent être Call depuis une Function
+        - Call uniquement depuis : 
+            - une Function Component
+            - ou un Custom Hook
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
