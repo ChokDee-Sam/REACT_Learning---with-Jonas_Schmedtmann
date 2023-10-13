@@ -73,10 +73,9 @@ Uniquement pour les librairies :
     Les Hooks dépendent de l'Ordre d'Appel      CALL ORDER
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-À partir du React Element Tree 
-    => Initial Render = Création du Fiber Tree
-        => Le Fiber Tree va "fiber" les Props, Hooks...
+QUand une App est Render, React crée un React Element Tree (Virtual Dom)
+    => Initial Render = Création du Fiber Tree ( en dehors du Virtual Dom)
+        => Le Fiber Tree va créer des FIBER : les Props, Liste, Hooks...
             => il y aura une liste d'Appel des Hooks utilisés
-                => IL EST INDISPENSABLE QUE LA LISTE SOIT LA MÊME
+                => IL EST INDISPENSABLE QUE LA LINKED LISTE SOIT LA MÊME
 
-    
