@@ -70,5 +70,13 @@ Uniquement pour les librairies :
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    
+    Les Hooks dépendent de l'Ordre d'Appel      CALL ORDER
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+À partir du React Element Tree 
+    => Initial Render = Création du Fiber Tree
+        => Le Fiber Tree va "fiber" les Props, Hooks...
+            => il y aura une liste d'Appel des Hooks utilisés
+                => IL EST INDISPENSABLE QUE LA LISTE SOIT LA MÊME
+
+    
