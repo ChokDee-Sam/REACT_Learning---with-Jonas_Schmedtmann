@@ -79,3 +79,9 @@ QUand une App est Render, React crée un React Element Tree (Virtual Dom)
             => il y aura une liste d'Appel des Hooks utilisés
                 => IL EST INDISPENSABLE QUE LA LINKED LISTE SOIT LA MÊME
 
+Il ne faut pas que les Links soient broken après un Render
+Et pour ça, il ne faut pas qu'un Link disparaissent suite à une condition ou autre
+React serait "confus"
+
+Les Hooks ont besoin d'être Call dans le même Ordre à chaque Render.
+Et le moyen de faire ça, c'est d'appeler les Hooks au Top Level
