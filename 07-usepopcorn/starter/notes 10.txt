@@ -115,3 +115,16 @@ Pourquoi s'embêter avec cette Linked List qui oblige une règle étrange ?
 
     Pour éviter les Stale States (states obsoletes), 
     on passe un callback de la current value
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Initialiser la State avec un Callback (Lazy Initial State)
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    Pour initialser une State avec un local Storage, 2 façons :
+        - soit en passant par un State
+        - soit en passant par un useEffect
+
+    Le local storage se compose uniquement de key value pairs
+        et la value est une String (penser à convertir)
