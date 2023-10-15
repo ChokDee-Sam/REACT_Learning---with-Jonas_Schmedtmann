@@ -85,3 +85,33 @@ React serait "confus"
 
 Les Hooks ont besoin d'être Call dans le même Ordre à chaque Render.
 Et le moyen de faire ça, c'est d'appeler les Hooks au Top Level
+
+Pourquoi s'embêter avec cette Linked List qui oblige une règle étrange ?
+    La raison est que, cette Linked List, qui est reliée à la Hook Call Ordre,
+    est le moyen le plus simple d'associer chaque Hook à sa valeur.
+
+    Fondadamentalement, l'Ordre dans lequel le Hook est appelé 
+    identifie de manière UNIQUE le Hook.
+
+    React connait la valeur des States, 
+    et ces valeurs sont associées à l'Ordre d'Appel (Call Order)
+
+    La Linked List, est en quelque sorte une liste de valeurs.
+    Grace à ça, pas besoin d'attribuer manuellement des noms à chaque Hooks.
+    C'est pratique, et cela évite donc certains problèmes.
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    More details of useStates
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    L'initial value d'une State est valable UNIQUEMENT lors de l'initial Render
+        (only on Component Mount)
+    
+    Ce qui peut être constamment valable, c'est une State Derivée, 
+    car elle est "regenerée" à chaque re-Render du Composant
+
+
+    Pour éviter les Stale States (states obsoletes), 
+    on passe un callback de la current value
