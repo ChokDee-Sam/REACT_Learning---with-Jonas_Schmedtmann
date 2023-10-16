@@ -276,13 +276,45 @@ On utilise :
 
 
 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useRef : Explication avant les étapes
+// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– 
+
+On utilise un useEffect pour utiliser un useRef que contiendra un DOM Element
+    <input className='abc' ref={refName} />
+car le useRef est ajouté à ce DOM Element uniquement après que le DOM ait été load
+
+C'est parfait, car le useEffect s'exécute également après le chargement du DOM.
+C'est donc l'endroit idéal pour utiliser un useRef
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useRef : 3 étapes
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+    1 - Créer le useRef(null) dans une variable (checker si bien importer)
+            const inputEl = useRef(null);
+
+    2 - Utiliser la variable.current dans un useEffect
+            useEffect(function () {
+            // console.log(inputEl.current);
+                inputEl.current.focus();
+            }, []); // run on Mount
+
+    3 - intégrer la ref dans la Prop ref
+          ref={inputEl}
+
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     
 
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––  

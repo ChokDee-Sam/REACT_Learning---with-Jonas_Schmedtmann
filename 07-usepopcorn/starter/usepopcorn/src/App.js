@@ -26,8 +26,7 @@ export default function App() {
     const storedValue = localStorage.getItem("watched");
     return JSON.parse(storedValue);
   });
-
-  // const [watched, setWatched] = useState([]);
+  // const [watched, setWatched] = useState([]); // avant, sans le localStorage
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
