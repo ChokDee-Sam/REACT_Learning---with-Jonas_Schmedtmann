@@ -216,3 +216,73 @@ Même si React ignore la valeur de cela,
 PS : Lors d'un Update
     - ne JAMAIS mutate un object/array
         => remplacez les par un nouveau
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Comment NE PAS SELECTIONNER des éléments du DOM
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Réponse : avec une approche impérative
+
+    useEffect(function () {
+        const el = document.querySelector(".search");
+        el.focus();
+    });
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useRef 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+C'est un objet qui contient des valeurs 'Mutables'
+et dont la DATA persiste entre les Renders.
+
+    C'EST ESSENTIELLEMENT FAIT POUR DE LA DATA NON-VISUELLE !
+    Si visuel / JSX => useState est mieux
+
+    useRef apparait uniquement dans les eventHandlers ou useEffects
+    (peut apparaitre dans du JSX, mais generalement pas sa place car non visuel !)
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useRef : 2 grands cas d'utilisations 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    - Créer une variable qui reste la même à travers les Renders
+        (State précédent, setTimeout id, etc...)
+    - Selectionner et stocker des éléments du DOM
+
+
+Attention : Pas de lecture ou d'écriture dans le Render Logic (comme les States)
+            => Sinon Side Effect indésirable
+            => Opter dans un useEffect
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    State VS Ref
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+ref est une sorte de State avec moins de pouvoir, car :
+    - Comme State, sa Data persiste entre les Renders
+    - MAIS ne cause pas un Re-Render lors d'un Update
+
+State   =   immutable - Update Asynchrone
+Ref     =   mutable - Update Synchrone (comme n'importe quel object JavaScript)
+
+On utilise :
+    - State pour stocker de la Data qui doit re-Render le Composant
+    - Rest pour stocker de la Data au fil du temps, mais qui ne doit pas Re-Render
+
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

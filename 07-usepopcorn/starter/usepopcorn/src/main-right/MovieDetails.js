@@ -75,15 +75,15 @@ export default function MovieDetails({
   );
 
   const watchedUserRating = watched.find(
-    (movie) => movie.imdbId === selectedId
+    (movie) => movie.imdbID === selectedId
   )?.userRating;
 
   // const compare = watched.filter((element) => element.includes(selectedId));
-  const isWatched = watched.map((movie) => movie.imdbId).includes(selectedId);
+  const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
 
   function handleAdd() {
     const newWatchedMovie = {
-      imdbId: selectedId,
+      imdbID: selectedId,
       title,
       year,
       poster,

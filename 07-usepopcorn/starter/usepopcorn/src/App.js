@@ -22,11 +22,10 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
 
   // Récupère la liste des films watched
-  // const [watched, setWatched] = useState(function () {
-  //   const storedValue = localStorage.getItem("watched");
-  //   return JSON.parse(storedValue);
-  // });
-  const [watched, setWatched] = useState(() => localStorage.getItem("watched"));
+  const [watched, setWatched] = useState(function () {
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue);
+  });
 
   // const [watched, setWatched] = useState([]);
 
@@ -49,7 +48,7 @@ export default function App() {
   }
 
   function handleDeleteWatched(id) {
-    setWatched((watched) => watched.filter((movie) => movie.imdbId !== id));
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
 
   // ----------------------------------
