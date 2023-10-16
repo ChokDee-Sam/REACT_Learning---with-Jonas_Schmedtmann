@@ -113,8 +113,8 @@ Pourquoi s'embêter avec cette Linked List qui oblige une règle étrange ?
     car elle est "regenerée" à chaque re-Render du Composant
 
 
-    Pour éviter les Stale States (states obsoletes), 
-    on passe un callback de la current value
+    Pour éviter les Stale States (states obsoletes) 
+    => on passe un callback de la current value
 
 
 
@@ -122,9 +122,97 @@ Pourquoi s'embêter avec cette Linked List qui oblige une règle étrange ?
     Initialiser la State avec un Callback (Lazy Initial State)
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+Le local storage : 
+    - se compose d'une paire key value, et est dispo dans le browser
+    - et la value est une String (penser à convertir si besoin)
+
+
     Pour initialser une State avec un local Storage, 2 façons :
         - soit en passant par un State
         - soit en passant par un useEffect
 
-    Le local storage se compose uniquement de key value pairs
-        et la value est une String (penser à convertir)
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Initialiser la State avec le localStorage
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    On pourrait écrire ça apres une fonction qui mettrait à jour le addWatched
+        localStorage.setItem("watched", JSON.stringify([...watched, movie]))
+    Et ensuite écrire le fait de supprimer le localStore à chaque deleteWatched
+        => Pas top, et plus compliqué
+
+
+    La solution idéale est : 
+        - un useEffect qui crée un localStorage, avec surveillance [watched]
+        - une functionCallback dans l'initial Render qui recupere ce localStorage
+
+
+Exemple :
+        useEffect(
+            function () {
+            localStorage.setItem("watched", JSON.stringify(watched));
+            },
+            [watched]
+        );
+
+        const [watched, setWatched] = useState(function () {
+            const storedValue = localStorage.getItem("watched");
+            return JSON.parse(storedValue);
+        });
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Chacun son rôle
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+La fonction dans le useState 
+    => Fait le job pour l'initial Render
+
+La fonction dans le useEffect 
+    => mettra à jour le localStorage à chaque fois que le useState changera
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Attention
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+On ne doit pas appeler une fonction dans un useState
+car un appel de fonction ne lui transmet pas la fonction dans le useState
+
+Même si React ignore la valeur de cela,
+=> il appellerait toujours cette fonction à chaque Render !
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useState : 2 manières de créer
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+    1. simple :
+        - en transmettant une single value
+
+    2. basée sur une fonction (lazy evaluation)
+        - en lui une callback function, qui return donc une value
+
+    La fonction sera :
+        - uniquement Call à l'Initial Render
+        - et aura 2 règles à respecter :
+            - être Pure
+            - ne pas accepter d'arguments
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useState : 2 manières d'Update 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+    1. simple :
+        - en transmettant une single value
+
+    2. basée sur une fonction  :
+        - en prenant en compte la Current State
+        - et aura 2 règles à respecter :
+            => être Pure
+            => return le prochain State
+
+
+PS : Lors d'un Update
+    - ne JAMAIS mutate un object/array
+        => remplacez les par un nouveau
