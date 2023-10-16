@@ -281,6 +281,7 @@ On utilise :
 // ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– 
 
 On utilise un useEffect pour utiliser un useRef que contiendra un DOM Element
+(car pas possible de muter un useRef dans le Render Logic)
     <input className='abc' ref={refName} />
 car le useRef est ajouté à ce DOM Element uniquement après que le DOM ait été load
 
@@ -298,6 +299,7 @@ C'est donc l'endroit idéal pour utiliser un useRef
             const inputEl = useRef(null);
 
     2 - Utiliser la variable.current dans un useEffect
+        (car pas possible de mutate un useRef    dans le Render Logic)
             useEffect(function () {
             // console.log(inputEl.current);
                 inputEl.current.focus();
@@ -308,13 +310,47 @@ C'est donc l'endroit idéal pour utiliser un useRef
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    useRef conditionnel dans un useEffect, avec un addEventListener
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+    C'est le même procédé que les 3 étapes précédente, 
+    sauf que l'étape 2 exige : 
+        - Une création de function callback(e)
+        - un addEventListener
+        - un clean up qui Return un addRemoveListener
+        - et un tableau des dépendances avec l'élément demandé
 
+useEffect(
+    function () {
+      // création de function callback avec (e)
+      function callback(e) {
+        if (document.activeElement === inputEl.current) return;
+        if (e.code === "Enter") {
+          inputEl.current.focus();
+          setQuery("");
+        }
+      }
+
+      // addEventListener qui enclenche la fonction callback
+      document.addEventListener("keydown", callback);
+
+      // removeEventListener clean pour éviter les multiples Events
+      return () => document.removeEventListener("keydown", callback);
+    },
+    [setQuery]
+  );
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Autres cas de useRef
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     
+    Un useRef n'a pas de setter function
+    À la place, on mutate la current propriété qui est dans la ref
+      countRef.current++
 
-// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––  
+    C'est pour ça qu'on dit qu'un useRef, 
+    c'est un peu comme une boite qui peut contenir n'importe quelle valeur
+
+    En utilisant une simple variable, elle se serait reset après chaque Render
+    Donc, ça aurait été une variable non persistante à travers les Renders
