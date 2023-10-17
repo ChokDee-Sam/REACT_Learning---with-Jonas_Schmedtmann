@@ -10,16 +10,21 @@ import WatchedSummary from "./main-right/WatchedSummary";
 import Loader from "./miscellaneouse/Loader";
 import MovieDetails from "./main-right/MovieDetails";
 import ErrorMessage from "./miscellaneouse/ErrorMessage";
+import { useMovies } from "./useMovies";
 
-const key = `8047cb10`;
+// const key = `8047cb10`;
 
 // –––––––––––––––––––––––––––––––
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-
+  // const [movies, setMovies] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+
+  const { movies, isLoading, error } = useMovies(query);
+  console.log(movies);
 
   // Récupère la liste des films watched
   const [watched, setWatched] = useState(function () {
@@ -27,9 +32,6 @@ export default function App() {
     return JSON.parse(storedValue);
   });
   // const [watched, setWatched] = useState([]); // avant, sans le localStorage
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
   // ----------------------------------
 
@@ -59,56 +61,56 @@ export default function App() {
   );
   // ----------------------------------
 
-  useEffect(
-    function () {
-      const controller = new AbortController();
+  // useEffect(
+  //   function () {
+  //     const controller = new AbortController();
 
-      async function fetchMovies() {
-        try {
-          setIsLoading(true);
-          setError("");
+  //     async function fetchMovies() {
+  //       try {
+  //         setIsLoading(true);
+  //         setError("");
 
-          const res = await fetch(
-            `http://www.omdbapi.com/?apikey=${key}&s=${query}`,
-            { signal: controller.signal }
-          );
+  //         const res = await fetch(
+  //           `http://www.omdbapi.com/?apikey=${key}&s=${query}`,
+  //           { signal: controller.signal }
+  //         );
 
-          //Si le fetch a un soucis
-          if (!res.ok)
-            throw new Error("Something went wrong with fetching movies");
+  //         //Si le fetch a un soucis
+  //         if (!res.ok)
+  //           throw new Error("Something went wrong with fetching movies");
 
-          const data = await res.json();
-          //Si aucun résultat de recherche
-          if (data.Response === "False") throw new Error("Movie not found");
+  //         const data = await res.json();
+  //         //Si aucun résultat de recherche
+  //         if (data.Response === "False") throw new Error("Movie not found");
 
-          setMovies(data.Search);
-          setError("");
-        } catch (err) {
-          console.log(err.message);
+  //         setMovies(data.Search);
+  //         setError("");
+  //       } catch (err) {
+  //         console.log(err.message);
 
-          if (err.name !== "AbortError") {
-            setError(err.message);
-          }
-        } finally {
-          setIsLoading(false);
-        }
-      }
+  //         if (err.name !== "AbortError") {
+  //           setError(err.message);
+  //         }
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     }
 
-      // Pour éviter des erreurs, et avoir un départ de recherche propre
-      if (query.length < 3) {
-        setMovies([]);
-        setError("");
-        return;
-      }
-      handleCloseMovie();
-      fetchMovies();
+  //     // Pour éviter des erreurs, et avoir un départ de recherche propre
+  //     if (query.length < 3) {
+  //       setMovies([]);
+  //       setError("");
+  //       return;
+  //     }
+  //     handleCloseMovie();
+  //     fetchMovies();
 
-      return function () {
-        controller.abort();
-      };
-    },
-    [query]
-  );
+  //     return function () {
+  //       controller.abort();
+  //     };
+  //   },
+  //   [query]
+  // );
 
   // ----------------------------------
 

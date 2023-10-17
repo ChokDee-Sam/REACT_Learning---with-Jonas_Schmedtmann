@@ -411,8 +411,8 @@ function useFetch(url) {
     Custom Hooks VS Composant
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-Un composant peut recevoir des Props        =>  return du JSX
-Un Custom Hook peut recevoir de la data     =>  return array / object
+Un composant peut recevoir des Props            =>  return du JSX
+Un Custom Hook peut recevoir des arguments      =>  return array / object
 
 
 Le Composant
@@ -425,12 +425,25 @@ Le Custom Hook
 
 
 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Custom Hook Avantage : l'ensemble de Logic
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+On prend toute la Logique (non visuelle) qui va ensemble
+On la met dans une Custom Hook
+On met le necessaire via un argument/propriété de fonction
+On return dans un array/object le necessaire
+
+Et dans un autre fichier 
+    - on appelle cette fonction
+    - et on utilise le Destructuring pour récupérer les elements du return
 
 
 
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-
-
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 
 
