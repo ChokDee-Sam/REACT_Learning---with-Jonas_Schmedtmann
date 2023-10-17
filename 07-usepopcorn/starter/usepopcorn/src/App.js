@@ -11,27 +11,39 @@ import Loader from "./miscellaneouse/Loader";
 import MovieDetails from "./main-right/MovieDetails";
 import ErrorMessage from "./miscellaneouse/ErrorMessage";
 import { useMovies } from "./useMovies";
+import { useLocalStorageState } from "./useLocalStorageState";
 
 // const key = `8047cb10`;
 
 // –––––––––––––––––––––––––––––––
 
 export default function App() {
+  // ----------------------------------
   const [query, setQuery] = useState("");
-  // const [movies, setMovies] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  // ----------------------------------
 
+  // Custom Hooks : fetch, chargement, et gestion des erreurs
   const { movies, isLoading, error } = useMovies(query);
-  console.log(movies);
 
-  // Récupère la liste des films watched
-  const [watched, setWatched] = useState(function () {
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue);
-  });
-  // const [watched, setWatched] = useState([]); // avant, sans le localStorage
+  // Custom Hooks : récupère la liste des films watched
+  const [watched, setWatched] = useLocalStorageState([], "watched");
+
+  // ----------------------------------
+
+  // Avant, avec un localStorare, mais sans le Custom Hook
+
+  // const [watched, setWatched] = useState(function () {
+  //   const storedValue = localStorage.getItem("watched");
+  //   return JSON.parse(storedValue);
+  // });
+
+  // useEffect(
+  //   function () {
+  //     localStorage.setItem("watched", JSON.stringify(watched));
+  //   },
+  //   [watched]
+  // );
 
   // ----------------------------------
 
@@ -52,13 +64,6 @@ export default function App() {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
 
-  // ----------------------------------
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
   // ----------------------------------
 
   // useEffect(
