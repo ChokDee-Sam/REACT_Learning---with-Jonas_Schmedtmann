@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Loader from "../miscellaneouse/Loader";
 import StarRating from "../miscellaneouse/StarRating";
+import { useKey } from "../useKey";
 
 const key = `8047cb10`;
 
@@ -36,22 +37,24 @@ export default function MovieDetails({
   } = movie;
   // console.log(title, year);
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (e.code === "Escape") {
-          onCloseMovie();
-          // console.log("CLOSE");
-        }
-      }
-      document.addEventListener("keydown", callback);
+  useKey("Escape", onCloseMovie);
 
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [onCloseMovie]
-  );
+  // useEffect(
+  //   function () {
+  //     function callback(e) {
+  //       if (e.code === "Escape") {
+  //         onCloseMovie();
+  //         // console.log("CLOSE");
+  //       }
+  //     }
+  //     document.addEventListener("keydown", callback);
+
+  //     return function () {
+  //       document.removeEventListener("keydown", callback);
+  //     };
+  //   },
+  //   [onCloseMovie]
+  // );
 
   useEffect(
     function () {
