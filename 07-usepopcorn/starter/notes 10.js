@@ -1,3 +1,4 @@
+/*
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Hooks
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -49,6 +50,7 @@ Uniquement pour les librairies :
     - useInsertionEffect
 
 
+
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Les 2 Règles de Hook
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -69,10 +71,11 @@ Uniquement pour les librairies :
             - ou un Custom Hook
 
 
+
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Les Hooks dépendent de l'Ordre d'Appel      CALL ORDER
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
+/*
 QUand une App est Render, React crée un React Element Tree (Virtual Dom)
     => Initial Render = Création du Fiber Tree ( en dehors du Virtual Dom)
         => Le Fiber Tree va créer des FIBER : les Props, Liste, Hooks...
@@ -103,7 +106,7 @@ Pourquoi s'embêter avec cette Linked List qui oblige une règle étrange ?
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    More details of useStates
+//  More details of useStates
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
     L'initial value d'une State est valable UNIQUEMENT lors de l'initial Render
@@ -119,8 +122,9 @@ Pourquoi s'embêter avec cette Linked List qui oblige une règle étrange ?
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    Initialiser la State avec un Callback (Lazy Initial State)
+//  Initialiser la State avec un Callback (Lazy Initial State)
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 
 Le local storage : 
     - se compose d'une paire key value, et est dispo dans le browser
@@ -133,8 +137,9 @@ Le local storage :
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-    Initialiser la State avec le localStorage
+//    Initialiser la State avec le localStorage
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 
     On pourrait écrire ça apres une fonction qui mettrait à jour le addWatched
         localStorage.setItem("watched", JSON.stringify([...watched, movie]))
@@ -147,18 +152,19 @@ Le local storage :
         - une functionCallback dans l'initial Render qui recupere ce localStorage
 
 
-Exemple :
-        useEffect(
-            function () {
-            localStorage.setItem("watched", JSON.stringify(watched));
-            },
-            [watched]
-        );
+Exemple
+*/ useEffect(
+  function () {
+    localStorage.setItem("watched", JSON.stringify(watched));
+  },
+  [watched]
+);
 
-        const [watched, setWatched] = useState(function () {
-            const storedValue = localStorage.getItem("watched");
-            return JSON.parse(storedValue);
-        });
+const [watched, setWatched] = useState(function () {
+  const storedValue = localStorage.getItem("watched");
+  return JSON.parse(storedValue);
+});
+/*
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Chacun son rôle
@@ -225,24 +231,26 @@ PS : Lors d'un Update
 
 Réponse : avec une approche impérative
 
-    useEffect(function () {
-        const el = document.querySelector(".search");
-        el.focus();
-    });
-
+*/ useEffect(function () {
+  const el = document.querySelector(".search");
+  el.focus();
+});
+/*
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     useRef 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 C'est un objet qui contient des valeurs 'Mutables'
-et dont la DATA persiste entre les Renders.
+    - dont la DATA persiste entre les Renders.
+    - et dont les mises à jour de cet objet ne produit aucun Re-Render
 
     C'EST ESSENTIELLEMENT FAIT POUR DE LA DATA NON-VISUELLE !
-    Si visuel / JSX => useState est mieux
+        Si visuel / JSX => useState est mieux
 
-    useRef apparait uniquement dans les eventHandlers ou useEffects
-    (peut apparaitre dans du JSX, mais generalement pas sa place car non visuel !)
+useRef apparait uniquement dans les eventHandlers ou useEffects
+(peut apparaitre dans du JSX, mais generalement pas sa place car non visuel !)
+
 
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -259,6 +267,7 @@ Attention : Pas de lecture ou d'écriture dans le Render Logic (comme les States
             => Opter dans un useEffect
 
 
+
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     State VS Ref
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -267,8 +276,9 @@ ref est une sorte de State avec moins de pouvoir, car :
     - Comme State, sa Data persiste entre les Renders
     - MAIS ne cause pas un Re-Render lors d'un Update
 
-State   =   immutable - Update Asynchrone
-Ref     =   mutable - Update Synchrone (comme n'importe quel object JavaScript)
+State   =   immutable   - Update Asynchrone
+Ref     =   mutable     - Update Synchrone (comme n'importe quel object JavaScript)
+
 
 On utilise :
     - State pour stocker de la Data qui doit re-Render le Composant
@@ -282,7 +292,10 @@ On utilise :
 
 On utilise un useEffect pour utiliser un useRef que contiendra un DOM Element
 (car pas possible de muter un useRef dans le Render Logic)
-    <input className='abc' ref={refName} />
+
+*/ <input className="abc" ref={refName} />;
+/*
+
 car le useRef est ajouté à ce DOM Element uniquement après que le DOM ait été load
 
 C'est parfait, car le useEffect s'exécute également après le chargement du DOM.
@@ -296,18 +309,18 @@ C'est donc l'endroit idéal pour utiliser un useRef
 
 
     1 - Créer le useRef(null) dans une variable (checker si bien importer)
-            const inputEl = useRef(null);
+*/ const inputEl = useRef(null);
+/*
 
     2 - Utiliser la variable.current dans un useEffect
         (car pas possible de mutate un useRef    dans le Render Logic)
-            useEffect(function () {
-            // console.log(inputEl.current);
-                inputEl.current.focus();
-            }, []); // run on Mount
-
+*/ useEffect(function () {
+  console.log(inputEl.current);
+  inputEl.current.focus();
+}, []); // run on Mount
+/*
     3 - intégrer la ref dans la Prop ref
-          ref={inputEl}
-
+*/ ref = { inputEl }; /*
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     useRef conditionnel dans un useEffect, avec un addEventListener
@@ -319,27 +332,27 @@ C'est donc l'endroit idéal pour utiliser un useRef
         - un addEventListener
         - un clean up qui Return un addRemoveListener
         - et un tableau des dépendances avec l'élément demandé
-
+*/
 useEffect(
-    function () {
-      // création de function callback avec (e)
-      function callback(e) {
-        if (document.activeElement === inputEl.current) return;
-        if (e.code === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
+  function () {
+    // création de function callback avec (e)
+    function callback(e) {
+      if (document.activeElement === inputEl.current) return;
+      if (e.code === "Enter") {
+        inputEl.current.focus();
+        setQuery("");
       }
+    }
 
-      // addEventListener qui enclenche la fonction callback
-      document.addEventListener("keydown", callback);
+    // addEventListener qui enclenche la fonction callback
+    document.addEventListener("keydown", callback);
 
-      // removeEventListener clean pour éviter les multiples Events
-      return () => document.removeEventListener("keydown", callback);
-    },
-    [setQuery]
-  );
-
+    // removeEventListener clean pour éviter les multiples Events
+    return () => document.removeEventListener("keydown", callback);
+  },
+  [setQuery]
+);
+/*
 
 // –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     Autres cas de useRef
@@ -354,3 +367,73 @@ useEffect(
 
     En utilisant une simple variable, elle se serait reset après chaque Render
     Donc, ça aurait été une variable non persistante à travers les Renders
+
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  Custom Hooks : explication et exemple
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+Dans React, il y a 2 grands lignes : 
+    1 - Le visuelle : L'UI
+    2 - Le non-visuel : La Logique
+
+
+React priviégie la réutilisation :
+À l'image d'un Composant qui permet une réutilisation de l'UI,
+un custom Hook permet de réutiliser de la logique.
+
+
+C'est une fonction JavaScript, donc :
+  - peut recevoir de la Data
+  - peut return de la Data 
+        => dans un array ou object
+
+  
+*/
+function useFetch(url) {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(function () {
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => setData(res));
+  }, []);
+
+  return [data, isLoading];
+} /*
+    
+
+
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    Custom Hooks VS Composant
+// –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+Un composant peut recevoir des Props        =>  return du JSX
+Un Custom Hook peut recevoir de la data     =>  return array / object
+
+
+Le Composant
+    -  sera obligé de return du JSX
+
+
+Le Custom Hook  
+    - sera obligé d'utiliser 1 ou plusieurs Hooks
+    - aura son nom de fonction commençant par "use"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
